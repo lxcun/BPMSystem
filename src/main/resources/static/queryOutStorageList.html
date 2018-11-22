@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="./style/uniformStyle.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./script/jquery.table2excel.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<body>
+<div class="maindiv">
+    <div id="header">出库单查询</div>
+    <div class="container">
+        <div class="btn-group" style="margin-bottom: 15px">
+            <button class="btn btn-success" data-toggle="modal"  id="detail">详情</button>
+            <button class="btn btn-success" id="query">查询</button>
+            <button class="btn btn-success" id="out">出库单导出</button>
+        </div>
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>出库单列表:</label>
+            </div>
+        </div>
+        <div class="row row-centered">
+            <table id="outStorageList_table" data-toggle="table" data-height="640" data-click-to-select="true" data-search="true" class="singleSelectTable">
+                <thead>
+                    <tr>
+                        <th data-checkbox="true"></th>
+                        <th data-field="name">名称</th>
+                        <th data-field="type">出库类型</th>
+                        <th data-field="requestNo">出库单号</th>
+                        <th data-field="outTime">出库时间</th>
+                        <th data-field="totalNumber">数量合计</th>
+                        <th data-field="requestor">出库申请人</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    
+    </div>
+</div>
+
+<!--第一个模态框  详情的模态框、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="printSheet" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="display: inline-block"><h4 class="modal-title">出库申请详情</h4></div>
+                <div style="display: inline-block"><button type="button" id="printBtn"><span class="glyphicon glyphicon-print"></span></button></div>
+            </div>
+            <div class="modal-body" id="printDiv">
+                <div class="row row-centered has-success">
+                    <div class="col-sm-3">
+                        <label>出库单名称:</label>
+                        <span name="name"></span>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label >出库类型:</label>
+                        <span name="type"></span>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label >项目编号:</label>
+                        <span name="programNumber"></span>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label >出库单号:</label>
+                        <span name="requestNo"></span>
+                    </div>
+                </div>
+                <div class="row row-centered has-success">
+                    <div class="form-group col-sm-3">
+                        <label >出库物料种类:</label>
+                        <span name="typeNum"></span>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label >出库物料总数:</label>
+                        <span name="totalNumber"></span>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label >领用人:</label>
+                        <span name="requestor"></span>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label>描述:</label>
+                        <span name="remark"></span>
+                    </div>
+                </div>
+                <div>
+                    <label>申请物料清单:</label>
+                </div>
+                <table id="applyMaterials"
+                       data-toggle="table">
+                    <thead>
+                    <tr>
+                        <th data-field="materialType">物料种类</th>
+                        <th data-field="name">物料名称</th>
+                        <th data-field="code">物料编码</th>
+                        <th data-field="modelNumber">规格型号</th>
+                        <th data-field="encapsulation">封装形式</th>
+                        <th data-field="miniumTemp">最低工作温度</th>
+                        <th data-field="maxTemp">最高工作温度</th>
+                        <th data-field="number">数量</th>
+                        <th data-field="remark">备注</th>
+                        <th data-field="materialId" data-visible="false">编号</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="update">提交</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+</body>   
+<script>
+    $(function(){
+
+        //行单选
+        $('.singleSelectTable').on('click-row.bs.table', function (e, row, element) {
+            $('.singleSelectTable').bootstrapTable("uncheckAll");
+            $('.singleSelectTable').bootstrapTable("checkBy", row);
+
+        });
+        //查询
+        $('#query').click(function(){
+            $.ajax({
+            url: '/api/findAllOutStorageKeeper',
+            type: "get",
+            dataType:'json',
+            //dataType:'jsonp',
+            data:null,
+            success: function (data) {
+                if(!data.hasOwnProperty("outStoreKeepers")){
+                    $("#outStorageList_table").bootstrapTable("append",{ name: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'name', colspan: 9 });
+                    return;
+                }
+                var outStoreKeepers=data.outStoreKeepers;
+                for(var i=0;i<outStoreKeepers.length;i++){
+                    if(outStoreKeepers[i].type=='0'){
+                        outStoreKeepers[i].type='生产领用';
+                    }
+                    if(outStoreKeepers[i].type=='1'){
+                        outStoreKeepers[i].type='研发领用';
+                    }
+                    if(outStoreKeepers[i].type=='2'){
+                        outStoreKeepers[i].type='借用';
+                    }
+                }
+                $('#outStorageList_table').bootstrapTable("load",outStoreKeepers);
+ 
+            },
+            error:function(){
+                alert("失败");
+            }
+            });
+        })
+        
+        //详情
+        var outStorageId=0;
+        $('#detail').click(function(){
+            var rowData=$('#outStorageList_table').bootstrapTable('getAllSelections');
+            if(rowData.length != 1){
+                alert("请选择一条申请查看详情!");
+                return;
+            }
+            $("#myModal1").modal("show");
+            outStorageId=rowData[0].outStorageId;
+        //表格数据
+            var outMaterial = rowData[0].outMaterial;
+            $('#applyMaterials').bootstrapTable('removeAll');
+            $('#applyMaterials').bootstrapTable('append', outMaterial);
+            //表单数据
+            var name = rowData[0].name;
+            var type = rowData[0].type;
+            var requestor = rowData[0].requestor;
+            var programNumber = rowData[0].programNumber;
+            var createDate = rowData[0].createDate;
+            var typeNum = rowData[0].typeNum;
+            var totalNumber = rowData[0].totalNumber;
+            var remark = rowData[0].remark;
+            var requestNo = rowData[0].requestNo;
+
+            $('div span[name=name]').text(name);
+            $('div span[name=type]').text(type);
+            $('div span[name=requestor]').text(requestor);
+            $('div span[name=programNumber]').text(programNumber);
+            $('div span[name=typeNum]').text(typeNum);
+            $('div span[name=totalNumber]').text(totalNumber);
+            $('div span[name=createDate]').text(createDate);
+            $('div span[name=remark]').text(remark);
+            $('div span[name=requestor]').text(requestor);
+            $('div span[name=requestNo]').text(requestNo);
+        });
+        //导出excel
+        $('#out').click(function () {
+            //$('tr').first().before("<thead id='title'><th>出库清单</th></thead>");
+            $("#outStorageList_table").table2excel({
+                exclude: ".noExl",       /*不被导出的表格行的CSS class类*/
+                name: "123",  /*导出的Excel文档的名称*/
+                filename: "出库清单" + new Date().toISOString().replace(/[\-\:\.]/g, ""),       /*Excel文件的名称*/
+                fileext: ".xls",
+                exclude_img: true,            /*是否导出图片*/
+                exclude_links: true,          /* 是否导出超链接*/
+                exclude_inputs: true          /* 是否导出框中内容*/
+            });
+            //$('#title').remove();
+        })
+        //打印出库单详情
+        $('#printBtn').click(function () {
+            var printHtml = document.getElementById("printDiv").innerHTML;
+            window.document.body.innerHTML = printHtml;
+            window.print();
+            window.close();
+            window.document.body.innerHTML = "";
+        })
+    })
+</script> 

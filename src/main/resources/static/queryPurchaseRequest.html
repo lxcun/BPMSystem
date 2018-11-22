@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="./style/uniformStyle.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<body>
+<div class="maindiv">
+    <div id="header">采购申请</div>
+    <div class="container">
+    <fieldset>
+        <legend>查询条件</legend>
+        <div class="form-group col-sm-3">
+            <fieldset>
+                <legend>人员</legend>
+                <div class="form-group form-inline">
+                    <label>
+                        人员类型:
+                        <select id="operatorType" class="combobox">
+                            <option value=""></option>
+                            <option value="requestor_id">申请人</option>
+                            <option value="auditor_id">审核人</option>
+                            <option value="approver_id">审批人</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="form-group form-inline">
+                    <label>
+                        人员姓名:
+                        <select id="operatorName" class="combobox">
+                            <option value=""></option>
+                        </select>
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+        <div class="form-group col-sm-9">
+            <fieldset>
+                <legend>范围</legend>
+                <div class="form-group form-inline">
+                    <label>日期类型:</label>
+                    <select id="dateType" class="combobox">
+                        <option value=""></option>
+                        <option value="submit_date">申请日期</option>
+                        <option value="audit_date">审核日期</option>
+                        <option value="approval_time">审批日期</option>
+                        <option value="order_date">采购日期</option>
+                        <option value="receiving_date">到货日期</option>
+                        <option value="qA_date">质检日期</option>
+                        <option value="in_storage_date">入库日期</option>
+                    </select>
+                    <label>日期:</label>
+                    <input id="dateFrom" type="date">
+                    <label>到</label>
+                    <input id="dateTo" type="date">
+                </div>
+                <div class="form-group form-inline">
+                    <label>数值类型:</label>
+                    <select id="rangeType" class="combobox">
+                        <option value=""></option>
+                        <option value="total_count">采购数量</option>
+                        <option value="total_price">采购总价</option>
+                        <option value="pass_rate">质检通过率</option>
+                    </select>
+                    <label>值:</label>
+                    <input id="rangeFrom" type="text">
+                    <label>到</label>
+                    <input id="rangeTo" type="text">
+                </div>
+            </fieldset>
+        </div>
+        <div  class="form-group col-sm-12">
+            <fieldset>
+                <legend>状态</legend>
+                <div  class="form-group">
+                    <select id="exe_State" name="exe_State">
+                        <option value=""></option>
+                        <option value="0">新建</option>
+                        <option value="1">待审核</option>
+                        <option value="2">待审批</option>
+                        <option value="3">已批准</option>
+                        <option value="4">已采购</option>
+                        <option value="5">待质检</option>
+                        <option value="6">待处理</option>
+                        <option value="7">已质检</option>
+                        <option value="8">已关闭</option>
+                    </select>
+                </div>
+                <button class="btn btn-success" id="query">查询</button>
+            </fieldset>
+        </div>
+    </fieldset>
+    <div class="maindiv">
+        <label>采购单列表</label>
+        <div id="toolbar" class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" id="detail">详情</button>
+        </div>
+        <table id="oderList" data-toggle="table" data-toolbar="#toolbar" data-click-to-select="true" class="singleSelectTable">
+            <thead>
+                <tr>
+                    <th data-checkbox="true"></th>
+                    <th data-field="name">名称</th>
+                    <th data-field="purchaseId">采购单号</th>
+                    <th data-field="creatDate">创建日期</th>
+                    <th data-field="endDate">期望到货日期</th>
+                    <th data-field="orderDate">完成采购日期</th>
+                    <th data-field="receivingDate">通知质检日期</th>
+                    <th data-field="qadate">完成质检日期</th>
+                    <th data-field="inStorageDate">完成入库日期</th>
+                    <th data-field="totalAmount">物料数量</th>
+                    <th data-field="totalPrice">总金额</th>
+                    <th data-field="approver">审批人</th>
+                    <th data-field="exeState">状态</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+</div>
+
+<!--第一个模态框  详情的模态框、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    采购物料详情
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label>申请物料清单:</label>
+                </div>
+                <table id="purchaseTable" data-toggle="table" data-click-to-select="true">
+                    <thead>
+                        <tr>
+                            <th data-checkbox="true"></th>
+                            <th data-field="purchaseName">采购名称</th>
+                            <th data-field="name">物料名称</th>
+                            <th data-field="code">物料编码</th>
+                            <th data-field="modelNumber">规格型号</th>
+                            <th data-field="purchaseModel">实际采购型号</th>
+                            <th data-field="encapsulation">封装形式</th>
+                            <th data-field="sellerName">供应商</th>
+                            <th data-field="receivingDate">到货日期</th>
+                            <th data-field="purchasePrice">采购价</th>
+                            <th data-field="reqCount">申请总数</th>
+                            <th data-field="purchaseCount">采购数量</th>
+                            <th data-field="inStorageCount">入库数量</th>
+                            <th data-field="passRate">质检通过率</th>
+                            <th data-field="contractNumber">合同编号</th>
+                            <th data-field="expirationDate">货期</th>
+                            <th data-field="remark" data-editable="true">备注</th>
+                            <th data-field="totalPrice">总金额</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>                   
+
+</body>
+<script>
+    $(function () {
+
+         //行单选
+         $('.singleSelectTable').on('click-row.bs.table', function (e, row, element) {
+            $('.singleSelectTable').bootstrapTable("uncheckAll");
+            $('.singleSelectTable').bootstrapTable("checkBy", row);
+        });
+        
+
+         $.ajax({
+            url: '/api/listUser',
+            type: "get",
+            dataType: 'json',    //接收到服务器的数据格式
+            contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+            data: null,
+            success: function (data) {
+                //var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                var arr = data.listUser;
+                for (var i = 0; i < arr.length; i++) {
+                    var value = arr[i].loginName;
+                    $("#operatorName").append("<option value='"+value+"'>"+value+"</option>");
+                }
+            },
+            error: function () {
+                alert("失败");
+                console.log(data);
+            }
+        })
+
+        $('#query').click(function () {
+
+            findPurchaseModels = new Array();
+            var person = new Object();
+            if ($('#operatorType').val() != null && $('#operatorType').val() != ""&&$('#operatorName').val()!=""&&$('#operatorName').val()!=null) {
+                person.name = $('#operatorType').val();
+                person.operation = "equal";
+                person.small = $('#operatorName').val();
+                person.large = "";
+                findPurchaseModels.push(person);
+            }
+            var timeType = new Object();
+            if ($('#dateType').val() != null && $('#dateType').val() != "" ) {
+                timeType.name = $('#dateType').val();
+                timeType.operation = "between";
+                if($('#dateFrom').val()!="")
+                timeType.small = $('#dateFrom').val();
+                if($('#dateTo').val()!="")
+                timeType.large = $('#dateTo').val();
+                findPurchaseModels.push(timeType);
+            }
+            
+            var state = new Object();
+            if($('#exe_State').val()!=''){
+                state.name = "exe_state";
+                state.operation = "equal";
+                state.small = $('#exe_State').val();
+                findPurchaseModels.push(state);
+            }
+            
+            var numberType = new Object();
+            if ($('#rangeType').val() != null&&$('#rangeType').val() != "") {
+                numberType.name = $('#rangeType').val();
+                numberType.operation = "between";
+                if ($('#rangeFrom').val() != "")
+                    numberType.small = $('#rangeFrom').val();
+                if ($('#rangeTo').val() != "")
+                    numberType.large = $('#rangeTo').val();
+                //            if (!(numberType.small != null || numberType.large != null))
+                findPurchaseModels.push(numberType);
+            }
+            var jsonString = JSON.stringify(findPurchaseModels);//转成字符串
+            $.ajax({
+                url: '/api/findPurchaseByCondition',
+                type: "post",
+                dataType: 'json',    //接收到服务器的数据格式
+                contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+                data: jsonString,
+                success: function (data) {
+                    if (!data.hasOwnProperty("PurchaseModels")) {
+                        $('#oderList').bootstrapTable("removeAll");
+                        $("#oderList").bootstrapTable("append",{ name: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'name', colspan: 9 });
+                    
+                        return;
+                    }
+                    var arr = data.PurchaseModels;
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i].exeState == '0') {
+                            arr[i].exeState = '新建';
+                        }
+                        if (arr[i].exeState == '1') {
+                            arr[i].exeState = '待审核';
+                        }
+                        if (arr[i].exeState == '2') {
+                            arr[i].exeState = '待审批';
+                        }
+                        if (arr[i].exeState == '3') {
+                            arr[i].exeState = '已批准';
+                        }
+                        if (arr[i].exeState == '4') {
+                            arr[i].exeState = '已采购';
+                        }
+                        if (arr[i].exeState == '5') {
+                            arr[i].exeState = '待质检';
+                        }
+                        if (arr[i].exeState == '6') {
+                            arr[i].exeState = '待处理';
+                        }
+                        if (arr[i].exeState == '7') {
+                            arr[i].exeState = '已检验';
+                        }
+                        if (arr[i].exeState == '8') {
+                            arr[i].exeState = '已关闭';
+                        }
+                    }
+                    $('#oderList').bootstrapTable("load", arr);
+                    
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        })
+
+
+$('#detail').click(function () {
+    var rowData=$('#oderList').bootstrapTable('getAllSelections');
+    if(rowData.length != 1){
+        alert("请选择一个采购清单!");
+        return;
+    }
+    console.log(rowData);
+    $("#myModal1").modal("show");
+    var purchaseName=rowData[0].name;
+    var receivingDate=rowData[0].receivingDate;
+    var detailPurchaseModels=rowData[0].detailPurchaseModels;
+    for(var i=0;i<detailPurchaseModels.length;i++){
+        detailPurchaseModels[i].purchaseName=purchaseName;
+        detailPurchaseModels[i].receivingDate=receivingDate;
+    }
+    $('#purchaseTable').bootstrapTable("load", detailPurchaseModels);
+//            $('#materialDetail').modal('show');
+//            $("#newForm input[name=name]").val(rowData.name);
+//            $("#newForm input[name=code]").val(rowData.code);
+//            $("#newForm input[name=programNumber]").val(rowData.programNumber);
+//            $("#newForm input[name=materialType]").val(rowData.materialType);
+//            $("#newForm input[name=modelNumber]").val(rowData.modelNumber);
+//            $("#newForm input[name=encapsulation]").val(rowData.encapsulation);
+//            $("#newForm input[name=tempRange]").val(tempRange);
+//            $("#newForm input[name=amount]").val(rowData.number);
+//            console.log(rowData);
+//            var detailPurchaseModels = rowData[0].detailPurchaseModels;
+//            $('#materialList').bootstrapTable('removeAll');
+//            $('#materialList').bootstrapTable('append', detailPurchaseModels);
+});
+    })
+   
+</script>

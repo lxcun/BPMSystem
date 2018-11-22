@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<body>
+    <style type="text/css">
+        body {
+            background-color: #EEEEEE;
+        }
+    
+        #header {
+            font-size: 22px;
+            height: 80px;
+            margin-left: 700px;
+            margin-top: 30px;
+        }
+    
+        th {
+            background: #eee;
+            color: #3366cc;
+        }
+    
+        .container a {
+            width: 150px;
+            height: 30px;
+        }
+    
+    </style>
+    <div class="container">
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>查询条件:</label>     
+            </div>
+        </div>
+        <button class="btn btn-success" id="query">查询</button>
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-3">
+                <label>物料种类:</label>
+                <input type="text" class="form-control" id="materialName" name="name">
+            </div>
+            <div class="form-group col-sm-3">
+                <label>物料编码:</label>
+                <input type="text" class="form-control" name="materialType">
+            </div>
+            <div class="form-group col-sm-3">
+                <label>型号:</label>
+                <input type="text" class="form-control" name="code">
+            </div>
+            <div class="form-group col-sm-3">
+                <label>封装形式:</label>
+                <input type="text" class="form-control" name="code">
+            </div>
+        </div>
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>物料种类列表:</label>     
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal1">添加</button>
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal2" id="edit">编辑</button>
+        </div>
+        <div class="row row-centered">
+            <table id="table1"
+                data-toggle="table"
+                data-toolbar="#toolbar"
+                data-height="250"
+                data-click-to-select="true"
+            >
+            <thead>
+                <tr>
+                    <th data-checkbox="true"></th>
+                    <th data-field="name">物料种类</th>
+                    <th data-field="code">物料名称</th>
+                    <th data-field="ModelNumber">物料编码</th>
+                    <th data-field="encapsulation">型号</th>
+                    <th data-field="materialType">封装形式</th>
+                    <th data-field="amount">最低温度</th>
+                    <th data-field="amount">最高温度</th>
+                    <th data-field="amount">描述</th>
+                    <th data-field="amount">RoHS</th>
+                    <th data-field="amount">ACTIVE</th>
+                    <th data-field="amount">DS</th>
+                </tr>
+            </thead>
+            </table>
+        </div>
+
+    </div>
+     <!--第一个模态框  添加出现的模态框、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、-->
+     <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form1">
+                            <div class="row row-centered has-success">
+                                <div class="form-group col-sm-4">
+                                    <label>物料名称:</label>
+                                    <input type="text" class="form-control" id="name" name="name">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>物料类型:</label>
+                                    <select name="typeName" id="" class="form-control">
+                                        <option value="有源">有源</option>
+                                        <option value="无源">无源</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>物料编码:</label>
+                                    <input type="text" class="form-control" name="code">
+                                </div>
+                            </div>
+                            <div class="row row-centered has-success">
+                                <div class="form-group col-sm-4">
+                                    <label>物料编码前缀:</label>
+                                    <input type="text" class="form-control" name="preCode">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>物料状态:</label>
+                                    <select name="active" id="" class="form-control">
+                                        <option value="true">true</option>
+                                        <option value="false">false</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>是否符合Rohs标准:</label>
+                                    <select name="roHS" id="" class="form-control">
+                                        <option value="true">true</option>
+                                        <option value="false">false</option>
+                                    </select>
+                                </div>
+    
+                            </div>
+                            <div class="row row-centered has-success">
+                                
+                                <div class="form-group col-sm-4">
+                                    <label>规格型号:</label>
+                                    <input type="text" class="form-control" name="modelNumber">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>最低工作温度:</label>
+                                    <input type="text" class="form-control" name="miniumTemp" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>最高工作温度:</label>
+                                    <input type="text" class="form-control" name="maxTemp" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字">
+                                </div>
+                            </div>
+                            <div class="row row-centered has-success">
+                                <div class="form-group col-sm-4">
+                                    <label>封装:</label>
+                                    <input type="text" class="form-control" name="encapsulation">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>备注:</label>
+                                    <input type="text" class="form-control" name="remark">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>物料描述:</label>
+                                    <textarea name="description" class="form-control" id="textarea"></textarea>
+                                </div>
+    
+                            </div>
+                        </form>
+              
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="add">
+                            保存
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+<!--第二个模态框  编辑出现的模态框、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="form2">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>物料名称:</label>
+                            <input type="text" class="form-control" name="name">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>物料类型:</label>
+                            <select name="typeName" id="selectTypeName" class="form-control">
+                                <option value="有源">有源</option>
+                                <option value="无源">无源</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>物料编码:</label>
+                            <input type="text" class="form-control" name="code">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>物料编码前缀:</label>
+                            <input type="text" class="form-control" name="preCode">
+                        </div>
+                    </div>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>物料状态:</label>
+                            <select name="active" id="selectActive" class="form-control">
+                                <option value="true">true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>是否符合Rohs标准:</label>
+                            <select name="roHS" id="selectRohs" class="form-control">
+                                <option value="true">true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>规格型号:</label>
+                            <input type="text" class="form-control" name="modelNumber">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>最低工作温度:</label>
+                            <input type="text" class="form-control" name="miniumTemp" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字">
+                        </div>
+
+                    </div>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>最高工作温度:</label>
+                            <input type="text" class="form-control" name="maxTemp" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>封装:</label>
+                            <input type="text" class="form-control" name="encapsulation">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>备注:</label>
+                            <input type="text" class="form-control" name="remark">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>物料描述:</label>
+                            <textarea name="description" class="form-control" id="textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>编号:</label>
+                            <input type="text" class="form-control" name="materialId">
+                        </div>
+                        
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="edit2">
+                    保存
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+</body>
+<script>
+    $(function(){
+    //查询
+    $('#query').click(function () {
+            var material_arr=[];
+            var callbackColumns = [
+                { checkbox: true },
+                {
+                    field: 'name',
+                    title: '物料名称',
+
+                }, {
+                    field: 'code',
+                    title: '物料编码'
+                }, {
+                    field: 'preCode',
+                    title: '物料编码前缀'
+                },{
+                    field: 'modelNumber',
+                    title: '规格型号'
+                }, {
+                    field: 'encapsulation',
+                    title: '封装'
+                }, {
+                    field: 'typeName',
+                    title: '物料类型'
+                },{
+                    field: 'description',
+                    title: '物料描述'
+                }, {
+                    field: 'active',
+                    title: '状态'
+                }, {
+                    field: 'roHS',
+                    title: '是否符合RoHS'
+                }, {
+                    field: 'miniumTemp',
+                    title: '最低温度'
+                }, {
+                    field: 'maxTemp',
+                    title: '最高温度'
+                },{
+                    field: 'remark',
+                    title: '备注'
+                }];
+
+            $.ajax({
+                url: '/api/findAllMaterial',
+                type: "get",
+                dataType: 'text',
+                //dataType:'jsonp',
+                data: null,
+                success: function (data) {
+                    //var arrdata=[];     
+                    var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                    material_arr = jsonobj.materialModels;
+                    /*
+                    for(var i=0;i<arr.length;i++){
+                        var obj=arr[i].materialId;
+                        //delete obj.id;        //删除id属性
+                        var obj2=arr[i];
+                        delete obj2.materialId;
+                        $.extend(obj,obj2);//将两个对象合并
+                        arrdata.push(obj);//将新对象加入数组中 
+                    }
+                    */
+                    //var temp={field:'customDefine2',title:arr[0].customDefine1};//将自定义的列加入
+                    //callbackColumns.push(temp);
+                    var material_type = $('#material_type').val();
+                    var material_code = $('#material_code').val();
+                    var material_number = $('#material_number').val();
+                    var material_encapsulation = $('#material_encapsulation').val();
+                    var material_arr_copy=material_arr;
+                    for (var j = 0; j < material_arr_copy.length; j++) {
+                        if (material_arr_copy[j].typeName == material_type && material_arr_copy[j].code == material_code&&material_arr_copy[j].modelNumber==material_number&&material_arr_copy[j].encapsulation==material_encapsulation) {
+                            
+                            var material_obj=material_arr_copy[j];
+                            material_arr=[];
+                            material_arr.push(material_obj);
+                            console.log(material_arr);
+                        }
+                    }
+                    $("#table1").bootstrapTable('destroy');
+                    $('#table1').bootstrapTable({
+
+                        data: material_arr,
+                        showColumns: true,
+                        cache: false,                       //是否使用缓存，默认为true，
+                        pagination: true,                   //是否显示分页（*）
+                        search: true,                       //是否显示表格搜索
+                        height: "600",
+                        columns: callbackColumns,
+                        clickToSelect: true,     //点击行选中复选框
+                        onClickRow: function (row) {
+                            $('#inDate').val(row.inStoreDate);
+                            $('#outDate').val(row.endData);
+                            $('#PersonWhoGet').val(row.remark);
+                        },
+                        onCheck: function (row, $element) {
+                            index = $element.data('index');
+                        },
+                        onDblClickRow: function (row, $element) {
+
+                        }
+                    });
+
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        })
+
+    //添加物料
+    $('#add').click(function(){
+        var jsonobj4=$('#form1').serializeJSON();//对象
+        var jsonString = JSON.stringify(jsonobj4);//转成字符串
+        //console.log(jsonString2);
+        //$('#table1').bootstrapTable('append',rows);
+        $.ajax({
+            url: '/api/addMaterial',
+            type: "post",
+            dataType:'text',    //接收到服务器的数据格式
+            contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+            data:jsonString,
+            success: function (data) {
+                console.log(jsonString);
+                location.reload(true);
+            },
+            error:function(){
+                console.log(jsonString);
+                alert("失败");
+            }                                       
+        });
+        $('#form1 input').val("");
+        $('#textarea').val("");
+        
+    });
+
+    //编辑
+    $('#edit').click(function(){
+        var rowData=$('#table1').bootstrapTable('getAllSelections');
+        console.log(rowData);
+        var Name = rowData[0].name;//名称
+        var typeName = rowData[0].typeName;//物料类型
+        var ModelNumber = rowData[0].modelNumber;//型号
+        var PreCode = rowData[0].preCode;//编码前缀
+        var active = rowData[0].active;//状态
+        var RoHS = rowData[0].roHS;//rohs
+        var encapsulation = rowData[0].encapsulation;//封装
+        var remark = rowData[0].remark;//备注
+        var code = rowData[0].code;//编码
+        var amount = rowData[0].amount;//数量
+        var MiniumTemp = rowData[0].miniumTemp;//最低温
+        var MaxTemp = rowData[0].maxTemp;//最高温
+
+        var price = rowData[0].price;//单价
+        var description = rowData[0].description;//描述
+        var materialId = rowData[0].materialId;
+
+
+        $('#form2 input[name=name]').val(Name);  
+        $('#form2 #selectTypeName').val(typeName);
+        $('#form2 input[name=modelNumber]').val(ModelNumber);
+        $('#form2 input[name=preCode]').val(PreCode);
+        $('#form2 #selectActive').val(active);
+        $('#form2 #selectRohs').val(RoHS);
+        $('#form2 input[name=encapsulation]').val(encapsulation);
+        $('#form2 input[name=remark]').val(remark);
+        $('#form2 input[name=code]').val(code);
+        $('#form2 input[name=amount]').val(amount);
+        $('#form2 input[name=miniumTemp]').val(MiniumTemp);
+        $('#form2 input[name=maxTemp]').val(MaxTemp);
+        $('#form2 input[name=price]').val(price);
+        $('#form2 textarea[name=description]').val(description);
+        $('#form2 input[name=materialId]').val(materialId);
+
+        $('#form2 input[name=storageId]').attr("readonly", "readonly");//设置成只读
+    });
+
+    //点击保存修改
+$('#edit2').click(function(){
+    
+    var jsonobj=$('#form2').serializeJSON();//对象
+    var jsonString = JSON.stringify(jsonobj);//字符串
+    $('#table1').bootstrapTable('updateRow', {
+        index: index,
+        row: jsonobj
+    });
+
+    $.ajax({
+        url: '/api/modifyMaterial',
+        type: "post",
+        dataType: 'text',    //接收到服务器的数据格式
+        contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+        data: jsonString,
+        success: function (data) {
+            console.log(jsonString);
+        },
+        error: function () {
+            console.log(jsonString);
+            alert("失败");
+        }
+    });
+
+});
+    })
+</script>

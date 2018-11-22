@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>basic-columns</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="./style/uniformStyle.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<body>
+<div class="maindiv">
+    <div id="header">通知质检</div>
+    <div class="container">
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>待质检采购列表:</label>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" id="detail">详情</button>
+        </div>
+        <div class="row row-centered has-success">
+            <table id="purchaseTable" data-toggle="table" data-toolbar="#toolbar" data-height="650" data-click-to-select="true" class='singleSelectTable'>
+                <thead>
+                <tr>
+                    <th data-checkbox="true"></th>
+                    <th data-field="name">名称</th>
+                    <th data-field="purchaseId">采购单号</th>
+                    <th data-field="creatDate">创建日期</th>
+                    <th data-field="endDate">期望到货日期</th>
+                    <th data-field="typeNum">物料总种类</th>
+                    <th data-field="totalAmount">物料总数量</th>
+                    <th data-field="totalPrice">总金额</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<!--第一个模态框   采购详情-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">订单详情</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row row-centered has-success">
+                        <table id="purchaseMaterialTable" data-toggle="table" data-toolbar="#toolbar" data-click-to-select="true">
+                            <thead>
+                                <tr>
+                                    <!--<th data-checkbox="true"></th>-->
+                                    <th data-field="name">物料名称</th>
+                                    <th data-field="code">物料编码</th>
+                                    <th data-field="modelNumber">规格型号</th>
+                                    <th data-field="replaceModel">替代型号</th>
+                                    <th data-field="purchaseModel">实际采购型号</th>
+                                    <th data-field="encapsulation">封装形式</th>
+                                    <th data-field="sellerName">供应商</th>
+                                    <th data-field="purchasePrice">采购价</th>
+                                    <th data-field="reqCount">申请总数</th>
+                                    <th data-field="purchaseCount">采购数量</th>
+                                    <th data-field="contractNumber">合同编号</th>
+                                    <th data-field="expirationDate">货期</th>
+                                    <th data-field="remark" data-editable="true">备注</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="form-group col-sm-3" style="margin-top: 15px;">
+                            <label>采购单号:</label>
+                            <input type="text" class="form-control"  name="purchaseId" id="purchaseId" style="width: auto;">
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="up">通知质检</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</body>
+<script>
+    $(function(){
+        //行单选
+        $('.singleSelectTable').on('click-row.bs.table', function (e, row, element) {
+            $('.singleSelectTable').bootstrapTable("uncheckAll");
+            $('.singleSelectTable').bootstrapTable("checkBy", row);
+        });
+
+        $.ajax({
+        url: '/api/findFinishPurchase',
+        type: "get",
+        dataType:'json',
+        data:null,
+        success: function (data) {    
+            if(!data.hasOwnProperty("finishPurchase")){
+                $("#purchaseTable").bootstrapTable("append",{ name: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'name', colspan: 9 });
+                return;
+            }
+            var arr=data.finishPurchase;
+            $('#purchaseTable').bootstrapTable("load",arr);
+
+        },
+        error:function(){
+            alert("失败");
+        }                                       
+        });
+    //点击详情
+    $('#detail').click(function(){
+        var rowData=$('#purchaseTable').bootstrapTable('getAllSelections');
+        if(rowData.length != 1){
+            alert("请选择一条数据查看详情!");
+            return;
+        }
+        $('#myModal1').modal('show');
+        var purchaseId=rowData[0].purchaseId;
+        $('#purchaseId').val(purchaseId);
+        var detailPurchaseModels=rowData[0].detailPurchaseModels; 
+        $('#purchaseMaterialTable').bootstrapTable('load',detailPurchaseModels);
+
+    });
+    //通知质检
+    $('#up').click(function(){
+        var jsonobj={};
+        jsonobj.purchaseId=$('#purchaseId').val();
+        var jsonString = JSON.stringify(jsonobj);
+        $.ajax({
+        url: '/api/waitQuality',
+        type: "post",
+        dataType:'text',
+        contentType: "application/json; charset=utf-8",
+        data:jsonString,
+        success: function (data) {    
+            location.reload(true);
+        },
+        error:function(){
+            
+        }                                       
+        });
+    })
+    })
+</script>

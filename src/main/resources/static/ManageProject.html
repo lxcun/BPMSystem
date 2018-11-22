@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="./style/uniformStyle.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<body>
+    <div class="maindiv">
+        <div id="header">项目管理</div>
+        <div class="container">
+            <div class="btn-group">
+                <button class="btn btn-success" data-toggle="modal" data-target="#createModal" id="newProgram">新建</button>
+                <button class="btn btn-success" data-toggle="modal" id="edit">修改</button>
+                <button class="btn btn-success" data-toggle="modal" id="delete">删除</button>
+            </div>
+            <table id="ProgramTable" data-toggle="table" data-height="680" data-click-to-select="true" data-pagination="true" data-search="true">
+                <thead>
+                    <tr>
+                        <th data-checkbox="true"></th>
+                        <th data-field="programName">项目名称</th>
+                        <th data-field="programNumber">项目号</th>
+                        <th data-field="remark">备注</th>                       
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <!--新建项目模态框-->
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        新建项目
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form  id="createProgramForm">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>项目名称:</label>
+                                <input type="text" class="form-control" name="programName" >
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>项目编号:</label>
+                                <input type="text" name="programNumber" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>备注:</label>
+                                <textarea   rows="1" class="form-control" name="remark" ></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="postProgram">提交</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+
+    <!--修改项目模态框-->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        修改项目
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form  id="editProgramForm">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>项目名称:</label>
+                                <input type="text" class="form-control" name="programName">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>项目编号:</label>
+                                <input type="text" name="programNumber" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>描述:</label>
+                                <textarea rows="1" class="form-control" name="remark"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="postEditProgram">提交</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+</body>
+<script>
+    $(function(){
+        $.ajax({
+            url: '/api/findAllProgramManage',
+            type: "get",
+            dataType:'json',
+            //dataType:'jsonp',
+            contentType:"application/json; charset=utf-8",
+            data:null,
+            success: function (data) {
+                if(!data.hasOwnProperty("ProgramManages")){
+                    $("#ProgramTable").bootstrapTable("append",{ name: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'programName', colspan: 4 });
+                    return;
+                }
+                var arr=data.ProgramManages;
+                $('#ProgramTable').bootstrapTable('load',arr);
+            },
+            error:function(){
+                
+            }
+        });
+
+        //新建项目
+        $('#postProgram').click(function(){
+            var jsonobj=$('#createProgramForm').serializeJSON();
+            var jsonString = JSON.stringify(jsonobj);
+            $.ajax({
+                url: '/api/addProgramManage',
+                type: "post",
+                dataType:'json',    //接收到服务器的数据格式
+                contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+                data:jsonString,
+                success: function (data) {
+                    location.reload(true);                  
+                },
+                error:function(){
+
+                }
+            });
+        });
+
+        //修改项目
+
+        var programNumberId=0;
+        $('#edit').click(function(){
+            var row = $('#ProgramTable').bootstrapTable('getAllSelections');
+            if(row.length != 1){
+                alert("请选择一条数据查看详情!");
+                return;
+            }
+            $("#editModal").modal("show");           
+            var rowData = row[0];
+            programNumberId=rowData.programNumberId;
+            $("#editProgramForm input[name=programName]").val(rowData.programName);
+            $("#editProgramForm input[name=programNumber]").val(rowData.programNumber);
+            $("#editProgramForm textarea[name=remark]").val(rowData.remark);
+            
+        });
+
+        //提交修改的项目
+        $('#postEditProgram').click(function(){
+            var jsonobj=$('#editProgramForm').serializeJSON();
+            jsonobj.programNumberId=programNumberId;
+            var jsonString = JSON.stringify(jsonobj);
+            $.ajax({
+                url: '/api/modifyProgramManage',
+                type: "post",
+                dataType:'json',    //接收到服务器的数据格式
+                contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+                data:jsonString,
+                success: function (data) {
+                    location.reload(true);                  
+                },
+                error:function(){
+
+                }
+            });
+        });
+
+        //删除项目
+        $('#delete').click(function(){
+            var row = $('#ProgramTable').bootstrapTable('getAllSelections');
+            if(row.length != 1){
+                alert("请选择一条数据删除!");
+                return;
+            }
+            var deleteId=row[0].programNumberId;
+            var arr=[];
+            arr.push({
+                "id":deleteId
+            });
+            var jsonString = JSON.stringify(arr);
+            $.ajax({
+            url: '/api/deleteProgramManage',
+            type: "post",
+            dataType:'json',
+            //dataType:'jsonp',
+            contentType:"application/json; charset=utf-8",
+            data:jsonString,
+            success: function (data) {
+                location.reload(true);
+            },
+            error:function(){
+                
+            }
+        });
+        })
+        
+    })
+</script>

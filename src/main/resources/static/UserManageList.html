@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>用户管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="./style/uniformStyle.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+    
+</head>
+<div class="maindiv">
+    <div id="header">用户管理</div>
+        <div class="container">
+            <div class="btn-group">
+                <button class="btn btn-success" data-toggle="modal" data-target="#myModal1" id="add">添加</button>
+                <button class="btn btn-success" id="delete">删除</button>
+                <button class="btn btn-success" data-toggle="modal"  id="edit">修改</button>
+            </div>
+            <table id="table1" class="singleSelectTable">
+            </table>
+        </div>
+    </div>
+</div>
+<!--第一个模态框    添加。。。-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="form1">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>用户名:</label>
+                            <input type="text" class="form-control" name="loginName">
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label>初始密码:</label>
+                            <input type="text" class="form-control" name="password">
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label>邮箱:</label>
+                            <input type="text" class="form-control" name="email">
+                        </div>
+                    </div>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>部门:</label>
+                            <select name="operation" class="form-control">
+                                <option value="研发部">研发部</option>
+                                <option value="市场部">市场部</option>
+                                <option value="质检部">质检部</option>
+                                <option value="综合部">综合部</option>
+                                <option value="财务部">财务部</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label>职务:</label>
+                            <select name="position" id="" class="form-control">
+                                <option value="部门经理">部门经理</option>
+                                <option value="工程师">工程师</option>
+                                <option value="市场专员">市场专员</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label>姓名:</label>
+                            <input type="text" class="form-control" name="name">
+                        </div>
+                    </div>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>电话:</label>
+                            <input type="text" class="form-control" name="phone">
+                        </div>
+                    </div>
+                </form>
+                <form id="form3">
+                    <div class="form-group col-sm-8">
+                        <label>角色:</label>
+                        <div class="form-control">
+                            <input type="checkbox" name="1" value="ROLE_ADMIN">
+                            <label>系统管理员</label>
+                            <input type="checkbox" name="2" value="ROLE_DEVELOPER">
+                            <label>开发人员</label>
+                            <input type="checkbox" name="3" value="ROLE_DIVISIONMANAGER">
+                            <label>部门经理</label>
+                            <input type="checkbox" name="4" value="ROLE_SENIOREXECUTIVE">
+                            <label>高管</label>
+                            <input type="checkbox" name="5" value="ROLE_BUYER">
+                            <label>采购员</label>
+                            <input type="checkbox" name="6" value="ROLE_INSPECTOR">
+                            <label>质检员</label>
+                            <input type="checkbox" name="7" value="ROLE_STOREHOUSE">
+                            <label>库管</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveUser">
+                    保存
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+    <!--第二个模态框   修改-->
+     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form2">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>用户名:</label>
+                                <input type="text" class="form-control" name="loginName">
+                            </div>
+       
+                            <div class="form-group col-sm-4">
+                                <label>姓名:</label>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>邮箱:</label>
+                                <input type="text" class="form-control" name="email">
+                            </div>
+                            
+                        </div>
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>部门:</label>
+                                <select name="operation" id="selected" class="form-control">
+                                    <option value="研发部">研发部</option>
+                                    <option value="市场部">市场部</option>
+                                    <option value="质检部">质检部</option>
+                                    <option value="综合部">综合部</option>
+                                    <option value="财务部">财务部</option>
+                                </select>
+                                
+                            </div>
+           
+                            <div class="form-group col-sm-4">
+                                <label>职务:</label>
+                                <select name="position" id="position" class="form-control">
+                                    <option value="部门经理">部门经理</option>
+                                    <option value="工程师">工程师</option>
+                                    <option value="市场专员">市场专员</option>       
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>电话:</label>
+                                <input type="text" class="form-control" name="phone">
+                            </div>
+                                
+                        </div>
+                    </form>
+                    <form id="form4">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-8">
+                                <label>角色:</label>
+                                <div class="form-control">
+                                <input type="checkbox" name="1" id="ROLE_ADMIN" value="ROLE_ADMIN">
+                                <label>系统管理员</label>
+                                <input type="checkbox" name="2" id="ROLE_DEVELOPER" value="ROLE_DEVELOPER">
+                                <label>开发人员</label>
+                                <input type="checkbox" name="3" id="ROLE_DIVISIONMANAGER" value="ROLE_DIVISIONMANAGER">
+                                <label>部门经理</label>
+                                <input type="checkbox" name="4" id="ROLE_SENIOREXECUTIVE" value="ROLE_SENIOREXECUTIVE">
+                                <label>高管</label>
+                                <input type="checkbox" name="5" id="ROLE_BUYER" value="ROLE_BUYER">
+                                <label>采购员</label>
+                                <input type="checkbox" name="6" id="ROLE_INSPECTOR" value="ROLE_INSPECTOR">
+                                <label>质检员</label>
+                                <input type="checkbox" name="7" id="ROLE_STOREHOUSE" value="ROLE_STOREHOUSE">
+                                <label>库管</label>
+                                </div>
+                            </div> 
+                            
+                        </div>
+                    </form>
+                    
+          
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="closed">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveEdit">
+                        保存修改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    
+</body>
+</html>
+<script>
+    $(function(){
+
+        //行单选
+        $('.singleSelectTable').on('click-row.bs.table', function (e, row, element) {
+            $('.singleSelectTable').bootstrapTable("uncheckAll");
+            $('.singleSelectTable').bootstrapTable("checkBy", row);
+        });
+
+        var index=0;
+        var callbackColumns=[
+            { checkbox: true },
+            {
+                field: 'loginName',
+                title: '用户名',
+
+            }, {
+                field: 'type',
+                title: '用户类型'
+            }];
+
+        $.ajax({
+        url: '/api/listUser',
+        type: "get",
+        dataType:'text',
+        //dataType:'jsonp',
+        data:null,
+        success: function (data) {  
+        var jsonobj = JSON.parse(data);//将接收到数据转成对象
+        var arr=jsonobj.listUser;
+        for(var i=0;i<arr.length;i++){
+            var arr2=arr[i].roles;
+            var str='';
+            for(var j=0;j<arr2.length;j++){        
+                if(arr2[j].role=='ROLE_ADMIN'){    
+                    str=str+'管理员 ';
+                }
+                if(arr2[j].role=='ROLE_DEVELOPER'){    
+                    str=str+'开发人员 ';
+                }
+                if(arr2[j].role=='ROLE_DIVISIONMANAGER'){    
+                    str=str+'部门经理 ';
+                }
+                if(arr2[j].role=='ROLE_SENIOREXECUTIVE'){    
+                    str=str+'高管 ';
+                }
+                if(arr2[j].role=='ROLE_BUYER'){    
+                    str=str+'采购员 ';
+                }
+                if(arr2[j].role=='ROLE_INSPECTOR'){    
+                    str=str+'质检员 ';
+                }
+                if(arr2[j].role=='ROLE_STOREHOUSE'){    
+                    str=str+'库管 ';
+                }
+
+                
+            }
+            arr[i].type=str;
+        }
+        $('#table1').bootstrapTable({
+
+            data:arr,
+            showColumns:true,
+            cache: false,                       //是否使用缓存，默认为true，
+            pagination: true,                   //是否显示分页（*）
+            search: true,                       //是否显示表格搜索
+            height:"600",
+            columns:callbackColumns,
+            clickToSelect:true,     //点击行选中复选框
+            onCheck:function(row,$element){
+                index = $element.data('index');
+            },
+            onDblClickRow:function(row,$element){
+ 
+            }
+        });
+
+        },
+        error:function(){
+            alert("失败");
+        }                                       
+    });
+
+
+    //添加保存用户
+    $('#saveUser').click(function(){
+        var jsonobj=$('#form1').serializeJSON();//对象
+        var jsonobj3=$('#form3').serializeJSON();//对象
+        jsonobj.roles=jsonobj3;
+        var jsonString = JSON.stringify(jsonobj);//字符串
+        $.ajax({
+            url: '/api/registerUser',
+            type: "post",
+            dataType:'text',    //接收到服务器的数据格式
+            contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+            data:jsonString,
+            success: function (data) {
+                console.log(jsonString);
+                location.reload(true);
+            },
+            error:function(){
+                alert("失败");
+                console.log(jsonString);
+            }                                       
+        });
+    });
+
+
+    //删除用户
+    $('#delete').click(function(){
+        var checkboxs=$("#table1 input[type=checkbox]:checked");
+        if(checkboxs.size()==0){
+            alert("要删除指定行，需选中要删除的行！");
+            return;
+        }
+        //获取选中的复选框，然后循环遍历删除
+        var rowData=$('#table1').bootstrapTable('getAllSelections');//数组
+        var length=rowData.length;
+   
+        var data=[];
+        for(var i=0;i<length;i++){
+            var id=rowData[i].id;
+            data.push({
+                "id":id
+            });
+        }
+        var datastring=JSON.stringify(data);//转成字符串
+        //上传数据
+        $.ajax({
+            url: '/api/deleteUser',
+            type: "post",
+            dataType:'text',    //接收到服务器的数据格式
+            contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+            data:datastring,
+            success: function (data) {
+                console.log(datastring);
+                checkboxs.each(function(){
+                    $(this).parent().parent().remove();//删除行
+                    location.reload(true);
+                });
+            },
+            error:function(){
+                console.log(datastring);
+                alert("失败");
+            }                                       
+        });
+    });
+
+    //点击修改
+    $('#edit').click(function(){
+        var rowData = $('#table1').bootstrapTable('getAllSelections');
+        if(rowData.length != 1){
+            alert("请选择一条数据查看详情!");
+            return;
+        }
+        $("#myModal2").modal("show")
+        $('#ROLE_DEVELOPER').attr("checked",false);
+        $('#ROLE_DIVISIONMANAGER').attr("checked",false);
+        $('#ROLE_SENIOREXECUTIVE').attr("checked",false);
+        $('#ROLE_BUYER').attr("checked",false);
+        $('#ROLE_INSPECTOR').attr("checked",false);
+        $('#ROLE_STOREHOUSE').attr("checked",false);
+        $('#ROLE_ADMIN').attr("checked",false);
+       
+        var array=rowData[0].roles;
+        for(var i=0;i<array.length;i++){
+            if(array[i].role=='ROLE_DEVELOPER'){
+                $('#ROLE_DEVELOPER').prop("checked",true);
+            }
+
+            if(array[i].role=='ROLE_DIVISIONMANAGER'){
+                $('#ROLE_DIVISIONMANAGER').prop("checked",true);
+            }
+
+            if(array[i].role=='ROLE_SENIOREXECUTIVE'){
+                $('#ROLE_SENIOREXECUTIVE').prop("checked",true);
+            }
+
+            if(array[i].role=='ROLE_BUYER'){
+                $('#ROLE_BUYER').prop("checked",true);
+            }
+
+            if(array[i].role=='ROLE_INSPECTOR'){
+                $('#ROLE_INSPECTOR').prop("checked",true);
+            }
+
+            if(array[i].role=='ROLE_STOREHOUSE'){
+                $('#ROLE_STOREHOUSE').prop("checked",true);
+            }
+
+            if(array[i].role=='ROLE_ADMIN'){
+                $('#ROLE_ADMIN').prop("checked",true);
+            }
+
+        }
+        console.log(rowData);
+        var loginName = rowData[0].loginName;
+        var name=rowData[0].name;
+        var email=rowData[0].email;
+        var id=rowData[0].id;
+        var phone=rowData[0].phone;
+        var operation=rowData[0].operation;
+        var position=rowData[0].position;
+        if(operation=='研发部'){
+            $('#selected').val('研发部');
+        }
+        if(operation=='市场部'){
+            $('#selected').val('市场部');
+        }
+        if(operation=='质检部'){
+            $('#selected').val('质检部');
+        }
+        if(operation=='综合部'){
+            $('#selected').val('综合部');
+        }
+        if(position=='部门经理'){
+            $('#position').val('部门经理');
+        }
+        if(position=='工程师'){
+            $('#position').val('工程师');
+        }
+        if(position=='市场专员'){
+            $('#position').val('市场专员');
+        }
+        $('#form2 input[name=name]').val(name);
+        $('#form2 input[name=loginName]').val(loginName);
+        $('#form2 input[name=loginName]').attr("readonly", "readonly");//设置成只读
+        $('#form2 input[name=email]').val(email);
+        $('#form2 input[name=id]').val(id);
+        $('#form2 input[name=phone]').val(phone);
+        
+
+    });
+
+    //保存修改
+    $('#saveEdit').click(function(){
+        var jsonobj=$('#form2').serializeJSON();//对象
+        var jsonobj4=$('#form4').serializeJSON();//对象
+        jsonobj.roles=jsonobj4;
+        var jsonString = JSON.stringify(jsonobj);//字符串
+        $.ajax({
+            url: '/api/modifyUser',
+            type: "post",
+            dataType:'text',    //接收到服务器的数据格式
+            contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+            data:jsonString,
+            success: function (data) {
+                console.log(jsonString);
+                location.reload(true);
+            },
+            error:function(){
+                console.log(jsonString);
+                alert("失败");
+            }                                       
+        });
+        $('#ROLE_DEVELOPER').attr("checked",false);
+        $('#ROLE_DIVISIONMANAGER').attr("checked",false);
+        $('#ROLE_SENIOREXECUTIVE').attr("checked",false);
+        $('#ROLE_BUYER').attr("checked",false);
+        $('#ROLE_INSPECTOR').attr("checked",false);
+        $('#ROLE_STOREHOUSE').attr("checked",false);
+        $('#ROLE_ADMIN').attr("checked",false);
+    });
+
+    //关闭模态框时清除原有数据
+    $('#closed').click(function(){
+        $('#ROLE_DEVELOPER').removeAttr("checked");
+        $('#ROLE_DIVISIONMANAGER').removeAttr("checked");
+        $('#ROLE_SENIOREXECUTIVE').removeAttr("checked");
+        $('#ROLE_BUYER').removeAttr("checked");
+        $('#ROLE_INSPECTOR').removeAttr("checked");
+        $('#ROLE_STOREHOUSE').removeAttr("checked");
+        $('#ROLE_ADMIN').removeAttr("checked");
+
+    });
+
+    })
+</script>

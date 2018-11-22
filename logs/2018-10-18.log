@@ -1,0 +1,206 @@
+2018-10-18 10:47:54.542 [http-nio-8088-exec-2] ERROR c.a.b.C.PurchaseController -进入查找符合条件的所有采购的方法
+2018-10-18 10:56:52.811 [http-nio-8088-exec-1] ERROR c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-10-18 11:00:01.350 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 5352 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 11:00:01.352 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 11:00:04.251 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 11:00:04.471 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 11:00:08.749 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.237 seconds (JVM running for 9.012)
+2018-10-18 11:00:16.781 [http-nio-8088-exec-2] ERROR c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-10-18 11:01:32.457 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9104 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 11:01:32.458 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 11:01:35.432 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 11:01:35.662 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 11:01:40.522 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.649 seconds (JVM running for 9.31)
+2018-10-18 11:01:49.066 [http-nio-8088-exec-2] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-10-18 11:02:14.256 [http-nio-8088-exec-1] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-10-18 11:03:21.347 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 8288 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 11:03:21.350 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 11:03:24.288 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 11:03:24.516 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 11:03:28.612 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.018 seconds (JVM running for 8.691)
+2018-10-18 11:03:53.694 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-10-18 11:08:58.016 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 5448 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 11:08:58.018 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 11:09:01.117 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 11:09:01.333 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 11:09:05.549 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.995 seconds (JVM running for 8.707)
+2018-10-18 11:09:17.588 [http-nio-8088-exec-7] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-10-18 11:13:34.410 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 8576 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 11:13:34.412 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 11:13:37.572 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 11:13:37.787 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 11:13:42.012 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.099 seconds (JVM running for 8.757)
+2018-10-18 11:13:51.469 [http-nio-8088-exec-9] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-10-18 11:19:52.051 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 8424 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 11:19:52.054 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 11:19:55.163 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 11:19:55.387 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 11:19:59.603 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.044 seconds (JVM running for 8.781)
+2018-10-18 11:29:43.516 [http-nio-8088-exec-3] ERROR c.a.b.C.PurchaseController -进入查找符合条件的所有采购的方法
+2018-10-18 11:40:53.817 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9016 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 11:40:53.819 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 11:40:57.025 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 11:40:57.273 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 11:41:01.098 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.81 seconds (JVM running for 8.492)
+2018-10-18 11:45:14.407 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9044 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 11:45:14.409 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 11:45:17.656 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 11:45:17.857 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 11:45:22.046 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.108 seconds (JVM running for 8.806)
+2018-10-18 13:41:10.550 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h2m52s441ms665µs600ns).
+2018-10-18 13:47:19.165 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 11160 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 13:47:19.167 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 13:47:22.140 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 13:47:22.353 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 13:47:26.469 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.994 seconds (JVM running for 8.935)
+2018-10-18 13:50:45.754 [http-nio-8088-exec-9] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-10-18 14:28:51.479 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 1328 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 14:28:51.481 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 14:28:54.455 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 14:28:54.696 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 14:28:58.514 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.894 seconds (JVM running for 8.624)
+2018-10-18 14:29:42.605 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 7476 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 14:29:42.607 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 14:29:45.457 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 14:29:45.677 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 14:29:49.312 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.69 seconds (JVM running for 8.41)
+2018-10-18 14:38:40.622 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9724 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 14:38:40.624 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 14:38:43.524 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 14:38:43.742 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 14:38:47.384 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.477 seconds (JVM running for 8.141)
+2018-10-18 14:53:04.784 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 11188 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 14:53:04.785 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 14:53:07.466 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 14:53:07.678 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 14:53:11.235 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.409 seconds (JVM running for 8.285)
+2018-10-18 14:55:05.530 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 8172 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 14:55:05.532 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 14:55:08.409 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 14:55:08.630 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 14:55:12.500 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.737 seconds (JVM running for 8.505)
+2018-10-18 14:57:47.782 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 10116 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 14:57:47.784 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 14:57:50.682 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 14:57:50.895 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 14:57:54.591 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.24 seconds (JVM running for 9.134)
+2018-10-18 15:08:56.339 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 7532 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 15:08:56.342 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 15:08:59.506 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 15:08:59.723 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 15:09:03.421 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.935 seconds (JVM running for 9.283)
+2018-10-18 15:17:57.066 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 10976 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 15:17:57.068 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 15:18:00.112 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 15:18:00.365 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 15:18:04.216 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.734 seconds (JVM running for 8.449)
+2018-10-18 15:21:51.005 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 4036 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 15:21:51.007 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 15:21:54.253 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 15:21:54.482 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 15:21:58.043 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.469 seconds (JVM running for 8.383)
+2018-10-18 15:35:50.171 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 7160 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 15:35:50.174 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 15:35:53.397 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 15:35:53.664 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 15:35:57.388 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.886 seconds (JVM running for 8.596)
+2018-10-18 15:41:32.558 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 10712 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 15:41:32.558 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 15:41:35.508 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 15:41:35.748 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 15:41:39.686 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.767 seconds (JVM running for 8.429)
+2018-10-18 15:44:36.926 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 5848 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 15:44:36.927 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 15:44:39.974 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 15:44:40.194 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 15:44:44.178 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.86 seconds (JVM running for 8.528)
+2018-10-18 15:48:53.863 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 3076 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 15:48:53.873 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 15:48:57.073 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 15:48:57.283 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 15:49:01.257 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.014 seconds (JVM running for 8.784)
+2018-10-18 15:49:10.610 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 8876 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 15:49:10.610 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 15:49:13.400 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 15:49:13.610 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 15:49:17.240 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.421 seconds (JVM running for 8.492)
+2018-10-18 15:51:45.137 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9756 (E:\BPMSystem\target\classes started by Administrator in E:\BPMSystem)
+2018-10-18 15:51:45.138 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 15:51:48.278 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 15:51:48.503 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 15:51:52.110 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.524 seconds (JVM running for 8.229)
+2018-10-18 16:05:31.369 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9768 (E:\BPMSystem\target\classes started by Administrator in E:\BPMSystem)
+2018-10-18 16:05:31.369 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 16:05:34.139 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 16:05:34.356 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 16:05:38.154 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.595 seconds (JVM running for 8.963)
+2018-10-18 16:08:04.888 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 5508 (E:\BPMSystem\target\classes started by Administrator in E:\BPMSystem)
+2018-10-18 16:08:04.889 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 16:08:07.784 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 16:08:08.002 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 16:08:11.890 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.773 seconds (JVM running for 8.706)
+2018-10-18 16:10:54.134 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 3004 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 16:10:54.137 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 16:10:57.526 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 16:10:57.746 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 16:11:01.822 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-10-18 16:11:01.827 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-10-18 16:22:04.813 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 10116 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 16:22:04.814 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 16:22:07.687 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 16:22:07.915 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 16:22:11.646 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.69 seconds (JVM running for 8.372)
+2018-10-18 16:36:35.227 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 8276 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 16:36:35.228 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 16:36:38.237 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 16:36:38.496 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 16:36:42.658 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.374 seconds (JVM running for 9.052)
+2018-10-18 17:05:55.578 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 5924 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 17:05:55.579 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 17:05:58.881 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 17:05:59.123 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 17:06:03.569 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.692 seconds (JVM running for 9.75)
+2018-10-18 17:12:10.671 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 7064 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 17:12:10.673 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 17:12:13.585 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 17:12:13.809 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 17:12:17.570 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.618 seconds (JVM running for 8.299)
+2018-10-18 17:14:15.806 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 10212 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 17:14:15.807 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 17:14:18.649 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 17:14:18.874 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 17:14:22.527 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.559 seconds (JVM running for 9.562)
+2018-10-18 17:16:41.443 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 6788 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 17:16:41.445 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 17:16:44.424 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 17:16:44.634 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 17:16:48.200 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.448 seconds (JVM running for 8.859)
+2018-10-18 17:20:04.242 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9708 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 17:20:04.243 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 17:20:07.311 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 17:20:07.526 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 17:20:11.219 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.545 seconds (JVM running for 8.267)
+2018-10-18 17:21:35.172 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9328 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 17:21:35.173 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 17:21:38.660 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 17:21:38.956 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 17:21:43.589 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.825 seconds (JVM running for 10.653)
+2018-10-18 17:22:37.843 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=58s785ms160µs140ns).
+2018-10-18 17:30:14.295 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m36s447ms738µs608ns).
+2018-10-18 17:30:20.627 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9840 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 17:30:20.628 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 17:30:23.664 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 17:30:23.883 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 17:30:27.448 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.736 seconds (JVM running for 8.503)
+2018-10-18 17:31:25.893 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9972 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 17:31:25.895 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 17:31:29.201 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 17:31:29.469 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 17:31:33.609 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 9.406 seconds (JVM running for 10.832)
+2018-10-18 17:32:58.872 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=59s308ms604µs388ns).
+2018-10-18 17:34:17.146 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48s271ms58µs128ns).
+2018-10-18 17:34:29.148 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 8376 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-18 17:34:29.158 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-18 17:34:32.754 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-18 17:34:32.994 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-18 17:34:37.540 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 9.143 seconds (JVM running for 10.04)

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>OA系统</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript" src="script/jquery-3.3.1.js"></script>
+</head>
+
+
+<frameset rows="100,*,15" framespacing="0" border="0" frameborder="0"  >
+	<FRAME noresize name="TopMenu" src="top.html" target="contents" scrolling="no"/>
+	<frameset cols="250,*" ID="resize">
+		<frame noresize name="menu" src="left.html" target="desktop" scrolling="yes" style="background-size:cover;"/>
+		<frame noresize name="view_frame" src="right.html" scrolling="yes" />
+	</frameset>
+</frameset>
+<body>
+<div>
+	<a href="/logout">登出</a>
+</div>
+</body>
+<noframes>
+	<body>
+	<div>
+		<a href="/logout">登出</a>
+	</div>
+	</body>
+</noframes>
+</html>
+

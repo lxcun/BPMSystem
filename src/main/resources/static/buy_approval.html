@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<body>
+    <style type="text/css">
+        body {
+            background-color: #EEEEEE;
+        }
+
+        #header {
+            font-size: 22px;
+            height: 80px;
+            margin-left: 700px;
+            margin-top: 30px;
+        }
+
+        th {
+            background: #eee;
+            color: #3366cc;
+        }
+
+        .container a {
+            width: 150px;
+            height: 30px;
+        }
+
+    </style>
+    <div id="header">采购审批</div>
+    <div class="container">
+    <div class="row row-centered has-success">
+        <div class="form-group col-sm-4">
+            <label>待办采购审核列表:</label>     
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal1" id="">详情</button>
+        </div>
+        <table id="table1" data-toggle="table" data-toolbar="#toolbar" data-height="250" data-click-to-select="true">
+            <thead>
+                <tr>
+                    <th data-checkbox="true"></th>
+                    <th data-field="name">名称</th>
+                    <th data-field="code">采购单号</th>
+                    <th data-field="ModelNumber">申请人</th>
+                    <th data-field="encapsulation">创建日期</th>
+                    <th data-field="materialType">期望到货日期</th>
+                    <th data-field="amount">物料总种类</th>
+                    <th data-field="amount">物料总数量</th>
+                    <th data-field="amount">总金额</th>
+                </tr>
+            </thead>
+        </table>
+
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>历史采购审核列表:</label>     
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" data-target="" id="">详情</button>
+        </div>
+        <table id="table2" data-toggle="table" data-toolbar="#toolbar" data-height="250" data-click-to-select="true">
+            <thead>
+                <tr>
+                    <th data-checkbox="true"></th>
+                    <th data-field="name">名称</th>
+                    <th data-field="code">采购单号</th>
+                    <th data-field="ModelNumber">申请人</th>
+                    <th data-field="encapsulation">创建日期</th>
+                    <th data-field="materialType">期望到货日期</th>
+                    <th data-field="amount">物料总种类</th>
+                    <th data-field="amount">物料总数量</th>
+                    <th data-field="amount">总金额</th>
+                    <th data-field="amount">审批人</th>
+                    <th data-field="amount">状态</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <!--第一个模态框   显示采购申请详情-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                </h4>
+                
+            </div>
+            <div class="modal-body">
+                <div class="row row-centered has-success">
+                    <div class="form-group col-sm-4">
+                        <label>采购申请:</label>
+                    </div>
+                </div>
+                <form id="form1">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>名称:</label>
+                            <input type="text" class="form-control"  name="name">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>采购人:</label>
+                            <input type="text" class="form-control" name="materialType">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>创建日期:</label>
+                            <input type="text" class="form-control" name="requestor">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>物料总种类:</label>
+                            <input type="text" class="form-control" name="createDate">
+                        </div>
+                        
+                    </div>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-1">
+                            <label>物料总数量:</label>
+                            <input type="text" class="form-control" name="createDate">
+                        </div>
+                        <div class="form-group col-sm-1">
+                            <label>合计金额:</label>
+                            <input type="text" class="form-control" name="createDate">
+                        </div>
+                    </div>
+                   
+                </form>
+                    <div class="row row-centered has-success">
+                        <hr>  
+                        <div class="form-group col-sm-4">
+                            <label>物料清单:</label>
+                        </div>
+                    </div>
+                    <div class="row row-centered has-success">
+                        <table id="" data-toggle="table" data-toolbar="#toolbar" data-height="250" data-click-to-select="true">
+                            <thead>
+                                <tr>
+                                    <th data-checkbox="true"></th>
+                                    <th data-field="programNumber">物料名称</th>
+                                    <th data-field="type">物料编码</th>
+                                    <th data-field="name">规格型号</th>
+                                    <th data-field="code">替代型号</th>
+                                    <th data-field="modelNumber">实际采购型号</th>
+                                    <th data-field="encapsulation">封装形式</th>
+                                    <th data-field="maxTemp">供应商</th>
+                                    <th data-field="miniumTemp">采购价</th>
+                                    <th data-field="price">申请总数</th>
+                                    <th data-field="number">采购数量</th>
+                                    <th data-field="price">总金额</th>   
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核:</label>
+                        </div>  
+                    </div>
+                    <form id="form3">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核结果:</label>
+                            <select name="exeState" class="form-control" id="audit">
+                                <option value="">请选择审核结果</option>
+                                <option value="3">通过</option>
+                                <option value="2">报请上级</option>
+                                <option value="6">拒绝</option>
+                                <option value="0">需修改</option>
+                                <option value="4">需等待</option>
+                            </select>
+                        </div>    
+                    </div>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>建议:</label>
+                            <textarea name="auditComments" class="form-control" id="textarea"></textarea>
+                        </div>
+                        
+                    </div> 
+                    </form>
+                
+      
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="save_myApproval">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</body>

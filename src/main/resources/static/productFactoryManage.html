@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>basic-columns</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="./style/uniformStyle.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+
+</head>
+<body>
+<div class="maindiv">
+    <div id="header">供应商管理</div>
+    <div class="container">
+        <div class="btn-group" style="margin-bottom: 15px;">
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal1" id="click">新建</button>
+        </div>
+        <div class="row row-centered has-success" style="margin-bottom: -5px;height: 30px;">
+            <div class="form-group col-sm-3" style="height: 15px;">
+                <label>供应商列表:</label>
+            </div>    
+        </div> 
+        <div class="row row-centered has-success">
+            <table id="sellerManagerTable" data-toggle="table" data-toolbar="#toolbar" data-height="600" data-click-to-select="true" style="margin-top: -5px;">
+                <thead>
+                    <tr>
+                        <th data-checkbox="true"></th>
+                        <th data-field="sellerName">名称</th>
+                        <th data-field="contactor">联系人</th>
+                        <th data-field="phone">联系电话</th>
+                        <th data-field="email">电子邮箱</th>
+                        <th data-field="address">地址</th>
+                        <th data-field="sellingTypes">经营范围</th>                                       
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+    <!--第一个模态框  添加出现的模态框、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form1">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-3">
+                                <label>名称:</label>
+                                <input type="text" class="form-control" name="sellerName">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label>联系人:</label>
+                                <input type="text" class="form-control" name="contactor">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label>联系电话:</label>
+                                <input type="text" class="form-control" name="phone">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label>电子邮箱:</label>
+                                <input type="text" class="form-control" name="email">
+                            </div>
+                        </div>
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-3">
+                                <label>地址:</label>
+                                <input type="text" class="form-control" name="address">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label>经营范围:</label>
+                                <input type="text" class="form-control" name="sellingTypes">
+                            </div>
+                        </div>
+                        </form>
+              
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="add">
+                            保存
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+</body>
+<script>
+    $(function(){
+        $.ajax({
+        url: '/api/listSeller',
+        type: "get",
+        dataType:'json',
+        data:null,
+        success: function (data) {    
+            //var jsonobj = JSON.parse(data);//将接收到数据转成对象
+            if(!data.hasOwnProperty("Sellers")){
+                $("#sellerManagerTable").bootstrapTable("append",{ sellerName: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'sellerName', colspan: 9 });
+                return;
+            }
+            var arr=data.Sellers;
+            $('#sellerManagerTable').bootstrapTable("load",arr);
+
+        },
+        error:function(){
+            alert("失败");
+        }                                       
+    });
+       
+            
+    //添加供应商
+    $('#add').click(function(){
+        var jsonobj=$('#form1').serializeJSON();//对象
+        var jsonString = JSON.stringify(jsonobj);//转成字符串
+
+        $.ajax({
+            url: '/api/addSeller',
+            type: "post",
+            dataType:'text',    //接收到服务器的数据格式
+            contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+            data:jsonString,
+            success: function (data) {
+                console.log(jsonString);
+                location.reload(true);
+            },
+            error:function(){
+                console.log(jsonString);
+            }                                       
+        });
+        $('#form1 input').val("");
+        
+    });
+    })
+</script>

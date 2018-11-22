@@ -1,0 +1,137 @@
+2018-11-09 09:40:10.148 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 10244 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-09 09:40:10.150 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-09 09:40:25.727 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 5348 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-09 09:40:25.826 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-09 09:40:30.802 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-09 09:40:31.117 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-09 09:40:38.573 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 15.169 seconds (JVM running for 17.221)
+2018-11-09 09:50:24.856 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 9448 (E:\OASystem\Source\BPMSystem\target\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\OASystem\Source\BPMSystem\target)
+2018-11-09 09:50:24.873 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-09 09:50:30.074 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-09 09:50:30.343 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-09 09:50:36.831 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-11-09 09:50:36.839 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-11-09 09:53:59.964 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 9448 (E:\OASystem\Source\BPMSystem\target\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\OASystem\Source\BPMSystem\target)
+2018-11-09 09:53:59.972 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-09 09:54:04.501 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-09 09:54:04.747 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-09 09:54:10.885 [main] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 11.494 seconds (JVM running for 12.026)
+2018-11-09 10:09:25.705 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9536 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-09 10:09:25.706 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-09 10:09:28.771 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-09 10:09:29.006 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-09 10:09:33.139 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.344 seconds (JVM running for 9.126)
+2018-11-09 11:35:13.521 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:35:20.976 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:35:23.111 [http-nio-8088-exec-7] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:37:01.202 [http-nio-8088-exec-7] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:37:02.161 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:37:09.505 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:37:12.091 [http-nio-8088-exec-4] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:37:14.582 [http-nio-8088-exec-2] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:37:15.003 [http-nio-8088-exec-11] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:38:53.204 [http-nio-8088-exec-11] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:40:03.792 [http-nio-8088-exec-7] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:40:04.834 [http-nio-8088-exec-4] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:40:12.034 [http-nio-8088-exec-2] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:40:19.402 [http-nio-8088-exec-11] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:42:52.581 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:43:09.407 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:43:13.211 [http-nio-8088-exec-1] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:43:16.013 [http-nio-8088-exec-5] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:43:18.914 [http-nio-8088-exec-9] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:43:21.385 [http-nio-8088-exec-7] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:43:43.481 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:43:46.369 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:43:46.960 [http-nio-8088-exec-1] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:43:49.089 [http-nio-8088-exec-5] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:43:52.668 [http-nio-8088-exec-9] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:45:44.385 [http-nio-8088-exec-4] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:45:45.258 [http-nio-8088-exec-2] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:45:45.728 [http-nio-8088-exec-3] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:45:46.505 [http-nio-8088-exec-11] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:45:46.848 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:45:47.233 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:45:52.107 [http-nio-8088-exec-1] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:45:52.377 [http-nio-8088-exec-5] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:45:52.833 [http-nio-8088-exec-9] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:45:53.042 [http-nio-8088-exec-7] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:45:53.272 [http-nio-8088-exec-4] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:10.216 [http-nio-8088-exec-3] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:12.114 [http-nio-8088-exec-11] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:17.257 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:20.673 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:23.678 [http-nio-8088-exec-1] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:29.929 [http-nio-8088-exec-5] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:37.383 [http-nio-8088-exec-9] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:46.964 [http-nio-8088-exec-7] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:47.764 [http-nio-8088-exec-4] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:48.553 [http-nio-8088-exec-2] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:53.377 [http-nio-8088-exec-3] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:56.146 [http-nio-8088-exec-11] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:47:58.922 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:48:01.034 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:50:12.858 [http-nio-8088-exec-5] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:50:13.858 [http-nio-8088-exec-9] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:50:14.849 [http-nio-8088-exec-7] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:50:15.283 [http-nio-8088-exec-4] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:50:20.720 [http-nio-8088-exec-2] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:50:22.130 [http-nio-8088-exec-3] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:50:33.121 [http-nio-8088-exec-11] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:50:41.466 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:50:50.186 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:50:55.193 [http-nio-8088-exec-1] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 11:50:59.466 [http-nio-8088-exec-5] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 12:13:24.531 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=48s759ms703?s882ns).
+2018-11-09 12:13:24.513 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=54s635ms546碌s834ns).
+2018-11-09 13:38:16.508 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h24m51s607ms552?s890ns).
+2018-11-09 13:38:16.652 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h24m51s769ms205碌s111ns).
+2018-11-09 14:48:49.413 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 12332 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-09 14:48:49.416 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-09 14:48:53.302 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-09 14:48:53.590 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-09 14:48:59.069 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 10.427 seconds (JVM running for 13.317)
+2018-11-09 14:54:43.899 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 11992 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-09 14:54:43.901 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-09 14:54:47.858 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-09 14:54:48.118 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-09 14:54:53.352 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 10.4 seconds (JVM running for 12.934)
+2018-11-09 15:06:17.082 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m28s807ms243碌s275ns).
+2018-11-09 15:06:23.345 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 13160 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-09 15:06:23.346 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-09 15:06:27.014 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-09 15:06:27.326 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-09 15:06:32.566 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 10.343 seconds (JVM running for 11.362)
+2018-11-09 15:14:31.786 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 11484 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-09 15:14:31.788 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-09 15:14:35.385 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-09 15:14:35.665 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-09 15:14:40.535 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 9.776 seconds (JVM running for 11.154)
+2018-11-09 17:08:46.723 [http-nio-8088-exec-7] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:08:52.701 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:08:53.571 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:08:55.693 [http-nio-8088-exec-5] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:08:56.266 [http-nio-8088-exec-2] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:09:08.388 [http-nio-8088-exec-9] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:09:09.733 [http-nio-8088-exec-11] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:09:10.671 [http-nio-8088-exec-1] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:09:14.083 [http-nio-8088-exec-4] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:09:20.225 [http-nio-8088-exec-3] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:09:20.970 [http-nio-8088-exec-7] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:09:31.474 [http-nio-8088-exec-11] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:10:12.946 [http-nio-8088-exec-1] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:13:55.804 [http-nio-8088-exec-4] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:14:02.489 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:14:51.035 [http-nio-8088-exec-11] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:14:53.659 [http-nio-8088-exec-2] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:14:54.257 [http-nio-8088-exec-9] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:14:57.411 [http-nio-8088-exec-1] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:15:02.467 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:15:03.185 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:15:03.415 [http-nio-8088-exec-5] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:15:08.436 [http-nio-8088-exec-9] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:15:09.051 [http-nio-8088-exec-1] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:15:11.242 [http-nio-8088-exec-8] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:15:12.630 [http-nio-8088-exec-10] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:15:14.723 [http-nio-8088-exec-5] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口
+2018-11-09 17:22:18.494 [http-nio-8088-exec-4] INFO  c.a.b.C.PurchaseController -进入采购条件查询接口

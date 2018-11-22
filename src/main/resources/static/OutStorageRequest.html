@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="./style/uniformStyle.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<body>
+<div class="maindiv">
+    <div id="header">出库申请列表</div>
+    <div class="container">
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal1" id="newApplication">新建</button>
+            <button class="btn btn-success" data-toggle="modal"  id="applyInfoBtn">详情</button>
+        </div>
+        <table id="table1" data-toggle="table" data-height="680" data-click-to-select="true" data-pagination="true" data-search="true">
+            <thead>
+                <tr>
+                    <th data-checkbox="true"></th>
+                    <th data-field="name">名称</th>
+                    <th data-field="programNumber">项目号</th>
+                    <th data-field="requestNo">出库单号</th>
+                    <th data-field="exeState">状态</th>
+                    <th data-field="createDate">创建日期</th>
+                    <th data-field="totalNumber">物料数量</th>
+                    <th data-field="type">出库类型</th>
+                    
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <!--第一个模态框  新建的模态框、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">
+                        出库申请详情
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" id="newMaterialForm">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>名称:</label>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label >类型:</label>
+                                <select name="type" class="form-control" id="select">
+                                    <option value="0">生产领用</option>
+                                    <option value="1">研发领用</option>
+                                    <option value="2">借用</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>项目编号:</label>
+                                <input type="text" class="form-control" name="programNumber" id="programNumber">
+                            </div>
+                        </div>
+                        <div class="row row-centered has-success" style="margin-top: 15px;">
+                            <div class="form-group col-sm-4">
+                                <label>描述:</label>
+                                <textarea rows="1" class="form-control" name="remark"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <div style="margin-top: 15px;">
+                        <label>已有物料:</label>
+                    </div>
+                    <fieldset>
+                        <legend>查询条件</legend>
+                        <form class="form-inline">
+                            <div class="row row-centered has-success" style="width: 100%">
+                                <div class="form-group col-sm-3">
+                                    <label>物料类型:</label>
+                                    <select class="form-control" id="materialTypeSelect"></select> <!--onchange="selectOnchang(this)"-->
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>规格型号:</label>
+                                    <input type="text" class="form-control" name="modelNumber" readonly="readonly">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>封装形式:</label>
+                                    <input type="text" class="form-control" name="encapsulation" readonly="readonly">
+                                </div>
+                            </div>
+                        </form>
+                    </fieldset>
+                    <table id="inventoryMaterialTable" data-toggle="table" data-click-to-select="true" data-pagination="true" data-search="true">
+                        <thead>
+                            <tr>
+                                <th data-checkbox="true"></th>
+                                <th data-field="name">名称</th>
+                                <th data-field="typeName">物料类型</th>
+                                <th data-field="code">物料编码</th>
+                                <th data-field="preCode">物料编码前缀</th>
+                                <th data-field="active">物料状态</th>
+                                <th data-field="roHS">是否符合Rohs标准</th>
+                                <th data-field="modelNumber">规格型号</th>
+                                <th data-field="miniumTemp">最低工作温度</th>
+                                <th data-field="maxTemp">最高工作温度</th>
+                                <th data-field="encapsulation">封装</th>
+                                <th data-field="remark">备注</th>
+                                <th data-field="description">物料描述</th>
+                                
+                            </tr>
+                        </thead>
+                    </table>
+
+                    <div class="btn-group" style="margin-bottom: 10px;">
+                        <button class="btn btn-success" id="addSelected">加入申请单</button>
+                        <button class="btn btn-success" id="deleteRows">取消已选物料</button>
+                    </div>
+                    <div>
+                        <label>申请物料清单:</label>
+                    </div>
+                    <table id="applyMaterialsTable"
+                           data-toggle="table"
+                           data-height="180"
+                           data-click-to-select="true">
+                        <thead>
+                        <tr>
+                            <th data-checkbox="true"></th>
+                            <th data-field="programNumber">项目编号</th>
+                            <th data-field="typeName">物料种类</th>
+                            <th data-field="name">物料名称</th>
+                            <th data-field="code">物料编码</th>
+                            <th data-field="modelNumber">规格型号</th>
+                            <th data-field="encapsulation">封装形式</th>
+                            <th data-field="miniumTemp">最低工作温度</th>
+                            <th data-field="maxTemp">最高工作温度</th>
+                            <th data-field="amount" data-editable="true">数量</th>
+                            <th data-field="outStorageId" data-visible="false">编号</th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <form class="form-inline" id="form2" style="margin-top: 10px;">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>种类:</label>
+                                <input type="text" class="form-control" id="typeNum" name="typeNum" readonly>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label >数量:</label>
+                                <input type="text" class="form-control" id="totalNumber" name="totalNumber" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveApplyInfo">保存</button>
+                    <button type="button" class="btn btn-primary"  id="submitApplyInfo">提交</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+
+
+<!--第二个模态框  详情的模态框、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、-->
+<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    出库申请详情
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline" id="applyInfoForm">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>名称:</label>
+                            <input type="text" class="form-control" name="name" >
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label >类型:</label>
+                            <input type="text" name="type" class="form-control" >
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label >项目编号:</label>
+                            <input type="text" name="programNumber" class="form-control" >
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label >种类:</label>
+                            <input type="text" name="typeNum" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="row row-centered has-success" style="margin-top: 15px;">
+                        <div class="form-group col-sm-3">
+                            <label >总数:</label>
+                            <input type="text" name="totalNumber" class="form-control" >
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>描述:</label>
+                            <textarea style="width: 95%;" rows="1" class="form-control" name="remark" ></textarea>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <label>申请物料清单:</label>
+                </div>
+                <table id="applyMaterials"
+                       data-toggle="table"
+                       data-click-to-select="true">
+                    <thead>
+                    <tr>
+                        <th data-checkbox="true"></th>
+                        <th data-field="materialType">物料种类</th>
+                        <th data-field="name">物料名称</th>
+                        <th data-field="code">物料编码</th>
+                        <th data-field="modelNumber">规格型号</th>
+                        <th data-field="encapsulation">封装形式</th>
+                        <th data-field="miniumTemp">最低工作温度</th>
+                        <th data-field="maxTemp">最高工作温度</th>
+                        <th data-field="number">数量</th>
+                        <th data-field="remark">备注</th>
+                        <th data-field="materialId" data-visible="false">编号</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="update">提交</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+
+    <!--第三个模态框  新建的模态框、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、-->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        出库申请详情
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" id="newMaterialForm_2">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>名称:</label>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label >类型:</label>
+                                <select name="type" class="form-control" id="select_2">
+                                    <option value="0">生产领用</option>
+                                    <option value="1">研发领用</option>
+                                    <option value="2">借用</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>项目编号:</label>
+                                <input type="text" class="form-control" name="programNumber" id="programNumber_2">
+                            </div>
+                        </div>
+                        <div class="row row-centered has-success" style="margin-top: 15px;">
+                            <div class="form-group col-sm-4">
+                                <label>描述:</label>
+                                <textarea rows="1" class="form-control" name="remark"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <div style="margin-top: 15px;">
+                        <label>已有物料:</label>
+                    </div>
+                    <fieldset>
+                        <legend>查询条件</legend>
+                        <form class="form-inline">
+                            <div class="row row-centered has-success" style="width: 100%">
+                                <div class="form-group col-sm-3">
+                                    <label>物料类型:</label>
+                                    <select class="form-control" id="materialTypeSelect"></select> <!--onchange="selectOnchang(this)"-->
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>规格型号:</label>
+                                    <input type="text" class="form-control" name="modelNumber" readonly="readonly">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label>封装形式:</label>
+                                    <input type="text" class="form-control" name="encapsulation" readonly="readonly">
+                                </div>
+                            </div>
+                        </form>
+                    </fieldset>
+                    <table id="storage_table" data-toggle="table" data-click-to-select="true" data-pagination="true" data-search="true">
+                        <thead>
+                            <tr>
+                                <th data-checkbox="true"></th>
+                                <th data-field="name">名称</th>
+                                <th data-field="typeName">物料类型</th>
+                                <th data-field="code">物料编码</th>
+                                <th data-field="preCode">物料编码前缀</th>
+                                <th data-field="active">物料状态</th>
+                                <th data-field="roHS">是否符合Rohs标准</th>
+                                <th data-field="modelNumber">规格型号</th>
+                                <th data-field="miniumTemp">最低工作温度</th>
+                                <th data-field="maxTemp">最高工作温度</th>
+                                <th data-field="encapsulation">封装</th>
+                                <th data-field="remark">备注</th>
+                                <th data-field="description">物料描述</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                    <div class="btn-group" style="margin-bottom: 10px;">
+                        <button class="btn btn-success" id="addSelected_2">加入申请单</button>
+                        <button class="btn btn-success" id="deleteRows_2">取消已选物料</button>
+                    </div>
+                    <div>
+                        <label>申请物料清单:</label>
+                    </div>
+                    <table id="saveAgainTable"
+                           data-toggle="table"
+                           data-height="180"
+                           data-click-to-select="true">
+                        <thead>
+                        <tr>
+                            <th data-checkbox="true"></th>
+                            <th data-field="programNumber">项目编号</th>
+                            <th data-field="typeName">物料种类</th>
+                            <th data-field="name">物料名称</th>
+                            <th data-field="code">物料编码</th>
+                            <th data-field="modelNumber">规格型号</th>
+                            <th data-field="encapsulation">封装形式</th>
+                            <th data-field="miniumTemp">最低工作温度</th>
+                            <th data-field="maxTemp">最高工作温度</th>
+                            <th data-field="amount" data-editable="true">数量</th>
+                            <th data-field="outStorageId" data-visible="false">编号</th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <form class="form-inline" id="form3" style="margin-top: 10px;">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>种类:</label>
+                                <input type="text" class="form-control" id="typeNum_2" name="typeNum" readonly>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label >数量:</label>
+                                <input type="text" class="form-control" id="totalNumber_2" name="totalNumber" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveAgain">保存</button>
+                    <button type="button" class="btn btn-primary"  id="upAgain">提交</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+</div>
+</body>
+</html>
+<script>
+    $(function(){
+        var outStorageId;
+        var ip='/api/';
+        $.ajax({
+            url: '/api/findMyApplyOutStorage',
+            type: "get",
+            dataType:'json',
+            //dataType:'jsonp',
+            data:null,
+            success: function (data) {
+                if(!data.hasOwnProperty("myHistoryOutStorages")){
+                    $("#table1").bootstrapTable("append",{ name: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'name', colspan: 9 });
+                    return;
+                }
+                var arr=data.myHistoryOutStorages;
+                for(var i=0;i<arr.length;i++){
+                    if(arr[i].type=='0'){
+                        arr[i].type='生产领用';
+                    }
+                    if(arr[i].type=='1'){
+                        arr[i].type='研发领用';
+                    }
+                    if(arr[i].type=='2'){
+                        arr[i].type='借用';
+                    }
+                    if(arr[i].exeState=='0'){
+                        arr[i].exeState='新建';
+                    }
+                    if(arr[i].exeState=='1'){
+                        arr[i].exeState='待审核';
+                    }
+                    if(arr[i].exeState=='2'){
+                        arr[i].exeState='待审批';
+                    }
+                    if(arr[i].exeState=='3'){
+                        arr[i].exeState='已批准';
+                    }
+                    if(arr[i].exeState=='4'){
+                        arr[i].exeState='已等待';
+                    }
+                    if(arr[i].exeState=='5'){
+                        arr[i].exeState='采购中';//已处理
+                    }
+                    if(arr[i].exeState=='6'){
+                        arr[i].exeState='已出库';
+                    }
+                    if(arr[i].exeState=='7'){
+                        arr[i].exeState='已关闭';
+                    }
+                    if(arr[i].exeState=='8'){
+                        arr[i].exeState='已入库';
+                    }                }
+                $('#table1').bootstrapTable('append',arr);
+            },
+            error:function(){
+                
+            }
+        });
+    //点击新建后加载物料信息
+    $('#newApplication').click(function(){
+        $.ajax({
+            url: '/api/findAllMaterial',
+            type: "get",
+            dataType: 'json',
+            contentType:"application/json; charset=utf-8",
+            data: null,
+            success: function (data) {
+                //var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                if(!data.hasOwnProperty("materialModels")){
+                    $("#inventoryMaterialTable").bootstrapTable("append",{ name: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'name', colspan: 9 });
+                    
+                    return;
+                }
+                var arr = data.materialModels;
+                $('#applyMaterialsTable').bootstrapTable("removeAll");
+                $('#inventoryMaterialTable').bootstrapTable("load", arr);
+            },
+            error: function () {
+                
+            }
+        });
+
+        //获取所有物料类型
+        $.ajax({
+            type: "GET",
+            url: "/api/listType",
+            dataType: "json",
+            success: function(result){
+                var data = result.listType;
+                var optionstring = "";
+                for (var j = 0; j < data.length;j++) {
+                    optionstring += "<option value=\"" + data[j].typeId + "\" >"+data[j].typeName + "</option>";
+                }
+                $("#materialTypeSelect").html("<option value='0'></option> "+optionstring);
+               $("#materialTypeSelect").change(function () {
+                    var $type = $('#materialTypeSelect option:selected').text();
+                   $('table#inventoryMaterialTable tbody tr').hide().filter(':contains(' + $type + ')').show();
+               });
+            },
+            error: function () {
+                alert("失败");
+            }
+        });
+    })    
+
+        //点击查看出库单详情
+        $('#applyInfoBtn').click(function(){
+            var row = $('#table1').bootstrapTable('getAllSelections');
+            if(row.length != 1){
+                alert("请选择一条数据查看详情!");
+                return;
+            }           
+            var rowData = row[0];
+            var outMaterial_arr=rowData.outMaterial;
+            var exeState=rowData.exeState;
+            outStorageId = rowData.outStorageId;
+            
+            $("#applyInfoForm input[name=name]").val(rowData.name);
+            $("#applyInfoForm input[name=type]").val(rowData.type);
+            $("#applyInfoForm input[name=typeNum]").val(rowData.typeNum);
+            $("#applyInfoForm textarea[name=remark]").val(rowData.remark);
+            $("#applyInfoForm input[name=totalNumber]").val(rowData.totalNumber);
+            $("#applyInfoForm input[name=programNumber]").val(rowData.programNumber);
+
+            if (exeState != '新建') {
+                $("#myModal5").modal("show");
+                $("#applyInfoForm input[name=name]").attr("readonly", "readonly");//设置成只读
+                $("#applyInfoForm input[name=type]").attr("readonly", "readonly");//设置成只读
+                $("#applyInfoForm input[name=typeNum]").attr("readonly", "readonly");//设置成只读
+                $("#applyInfoForm textarea[name=remark]").attr("readonly", "readonly");//设置成只读
+                $("#applyInfoForm input[name=totalNumber]").attr("readonly", "readonly");//设置成只读
+                $("#applyInfoForm input[name=programNumber]").attr("readonly", "readonly");//设置成只读
+                $('#update').hide();
+                $("#applyMaterials").bootstrapTable('removeAll');
+                $("#applyMaterials").bootstrapTable('append',outMaterial_arr);
+            }else{
+                $("#myModal3").modal("show");
+                $.ajax({
+                    url: '/api/findAllMaterial',
+                    type: "get",
+                    dataType: 'json',
+                    contentType:"application/json; charset=utf-8",
+                    data: null,
+                    success: function (data) {
+                    //var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                        if(!data.hasOwnProperty("materialModels")){
+                            $("#storage_table").bootstrapTable("append",{ name: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'name', colspan: 9 });
+                    
+                            return;
+                        }
+                        var arr = data.materialModels;
+
+                        $('#storage_table').bootstrapTable("load", arr);
+                    },
+                    error: function () {
+                
+                    }
+                });
+                //console.log(rowData);
+                $("#newMaterialForm_2 input[name=name]").val(rowData.name);
+                if(rowData.type=='生产领用'){
+                    $("#select_2").val('0');
+                }
+                if(rowData.type=='研发领用'){
+                    $("#select_2").val('1');
+                }
+                if(rowData.type=='借用'){
+                    $("#select_2").val('2');
+                }
+                
+                $("#form3 input[name=typeNum]").val(rowData.typeNum);
+                $("#newMaterialForm_2 textarea[name=remark]").val(rowData.remark);
+                $("#form3 input[name=totalNumber]").val(rowData.totalNumber);
+                $("#newMaterialForm_2 input[name=programNumber]").val(rowData.programNumber);
+                for(var j=0;j<outMaterial_arr.length;j++){
+                    var typeName=outMaterial_arr[j].materialType;
+                    var amount=outMaterial_arr[j].number;
+                    outMaterial_arr[j].typeName=typeName;
+                    outMaterial_arr[j].amount=amount;
+                }
+                setInterval(getRowTotal_2, 1000);
+                $("#saveAgainTable").bootstrapTable('load',outMaterial_arr);
+            } 
+            
+                
+
+        });
+        function getRowTotal(){
+            var tr = $("#applyMaterialsTable tr");
+            var totalPrice=0;
+            var totalAmount=0;
+            for(var i=1;i<tr.length;i++){
+                var tds = $(tr[i]).find("td");
+                var amount=$(tds[9]).text();
+                var programNumber=$('#programNumber').val();
+                $(tds[1]).text(programNumber);
+                totalAmount += Number(amount);
+            }
+            var totalType = tr.length-1;
+            $('#typeNum').val(totalType);
+            $('#totalNumber').val(totalAmount);
+        }
+        function getRowTotal_2(){
+            var tr = $("#saveAgainTable tr");
+            var totalPrice=0;
+            var totalAmount=0;
+            for(var i=1;i<tr.length;i++){
+                var tds = $(tr[i]).find("td");
+                var amount=$(tds[9]).text();
+                var programNumber=$('#programNumber_2').val();
+                $(tds[1]).text(programNumber);
+                totalAmount += Number(amount);
+            }
+            var totalType = tr.length-1;
+            $('#typeNum_2').val(totalType);
+            $('#totalNumber_2').val(totalAmount);
+        }
+        //加入申请单
+        $('#addSelected').click(function() {
+            var rowData = $('#inventoryMaterialTable').bootstrapTable('getAllSelections');//数组
+            var getData=$('#applyMaterialsTable').bootstrapTable('getData');
+            for(var i=0;i<rowData.length;i++){
+                for(var j=0;j<getData.length;j++){
+                    if(rowData[i].materialId==getData[j].materialId){
+                    alert('物料已添加');
+                    return;
+                }
+                }
+            }
+            $('#applyMaterialsTable').bootstrapTable('append', rowData);
+            $('#inventoryMaterialTable').bootstrapTable('uncheckAll');
+            setInterval(getRowTotal, 1000);
+        });
+        //取消已选物料
+        $('#deleteRows').click(function(){
+            var ids = $.map($('#applyMaterialsTable').bootstrapTable('getSelections'), function (row) {
+                return row.materialId;
+            });
+            $('#applyMaterialsTable').bootstrapTable('remove', {
+                field: 'materialId',
+                values: ids
+            });
+        });
+
+        //取消已选物料  再次保存的时候
+        $('#deleteRows_2').click(function(){
+            var ids = $.map($('#saveAgainTable').bootstrapTable('getSelections'), function (row) {
+                return row.materialId;
+            });
+            $('#saveAgainTable').bootstrapTable('remove', {
+                field: 'materialId',
+                values: ids
+            });
+        });
+
+
+        //加入申请单  再次保存的时候
+        $('#addSelected_2').click(function() {
+            var rowData = $('#storage_table').bootstrapTable('getAllSelections');//数组
+            var getData=$('#saveAgainTable').bootstrapTable('getData');
+            for(var i=0;i<rowData.length;i++){
+                for(var j=0;j<getData.length;j++){
+                    if(rowData[i].materialId==getData[j].materialId){
+                    alert('物料已添加');
+                    return;
+                }
+                }
+                
+            }
+            $('#saveAgainTable').bootstrapTable('append', rowData);
+            $('#storage_table').bootstrapTable('uncheckAll');
+            setInterval(getRowTotal, 1000);
+        });
+        //保存出库申请单
+        $('#saveApplyInfo').click(function(){
+            var jsonobj=$('#newMaterialForm').serializeJSON();
+            var jsonobj2=$('#form2').serializeJSON();
+            $('#applyMaterialsTable').bootstrapTable('checkAll');
+            var rowData=$('#applyMaterialsTable').bootstrapTable('getAllSelections');
+            arr=[];
+            for(var j=0;j<rowData.length;j++){
+                var dataobj={};
+                var typeName= rowData[j].typeName; //物料类型
+                var name= rowData[j].name;//物料名称
+                var modelNumber= rowData[j].modelNumber;    //规格型号
+                var code= rowData[j].code;  //编码
+                var encapsulation= rowData[j].encapsulation;    //封装
+                var maxTemp= rowData[j].maxTemp;
+                var miniumTemp= rowData[j].miniumTemp;
+                var amount= rowData[j].amount; //数量
+                var materialId= rowData[j].materialId;
+                dataobj.programNumber  = jsonobj.programNumber;
+                dataobj.name=name;
+                dataobj.modelNumber=modelNumber;
+                dataobj.code=code;
+                dataobj.encapsulation=encapsulation;
+                dataobj.typeName=typeName;
+                dataobj.amount=amount;
+                dataobj.maxTemp=maxTemp;
+                dataobj.miniumTemp=miniumTemp;
+                dataobj.materialId=materialId;
+                arr.push(dataobj);
+
+            } 
+            jsonobj.typeNum=jsonobj2.typeNum;
+            jsonobj.totalNumber=jsonobj2.totalNumber; 
+            //jsonobj.outStorageId=outStorageId;
+            jsonobj.outMaterial=arr;
+            var jsonString = JSON.stringify(jsonobj);
+            $.ajax({
+                url: '/api/addOutStorage',
+                type: "post",
+                dataType:'json',    //接收到服务器的数据格式
+                contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+                data:jsonString,
+                success: function (data) {
+                    alert(data.Msg);
+                    location.reload(true);                  
+                },
+                error:function(){
+
+                }
+            });
+        });
+
+            
+        
+        //新建时提交出库申请单
+        $('#submitApplyInfo').click(function(){
+            var jsonobj=$('#newMaterialForm').serializeJSON();
+            var jsonobj2=$('#form2').serializeJSON();
+            $('#applyMaterialsTable').bootstrapTable('checkAll');
+            var rowData=$('#applyMaterialsTable').bootstrapTable('getAllSelections');
+            arr=[];
+            for(var j=0;j<rowData.length;j++){
+                var dataobj={};
+                var typeName= rowData[j].typeName; //物料类型
+                var name= rowData[j].name;//物料名称
+                var modelNumber= rowData[j].modelNumber;    //规格型号
+                var code= rowData[j].code;  //编码
+                var encapsulation= rowData[j].encapsulation;    //封装
+                var maxTemp= rowData[j].maxTemp;
+                var miniumTemp= rowData[j].miniumTemp;
+                var amount= rowData[j].amount; //数量
+                if(amount==0){
+                    alert("申请数量不能为0");
+                    return;
+                }
+                var materialId= rowData[j].materialId;
+                dataobj.programNumber  = jsonobj.programNumber;
+                dataobj.name=name;
+                dataobj.modelNumber=modelNumber;
+                dataobj.code=code;
+                dataobj.encapsulation=encapsulation;
+                dataobj.typeName=typeName;
+                dataobj.amount=amount;
+                dataobj.maxTemp=maxTemp;
+                dataobj.miniumTemp=miniumTemp;
+                dataobj.materialId=materialId;
+                arr.push(dataobj);
+
+            } 
+            jsonobj.typeNum=jsonobj2.typeNum;
+            jsonobj.totalNumber=jsonobj2.totalNumber; 
+            jsonobj.outMaterial=arr;
+            //jsonobj.outStorageId = outStorageId;
+            var jsonString = JSON.stringify(jsonobj);
+            $('#myModal1').modal('hide');
+            $.ajax({
+                url: '/api/saveOutStorage',
+                type: "post",
+                dataType:'json',    //接收到服务器的数据格式
+                contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+                data:jsonString,
+                success: function (data) {
+                    //alert(data.Msg);
+                    location.reload(true);                
+                },
+                error:function(){
+                }
+            });
+        });  
+
+        //行单选
+        $('#table1').on('click-row.bs.table', function (e, row, element) {
+            $('#table1').bootstrapTable("uncheckAll");
+            $('#table1').bootstrapTable("checkBy", row);
+        });
+
+
+        //详情时提交出库申请单
+        $('#update').click(function(){
+            var jsonobj=$('#applyInfoForm').serializeJSON();
+       
+            $('#applyMaterials').bootstrapTable('checkAll');
+            var rowData=$('#applyMaterials').bootstrapTable('getAllSelections');
+            console.log(rowData);
+            arr=[];
+            for(var j=0;j<rowData.length;j++){
+                var dataobj={};
+                var typeName= rowData[j].typeName; //物料类型
+                var name= rowData[j].name;//物料名称
+                var modelNumber= rowData[j].modelNumber;    //规格型号
+                var code= rowData[j].code;  //编码
+                var encapsulation= rowData[j].encapsulation;    //封装
+                var maxTemp= rowData[j].maxTemp;
+                var miniumTemp= rowData[j].miniumTemp;
+                var amount= rowData[j].number; //数量
+                if(amount==0){
+                    alert("申请数量不能为0");
+                    return;
+                }
+                var materialId= rowData[j].materialId;
+                dataobj.name=name;
+                dataobj.modelNumber=modelNumber;
+                dataobj.code=code;
+                dataobj.encapsulation=encapsulation;
+                dataobj.typeName=typeName;
+                dataobj.amount=amount;
+                dataobj.maxTemp=maxTemp;
+                dataobj.miniumTemp=miniumTemp;
+                dataobj.materialId=materialId;
+                arr.push(dataobj);
+
+            } 
+            //jsonobj.typeNum=jsonobj2.typeNum;
+            //jsonobj.totalNumber=jsonobj2.totalNumber; 
+            jsonobj.outMaterial=arr;
+            if(jsonobj.type=='生产领用'){
+                jsonobj.type=0;
+            }
+            if(jsonobj.type=='研发领用'){
+                jsonobj.type=1;
+            }
+            if(jsonobj.type=='借用'){
+                jsonobj.type=2;
+            }
+            jsonobj.outStorageId = outStorageId;
+            var jsonString = JSON.stringify(jsonobj);
+            $('#myModal5').modal('hide');
+            $.ajax({
+                url: '/api/saveOutStorage',
+                type: "post",
+                dataType:'text',    //接收到服务器的数据格式
+                contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+                data:jsonString,
+                success: function (data) {
+                    location.reload(true);
+                   
+                },
+                error:function(){
+                    alert("失败");
+                }
+            });
+        }); 
+
+        //再次保存
+        //保存出库申请单
+        $('#saveAgain').click(function(){
+            var jsonobj=$('#newMaterialForm_2').serializeJSON();
+            var jsonobj2=$('#form3').serializeJSON();
+            $('#saveAgainTable').bootstrapTable('checkAll');
+            var rowData=$('#saveAgainTable').bootstrapTable('getAllSelections');
+            arr=[];
+            for(var j=0;j<rowData.length;j++){
+                var dataobj={};
+                var typeName= rowData[j].typeName; //物料类型
+                var name= rowData[j].name;//物料名称
+                var modelNumber= rowData[j].modelNumber;    //规格型号
+                var code= rowData[j].code;  //编码
+                var encapsulation= rowData[j].encapsulation;    //封装
+                var maxTemp= rowData[j].maxTemp;
+                var miniumTemp= rowData[j].miniumTemp;
+                var amount= rowData[j].amount; //数量
+                var materialId= rowData[j].materialId;
+                if(rowData[j].hasOwnProperty("detailOutStorageId")){
+                    dataobj.detailOutStorageId=rowData[j].detailOutStorageId;
+                }
+                dataobj.programNumber  = jsonobj.programNumber;
+                dataobj.name=name;
+                dataobj.modelNumber=modelNumber;
+                dataobj.code=code;
+                dataobj.encapsulation=encapsulation;
+                dataobj.typeName=typeName;
+                dataobj.amount=amount;
+                dataobj.maxTemp=maxTemp;
+                dataobj.miniumTemp=miniumTemp;
+                dataobj.materialId=materialId;
+                arr.push(dataobj);
+
+            } 
+            jsonobj.typeNum=jsonobj2.typeNum;
+            jsonobj.totalNumber=jsonobj2.totalNumber; 
+            jsonobj.outStorageId=outStorageId;
+            jsonobj.outMaterial=arr;
+            var jsonString = JSON.stringify(jsonobj);
+            $.ajax({
+                url: '/api/addOutStorage',
+                type: "post",
+                dataType:'json',    //接收到服务器的数据格式
+                contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+                data:jsonString,
+                success: function (data) {
+                    alert(data.Msg);
+                    location.reload(true);                  
+                },
+                error:function(){
+
+                }
+            });
+        }); 
+
+        //再次提交
+        //详情时提交出库申请单
+        $('#upAgain').click(function(){
+            var jsonobj=$('#newMaterialForm_2').serializeJSON();
+            var jsonobj2=$('#form3').serializeJSON();
+            $('#saveAgainTable').bootstrapTable('checkAll');
+            var rowData=$('#saveAgainTable').bootstrapTable('getAllSelections');
+            arr=[];
+            for(var j=0;j<rowData.length;j++){
+                var dataobj={};
+                var typeName= rowData[j].typeName; //物料类型
+                var name= rowData[j].name;//物料名称
+                var modelNumber= rowData[j].modelNumber;    //规格型号
+                var code= rowData[j].code;  //编码
+                var encapsulation= rowData[j].encapsulation;    //封装
+                var maxTemp= rowData[j].maxTemp;
+                var miniumTemp= rowData[j].miniumTemp;
+                var amount= rowData[j].amount; //数量
+                if(amount==0){
+                    alert("申请数量不能为0");
+                    return;
+                }
+                var materialId= rowData[j].materialId;
+                if(rowData[j].hasOwnProperty("detailOutStorageId")){
+                    dataobj.detailOutStorageId=rowData[j].detailOutStorageId;
+                }
+                dataobj.name=name;
+                dataobj.modelNumber=modelNumber;
+                dataobj.code=code;
+                dataobj.encapsulation=encapsulation;
+                dataobj.typeName=typeName;
+                dataobj.amount=amount;
+                dataobj.maxTemp=maxTemp;
+                dataobj.miniumTemp=miniumTemp;
+                dataobj.materialId=materialId;
+                arr.push(dataobj);
+
+            } 
+            //jsonobj.typeNum=jsonobj2.typeNum;
+            //jsonobj.totalNumber=jsonobj2.totalNumber; 
+            
+            jsonobj.outMaterial=arr;
+            if(jsonobj.type=='生产领用'){
+                jsonobj.type=0;
+            }
+            if(jsonobj.type=='研发领用'){
+                jsonobj.type=1;
+            }
+            if(jsonobj.type=='借用'){
+                jsonobj.type=2;
+            }
+            jsonobj.outStorageId = outStorageId;
+            jsonobj.typeNum=jsonobj2.typeNum;
+            jsonobj.totalNumber=jsonobj2.totalNumber;
+            var jsonString = JSON.stringify(jsonobj);
+            $('#myModal3').modal('hide');
+            $.ajax({
+                url: '/api/saveOutStorage',
+                type: "post",
+                dataType:'text',    //接收到服务器的数据格式
+                contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+                data:jsonString,
+                success: function (data) {
+                    location.reload(true);
+                    console.log(jsonString);
+                   
+                },
+                error:function(){
+                    console.log(jsonString);
+                    alert("失败");
+                }
+            });
+        });
+
+    })
+</script>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>用户中心</title>
+  <link rel="stylesheet" href="./style/layui.css">
+  <script src="./assets/jquery.min.js"></script>
+  <script src="script/jquery.serializejson.js"></script>
+</head>
+<style>
+    body{
+        background-color: #EEEEEE;
+    }
+    .state{
+        color:rgb(228, 64, 15);
+    }
+    legend{
+        color: rgb(21, 124, 209);
+    }
+    form {
+		margin: 0;
+    }
+    .readyToDelete,.typeClass,.delete,.edit ,#confirm{
+        background-color: white; 
+        border: 1px solid #4297D4;
+        color: #4297D4;
+        padding: 5px 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10px;
+        margin: 2px 1px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+	textarea {
+		display: block;
+    }
+    .layui-body{
+        left:5px;
+    }
+</style>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 2px;">
+        <fieldset class="layui-elem-field" style="width:1000px;position: relative;">
+            <legend>用户列表</legend>
+            <div class="layui-field-box">
+                <form id="form1">
+                <table class="layui-table" id="table1">
+                    <colgroup>
+                        <col width="150">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                        <th type="string">用户名</th>
+                        <th type="number" id="date">身份</th>
+                        <th type="string">操作</th>
+                        </tr> 
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+  </div>
+  </div>
+
+</body>
+</html>
+<script>
+function test(){
+    //加载页面
+    var up="http://192.168.2.195:8088/";
+    $.ajax({
+        url: up+"listUser",
+        type: "get",
+        dataType:'text',
+        data:null,
+        success: function (data) {
+            var jsonobj = JSON.parse(data);//转成对象
+            var arr=jsonobj.listUser;
+            $('#table1 tr:not(:first)').remove();
+            for(var i=0;i<arr.length;i++){
+                var trhtml="<tr id=tr"+i+"><td><input type='text' id=name"+i+" readonly='readonly' class='readyToDelete'></td><td><input type='text' id=context"+i+" readonly='readonly' class='typeClass'></td><td id='td11'><input type='button' value='删除' class='delete'><input type='button' value='修改' class='edit'></td></tr>";
+                $('#table1').append(trhtml); 
+                var x="#name"+i;
+                var z="#context"+i;
+                $(x).val(arr[i].name); 
+                $(z).val(arr[i].type);                   
+            }
+        },
+        error:function(){
+            alert("失败");
+        }                                       
+    });
+}
+
+
+$(function(){
+    //setInterval("test1()",2000);//轮询
+    test();
+    //点击删除选中行
+    $("table").on("click",".delete",function(){
+        $(this).parents('tr:first').remove();
+        var deleteName=$(this).closest("tr").find("input[class='readyToDelete']").val();//获取当前行中的第一个input的值 传回后端
+        var jsonData={
+            "userName":deleteName
+        }
+        var jsonString = JSON.stringify(jsonData);
+        $.ajax({
+            url: 'http://192.168.2.195:8088/deleteUser',
+            type: "post",
+            dataType:'text',    //接收到服务器的数据格式
+            contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+            data:jsonString,
+            success: function (data) {
+                console.log(jsonString);
+            },
+            error:function(){
+                alert("失败");
+                }
+            })
+    });
+
+
+     //点击修改
+     $("table").on("click",".edit",function(){
+
+        $(this).closest("tr").find("input[class='readyToDelete']").removeAttr("readonly");
+        $(this).closest("tr").find("input[class='typeClass']").removeAttr("readonly");
+        var html="<input type='button' value='确定' id='confirm'>";
+        $(this).parents('tr:first td:last').append(html);
+        var oldName=$(this).closest("tr").find("input[class='readyToDelete']").val();
+        var oldType=$(this).closest("tr").find("input[class='typeClass']").val();
+        //点击确认键
+        $('#confirm').click(function(){
+            $(this).closest("tr").find("input[class='readyToDelete']").attr("readonly","readonly");
+            $(this).closest("tr").find("input[class='typeClass']").attr("readonly","readonly");
+            $(this).hide();
+            var newName=$(this).closest("tr").find("input[class='readyToDelete']").val();
+            var newType=$(this).closest("tr").find("input[class='typeClass']").val();
+            var jsonData={
+            "oldName":oldName,
+            "oldType":oldType,
+            "newName":newName,
+            "newType":newType
+            }
+            var jsonString = JSON.stringify(jsonData);
+            $.ajax({
+                url: 'http://192.168.2.195:8088/listUser/deleteUser/modifyUser',
+                type: "post",
+                dataType:'text',    //接收到服务器的数据格式
+                contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+                data:jsonString,
+                success: function (data) {
+                    console.log(jsonString);
+                    alert("提交成功啦");
+                },
+                error:function(){
+                    alert("失败");
+                    }
+            })
+        })       
+    });
+
+})      
+
+
+</script>

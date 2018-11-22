@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>basic-columns</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="./style/uniformStyle.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./script/jquery.table2excel.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<body>
+<div class="maindiv">
+    <div id="header">物料质检</div>
+    <div class="container">
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>待质检采购清单:</label>
+            </div>
+        </div>
+        <div class="btn-group" style="margin-bottom: 15px">
+            <button class="btn btn-success" data-toggle="modal" id="detail">详情</button>
+        </div>
+        <div class="row row-centered has-success">
+            <table id="purchaseTable" data-toggle="table" data-height="650" data-pagination="true" data-click-to-select="true">
+                <thead>
+                    <tr>
+                        <th data-checkbox="true"></th>
+                        <th data-field="name">名称</th>
+                        <th data-field="purchaseId">采购单号</th>
+                        <th data-field="creatDate">创建日期</th>
+                        <th data-field="endDate">期望到货日期</th>
+                        <th data-field="typeNum">物料总种类</th>
+                        <th data-field="totalAmount">物料总数量</th>
+                        <th data-field="totalPrice">总金额</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<!--第一个模态框   物料详情-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">订单详情</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form1">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>质检单名称:</label>
+                            <input type="text" class="form-control" name="name">
+                        </div> 
+                        <div class="form-group col-sm-3">
+                            <label>备注:</label>
+                            <input type="text" class="form-control" name="remark">
+                        </div> 
+                        <div class="form-group col-sm-3">
+                            <label>质检结果:</label>
+                            <select name="result" class="form-control">
+                                <option value="true">合格</option>
+                                <option value="false">不合格</option>
+                            </select>
+                        </div>  
+                    </div>
+                    </form>
+                    <button class="btn btn-success" id="out">质检单导出</button>
+                    <table id="purchaseMaterialTable" data-toggle="table" data-height="250" data-pagination="true" data-click-to-select="true">
+                        <thead>
+                            <tr>
+                                <th data-checkbox="true"></th>
+                                <th data-field="name">物料名称</th>
+                                <th data-field="materialType">物料种类</th>
+                                <th data-field="code">物料编码</th>
+                                <th data-field="purchaseModel">实际采购型号</th>
+                                <th data-field="encapsulation">封装形式</th>
+                                <th data-field="sellerName">供应商</th>
+                                <th data-field="purchasePrice">采购价</th>
+                                <th data-field="purchaseCount">采购数量</th>
+                                <th data-field="sampleCount" data-editable="true">质检抽样数量</th>
+                                <th data-field="passCount" data-editable="true">质检通过数量</th>
+                                <th data-field="passRate">通过率</th>
+                                <th data-field="contractNumber">合同编号</th>
+                                <th data-field="expirationDate">货期</th>
+                                <th data-field="productionDate" data-formatter="setDate">物料生产日期</th>
+                                <th data-field="remark" data-editable="true">备注</th>
+                                <th data-field="inStorageCount" data-editable="true">可入库数量</th>
+                                <!--<th data-field="result" data-formatter="setSelect">质检结果</th>-->
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">保存</button> -->
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="up">提交质检结果</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</body>
+<script>
+    function setDate(value, row, index) {
+        var strHtml = "<input type='date' style='width: 95%;height: 85%' name='productionDate'/>";
+        return strHtml;
+    }
+    $(function(){
+        $.ajax({
+            url: '/api/findWaitQuality',
+            type: "get",
+            dataType:'json',
+            data:null,
+            success: function (data) {
+                //var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                if(!data.hasOwnProperty("waitQuality")){
+                    $("#purchaseTable").bootstrapTable("append",{ name: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'name', colspan: 9 });
+                    return;
+                }
+                var arr=data.waitQuality;
+                $('#purchaseTable').bootstrapTable("load",arr);
+            },
+            error:function(){
+                alert("失败");
+            }
+        });
+        //点击详情
+        $('#detail').click(function(){
+            var rowData=$('#purchaseTable').bootstrapTable('getAllSelections');
+            if(rowData.length < 1){
+                alert("请选择至少一条待质检申请!");
+                return;
+            }
+            $('#myModal1').modal('show');
+            //var purchaseId=rowData[0].purchaseId;
+            //$('#purchaseId').val(purchaseId);
+            var detailPurchaseModels=rowData[0].detailPurchaseModels;
+            $('#purchaseMaterialTable').bootstrapTable('load',detailPurchaseModels);
+            setInterval(getRowTd, 1000);
+        });
+        function getRowTd(){
+            var tr = $("#purchaseMaterialTable tr");
+            for(var i=1;i<tr.length;i++){
+                var tds = $(tr[i]).find("td");
+                var num1=$(tds[8]).text();
+                var num2=$(tds[9]).text();
+                var rate=(num2/num1).toFixed(2).toString();
+                $(tds[10]).html(rate);
+            }
+        }
+        //save质检结果
+        $('#save').click(function(){
+            jsonobj = $('#form1').serializeJSON();
+            $('#purchaseMaterialTable').bootstrapTable('checkAll');
+            var rowData = $('#purchaseMaterialTable').bootstrapTable('getAllSelections');
+            jsonobj.detailQualityAuditModels = rowData;
+            var jsonString = JSON.stringify(jsonobj);
+            $.ajax({
+                url: '/api/addCheck',
+                type: "post",
+                dataType:'text',
+                contentType: "application/json; charset=utf-8",//发送格式
+                data:jsonString,
+                success: function (data) {
+                    console.log(jsonString);
+                },
+                error:function(){
+
+                }
+            });
+            $('#purchaseMaterialTable').bootstrapTable('removeAll');
+        });
+
+        //通知提交质检结果
+        $('#up').click(function(){
+            jsonobj = $('#form1').serializeJSON();
+            $('#purchaseMaterialTable').bootstrapTable('checkAll');
+            var rowData = $('#purchaseMaterialTable').bootstrapTable('getAllSelections');
+            var tr = $("#purchaseMaterialTable tr");
+            for(var i=1;i<tr.length;i++){
+                var tds = $(tr[i]).find("td");
+                var date=$(tds[13]).find("input").val();
+                rowData[i-1].productionDate = date;
+            }
+            jsonobj.detailQualityAuditModels = rowData;
+            var jsonString = JSON.stringify(jsonobj);
+            $.ajax({
+                url: '/api/submitCheck',
+                type: "post",
+                dataType:'json',
+                contentType: "application/json; charset=utf-8",//发送格式
+                data:jsonString,
+                success: function (data) {
+                    alert(data.Msg);
+                    location.reload(true);
+                },
+                error:function(){
+                }
+            });
+            $('#purchaseMaterialTable').bootstrapTable('removeAll');
+        });
+        //导出excel
+        $('#out').click(function () {
+            //$('tr').first().before("<thead id='title'><th>出库清单</th></thead>");
+            $("#purchaseMaterialTable").table2excel({
+                exclude: ".noExl",       /*不被导出的表格行的CSS class类*/
+                name: "123",  /*导出的Excel文档的名称*/
+                filename: "质检物料清单" + new Date().toISOString().replace(/[\-\:\.]/g, ""),       /*Excel文件的名称*/
+                fileext: ".xls",
+                exclude_img: true,            /*是否导出图片*/
+                exclude_links: true,          /* 是否导出超链接*/
+                exclude_inputs: true          /* 是否导出框中内容*/
+            });
+            //$('#title').remove();
+        })
+    /*
+    $("#purchaseMaterialTable").on("change",".ss",function(){
+        var val=$(this).val();
+        alert(val);
+    });
+    */
+
+    })
+</script>

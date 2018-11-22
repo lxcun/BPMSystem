@@ -1,0 +1,12 @@
+2018-10-25 17:21:51.631 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 9016 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-25 17:21:51.633 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-25 17:21:55.611 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-25 17:21:56.337 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-25 17:22:01.766 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 10.815 seconds (JVM running for 13.122)
+2018-10-25 17:25:25.971 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 11948 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-25 17:25:25.973 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-25 17:25:30.514 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-25 17:25:30.801 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-25 17:25:38.238 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 12.742 seconds (JVM running for 14.966)
+2018-10-25 17:28:44.746 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m13s834ms280µs132ns).
+2018-10-25 17:29:53.083 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m8s333ms837µs554ns).

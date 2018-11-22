@@ -1,0 +1,5 @@
+2018-10-30 15:44:30.501 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 16880 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-30 15:44:30.503 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-30 15:44:34.215 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-30 15:44:34.477 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-30 15:44:39.504 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 9.958 seconds (JVM running for 11.739)

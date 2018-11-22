@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>basic-columns</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="./style/uniformStyle.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+    <script src="script/utilities.js"></script>
+</head>
+<body>
+<div class="maindiv">
+    <div id="header">物料入库</div>
+    <div class="container">
+    <div id="tobePutIn" class="form-group">
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>待入库单列表:</label>
+            </div>
+        </div>
+        <table id="QAList"
+                   data-toggle="table"
+                   data-click-to-select="true"
+                   data-editable="false" >
+                <thead>
+                <tr>
+                    <th data-checkbox="true"></th>
+                    <th data-field="name">名称</th>
+                    <th data-field="purchaseId">采购单号</th>
+                    <th data-field="orderDate">采购日期</th>
+                    <th data-field="qaName">质检员</th>
+                    <th data-field="amount">物料数量</th>
+                    <!--<th data-field="orderAmount">订单总数</th>-->
+                    <th data-field="totalCost">总金额</th>
+                </tr>
+                </thead>
+            </table>
+        <div class="row row-centered has-success" style="margin-top: 15px;">
+            <div class="form-group col-sm-4">
+                <label>物料清单:</label>
+            </div>
+        </div>
+        <table id="materialList"
+                   data-toggle="table"
+                   data-click-to-select="true"
+                   data-editable="false">
+                <thead>
+                <tr>
+                    <th data-field="programNumber" data-editable="true">项目编号</th>
+                    <th data-field="name">物料名称</th>
+                    <th data-field="code">物料编码</th>
+                    <th data-field="purchaseModel">实际采购型号</th>
+                    <th data-field="encapsulation">封装形式</th>
+                    <th data-field="batchNumber" data-editable="true">批次号</th>
+                    <th data-field="sellerName">供应商</th>
+                    <th data-field="purchasePrice">采购单价</th>
+                    <th data-field="purchaseCount">采购数量</th>
+                    <th data-field="contractNumber">合同编号</th>
+                    <th data-field="endDate">物料失效日期</th>
+                    <th data-field="expirationDate">货期</th>
+                    <th data-field="remark" data-editable="true">备注</th>
+                    <!--<th data-field="passCount">质检通过数量</th>-->
+                    <th data-field="inStorageCount">可入库数量</th>
+                </tr>
+                </thead>
+            </table>
+    </div>
+    <div id="InStorage" class="form-group">
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" data-target="#myInstorageItem" id="addNew">添加到入库单</button>
+            <!--<button class="btn btn-success" data-toggle="modal" data-target="#myMateiralList" id="detail">物料详情</button>-->
+        </div>
+        <div class="row row-centered has-success" style="margin-top: 15px;">
+            <div class="form-group col-sm-4">
+                <label>入库单列表:</label>
+            </div>
+        </div>
+        <table id="InstorageList"
+                   data-toggle="table"
+                   data-click-to-select="true">
+                <thead>
+                <tr>
+                    <th data-checkbox="true"></th>
+                    <th data-field="programNumber" data-editable="true">项目编号</th>
+                    <th data-field="type">入库类型</th>
+                    <th data-field="inStorageNumber">入库单号</th>
+                    <th data-field="sellerName">供应商</th>
+                    <th data-field="orderId" data-editable="true">订单号</th>
+                    <th data-field="remark" data-visible="false">备注</th>
+                </tr>
+                </thead>
+            </table>
+        <div class="form-inline" style="margin-top: 15px;">
+            <!--<button class="btn btn-success" data-toggle="modal" data-target="#myModal1" id="check">-->
+                <!--校验-->
+            <!--</button>-->
+             <!--<button class="btn btn-success" data-toggle="modal" data-target="#myModal1" id="save">-->
+                <!--保存-->
+            <!--</button>-->
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal1" id="saveMaterialIn">
+                提交
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+<!--第一个模态框  添加-->
+<div class="modal fade" id="myInstorageItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <fieldset>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-2">
+                            <label>项目编号:</label>
+                            <select id="programNumber" class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label>订单号:</label>
+                            <select id="orderId" class="form-control" >
+                            </select>
+                        </div>
+                        <!--<div class="form-group col-sm-2">-->
+                            <!--<label>供应商:</label>-->
+                            <!--<input id="sellerName" class="form-control" type="text" readonly="readonly"/>-->
+                        <!--</div>-->
+                        <div class="form-group col-sm-2">
+                            <label>入库单号:</label>
+                            <input id="inStorageNumber" class="form-control" type="text"/>
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label>备注:</label>
+                            <input type="text" class="form-control" id="remark">
+                        </div>
+                    </div>
+                </fieldset>
+                <legend>
+                    质检物料清单
+                </legend>
+                <table id="QAmaterialList"
+                       data-toggle="table"
+                       data-height="250"
+                       data-click-to-select="true"
+                       data-editable="false"
+                >
+                    <thead>
+                    <tr>
+                        <th data-field="programNumber" data-editable="false">项目编号</th>
+                        <th data-field="name" data-editable="false">物料名称</th>
+                        <th data-field="code" data-editable="false">物料编码</th>
+                        <th data-field="purchaseModel" data-editable="false">实际采购型号</th>
+                        <th data-field="encapsulation" data-editable="false">封装形式</th>
+                        <th data-field="batchNumber" data-editable="false">批次号</th>
+                        <th data-field="sellerName" data-editable="false">供应商</th>
+                        <th data-field="purchasePrice" data-editable="false">采购单价</th>
+                        <th data-field="purchaseCount" data-editable="false">采购数量</th>
+                        <!--<th data-field="passCount" data-editable="false">质检通过数量</th>-->
+                        <th data-field="inStorageCount" data-editable="false">可入库数量</th>
+                        <th data-field="contractNumber">合同编号</th>
+                        <th data-field="expirationDate">货期</th>
+                        <th data-field="remark">备注</th>
+                    </tr>
+                    </thead>
+                </table>
+                <fieldset>
+                    <legend>
+                        入库物料清单
+                    </legend>
+                    <table id="InmaterialList"
+                           data-toggle="table"
+                           data-height="250"
+                           data-click-to-select="true"
+                    >
+                        <thead>
+                        <tr>
+                            <th data-field="programNumber">项目编号</th>
+                            <th data-field="name">物料名称</th>
+                            <th data-field="code">物料编码</th>
+                            <th data-field="modelNumber">规格型号</th>
+                            <th data-field="encapsulation">封装形式</th>
+                            <th data-field="sequence" data-editable="true">批次号</th>
+                            <th data-field="sellerName">供应商</th>
+                            <th data-field="price">单价</th>
+                            <th data-field="number">数量</th>
+                            <th data-field="total">总价</th>
+                            <th data-field="contractNumber">合同编号</th>
+                            <th data-field="expirationDate">货期</th>
+                            <th data-field="remark">备注</th>
+                            <th data-field="detailPos" data-editable="true">存放位置</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="saveOverall">
+                    保存
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="cancelOverall">
+                    取消
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var inMateiralIndex;                //入库单详情选择
+    var qaBillIndex;                    //质检单选择
+    var progNum;                        //项目号
+    var orderId;                        //订单号
+    var qaItems;
+    var inItems;
+    var sellerName;
+    var inStorageBill = [];                  //入库单列表
+    var qaList;
+    var inStorageIndex;                 //所选入库单
+    var inStorageMap;
+    var savedMap;                      //已经保存的入库单的订单号
+    $(function(){
+        $.ajax({
+            url: "/api/findCheckToInStorage",
+            type: "get",
+            dataType:'json',
+            data:null,
+            success: function (data) {
+                if(!data.hasOwnProperty("qualityAuditModels")){
+                    $("#QAList").bootstrapTable("append",{ name: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'name', colspan: 9 });
+                    return;
+                }
+                var arr=data.qualityAuditModels;
+                qaList = new Array(arr.length);
+                for(var i = 0; i <arr.length; i ++ ){
+                    var item = new Object();
+                    item.name=arr[i].name;
+                    item.qaName = arr[i].qaName;
+                    item.amount = arr[i].inStorageCount;
+                    //item.orderAmount = 5;
+                    item.totalCost = arr[i].inStoragePrice;
+                    item.orderDate=arr[i].orderDate;
+                    item.purchaseId=arr[i].purchaseId;
+                    item.qualityAuditId = arr[i].qualityAuditId;
+                    qaList[i] = item;
+                }
+                $('#QAList').bootstrapTable("load",qaList);
+
+                $('#QAList').on('click-row.bs.table', function (e, row, element){
+                    $('#QAList').bootstrapTable("uncheckAll");
+                    qaBillIndex = element.data("index");
+                    $('#QAList').bootstrapTable("checkBy", row);
+                    $("#materialList").bootstrapTable("removeAll");
+                    inStorageBill = [];
+                    $("#materialList").bootstrapTable("append", arr[qaBillIndex].detailQualityAuditModels);
+                    $("#addNew").prop("disabled", false);
+                    setDefaultOptions("#programNumber", "programNumber", arr[qaBillIndex].detailQualityAuditModels);
+                    setDefaultOptions("#orderId", "orderId", null);
+                });
+
+                $('#programNumber').change(function(){              //项目选择后，订单只能在属于该项目的订单中选择
+                    progNum =  $('#programNumber').val();
+                    setNoSavedMatchOptions("#orderId", "orderId", arr[qaBillIndex].detailQualityAuditModels, "programNumber", progNum, savedMap);
+                });
+
+                $('#orderId').change(function(){            //订单选择后，入库物料清单随之确定
+                    orderId =  $('#orderId').val();
+                    qaItems = [];
+                    inItems = [];
+                    $("#QAmaterialList").bootstrapTable("removeAll");
+                    $("#InmaterialList").bootstrapTable("removeAll");
+                    for(var i = 0; i < arr[qaBillIndex].detailQualityAuditModels.length; i ++)
+                    {
+                        if((arr[qaBillIndex].detailQualityAuditModels[i]["programNumber"] == progNum)&&(arr[qaBillIndex].detailQualityAuditModels[i]["orderId"] == orderId)){
+                            sellerName = arr[qaBillIndex].detailQualityAuditModels[i].sellerName;
+                            //$("#sellerName").attr("value",arr[qaBillIndex].detailQualityAuditModels[i].sellerName);
+                            qaItems.push(arr[qaBillIndex].detailQualityAuditModels[i]);
+                            $("#QAmaterialList").bootstrapTable("append", arr[qaBillIndex].detailQualityAuditModels[i]);
+                            var item = new Object();
+                            item.programNumber = arr[qaBillIndex].detailQualityAuditModels[i].programNumber;
+                            item.name = arr[qaBillIndex].detailQualityAuditModels[i].name;
+                            item.code = arr[qaBillIndex].detailQualityAuditModels[i].code;
+                            item.materialId = arr[qaBillIndex].detailQualityAuditModels[i].materialId
+                            item.modelNumber = arr[qaBillIndex].detailQualityAuditModels[i].purchaseModel;
+                            item.encapsulation = arr[qaBillIndex].detailQualityAuditModels[i].encapsulation;
+                            item.sellerName = arr[qaBillIndex].detailQualityAuditModels[i].sellerName;
+                            item.price = arr[qaBillIndex].detailQualityAuditModels[i].purchasePrice;
+                            item.passCount = arr[qaBillIndex].detailQualityAuditModels[i].passCount
+                            item.inStorageCount = arr[qaBillIndex].inStorageCount;
+                            item.number = arr[qaBillIndex].detailQualityAuditModels[i].inStorageCount;
+                            item.total = (item.price * item.number).toFixed(2);
+                            item.sequence = arr[qaBillIndex].detailQualityAuditModels[i].batchNumber;
+                            item.contractNumber = arr[qaBillIndex].detailQualityAuditModels[i].contractNumber;
+                            item.remark = arr[qaBillIndex].detailQualityAuditModels[i].remark;
+                            item.expirationDate = arr[qaBillIndex].detailQualityAuditModels[i].expirationDate;
+                            inItems.push(item);
+                            $("#InmaterialList").bootstrapTable("append", item);
+                        }
+                    }
+                });
+
+                $('#InstorageList').on('click-row.bs.table', function (e, row, element){
+                    $('#materialList').bootstrapTable("uncheckAll");
+                    inMateiralIndex = element.data("index");
+                    $('#materialList').bootstrapTable("checkBy", row);
+                    $("#detail").prop("disabled", false);
+                });
+            },
+            error:function(){
+                alert("失败");
+            }
+        });
+        //Initialize buttons
+        $("#addNew").prop("disabled", true);
+        $("#detail").prop("disabled", true);
+        $("#check").prop("disabled", true);
+        $("#save").prop("disabled", true);
+        $("#saveMaterialIn").prop("disabled", true);
+
+        inStorageMap = new Map();
+        savedMap = new Map();
+
+        //Initialize tables
+        $('#QAList').bootstrapTable({
+        });
+        $('#materialList').bootstrapTable({
+        });
+        $('#InstorageList').bootstrapTable({
+        });
+        /*$('#QAList').bootstrapTable({
+        });
+        $('#QAList').bootstrapTable({
+        });*/
+
+        //Save inStorage bill content
+        $("#saveOverall").click(function(){
+            var inStorage = new Object();
+            var dispItem = new Object();
+            inStorage.programNumber = progNum;
+            inStorage.orderNumber = orderId;
+            inStorage.remark = $("#remark").val();;
+            inStorage.type = 0;
+            inStorage.list = inItems;
+            inStorage.requestNo = $("#inStorageNumber").val();
+            inStorage.sellerName = sellerName;
+
+            dispItem.programNumber = progNum;
+            dispItem.type = "采购入库"
+            dispItem.inStorageNumber = inStorage.requestNo;
+            dispItem.sellerName = sellerName;
+            dispItem.orderId = orderId;
+            dispItem.remark = inStorage.remark;
+
+            if(!inStorageMap.has($("#inStorageNumber").val()))
+            {
+                inStorageBill.push(inStorage);
+                $("#InstorageList").bootstrapTable("append", dispItem);
+                savedMap.set(dispItem.orderId, 1);
+            }
+            else{//编辑暂时不支持
+                //inStorageBill[inStorageIndex] = inStorage;
+            }
+            $("#programNumber").val(0);
+            $("#orderId").val(0);
+            $("#inStorageNumber").val('');
+            $("#remark").val('');
+            $("#myInstorageItem").modal("hide");
+            $("#saveMaterialIn").prop("disabled", false);
+        });
+
+        $("#saveMaterialIn").click(function(){
+            var selQAList = [];
+            selQAList.push(qaList[qaBillIndex].qualityAuditId);
+            var submitData = new Object();
+            submitData.qualityAuditIdList = selQAList;
+            submitData.inStorageModels = inStorageBill;
+            var strData = JSON.stringify(submitData);
+            $.ajax({
+                url: "/api/addInStorageList",
+                type: "post",
+                dataType: 'text',    //接收到服务器的数据格式
+                contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+                data: strData,
+                success: function (data) {
+                    alert("成功！");
+                    location.reload();
+                }
+            });
+        });
+//        $("#check").click(function(){
+//
+//        });
+    });
+</script>

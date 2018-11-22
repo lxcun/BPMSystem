@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Top</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link type="text/css" rel="stylesheet" href="style/blue/top.css" />
+	<script src="assets/jquery.min.js"></script>
+</head>
+<style>
+	#div1{
+		float: right;
+		margin-right: 200px;
+		margin-top: 50px;
+		font-size: 20px;
+	}
+	p{
+		display: inline;
+	}
+	#div1 a{
+		display: inline;
+	}
+	#div1 a:eq(1){
+		margin-left: 30px;
+	}
+
+</style>
+<body class="PageBody" style="margin: 0">
+	<div id="Head1">
+		<div id="Logo">
+			<a id="msgLink" href="javascript:void(0)"></a>
+            <font color="#0000CC" style="color:#F1F9FE; font-size:28px; font-family:Arial Black, Arial">仓库管理系统</font>
+		</div>
+		<div id="div1">
+			<img src="style/images/6.PNG">
+			<p>当前用户:</p>
+			<a></a>
+			<a href="/logout" target="_top">登出</a>
+		</div>
+	</div>
+
+</body>
+</html>
+<script>
+	$(function(){
+      	$.ajax({
+			url: '/api/username',
+            type: "get",
+            dataType:'json',    //接收到服务器的数据格式
+            data:null,
+            success: function (data) {
+        		var name=data.user.username;
+                $('#div1 a:eq(0)').text(name);
+            },
+            error:function(){
+            }                                       
+        });
+	});
+</script>
+

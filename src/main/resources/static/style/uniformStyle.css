@@ -1,0 +1,22 @@
+body {
+    background-color: #EEEEEE;
+}
+.maindiv{
+    margin: 25px 10px;
+}
+#header {
+    padding: 8px 0 0 0;
+    height: 68px;
+    font-size: 22px;
+    text-align: center;
+}
+th {
+    background: #eee;
+    color: #3366cc;
+}
+.container a {
+    width: 150px;
+    height: 30px;
+}
+fieldset{padding:.35em .625em .75em;margin:0 2px;border:1px solid silver;border-radius:8px}
+legend{padding:.2em;border:0;width:auto;margin-bottom:10px;font-size: 16px;}

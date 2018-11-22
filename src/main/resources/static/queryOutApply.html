@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="./style/uniformStyle.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<body>
+<div class="maindiv">
+    <div id="header">出库申请查询</div>
+    <div class="container">
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>查询条件:</label>
+            </div>
+        </div>
+        <button class="btn btn-success" id="query" style="margin-bottom: 15px">查询</button>
+    <form id="form1">
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-3">
+                <label>出库类型:</label>
+                <select name="type" class="form-control">
+                    <option value=""></option>
+                    <option value="0">生产领用</option>
+                    <option value="1">研发领用</option>
+                    <option value="2">借用</option>
+                </select>
+            </div>
+            
+            <div class="form-group col-sm-3">
+                <label>项目编号:</label>
+                <input type="text" class="form-control" name="programNumber">
+            </div>
+            <div class="form-group col-sm-3">
+                <label>申请人:</label>
+                <input type="text" class="form-control" name="requestor">
+            </div>
+            <div class="form-group col-sm-3">
+                <label>部门:</label>
+                <select name="department" class="form-control">
+                        <option value=""></option>
+                        <option value="研发部">研发部</option>
+                        <option value="市场部">市场部</option>
+                        <option value="质检部">质检部</option>
+                        <option value="综合部">综合部</option>
+                        <option value="财务部">财务部</option>                        
+                    </select>
+            </div>
+        </div>
+        <div class="row row-centered has-success">
+        <div class="form-group col-sm-3">
+            <label>创建时间:</label>
+            <input type="date" class="form-control" name="startTime">
+            <label>到:</label>
+            <input type="date" class="form-control" name="endTime">
+        </div>
+        </div>
+    </form>
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>出库申请列表:</label>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal"  id="detail">详情</button>
+        </div>
+        <div class="row row-centered">
+            <table id="table1" data-toggle="table" data-toolbar="#toolbar" data-height="250" data-click-to-select="true" class="singleSelectTable">
+                <thead>
+                    <tr>
+                        <th data-checkbox="true"></th>
+                        <th data-field="name">名称</th>
+                        <th data-field="type">出库类型</th>
+                        <th data-field="requestNo">出库单号</th>
+                        <th data-field="createDate">创建时间</th>
+                        <th data-field="totalNumber">数量合计</th>
+                        <th data-field="requestor">出库申请人</th>
+                        <th data-field="exeState">状态</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    
+    </div>
+</div>
+    
+<!--第一个模态框   显示开发人员申请详情-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                </h4>
+                
+            </div>
+            <div class="modal-body">
+                <div class="row row-centered has-success">
+                    <div class="form-group col-sm-4">
+                        <label>出库申请:</label>
+                    </div>
+                </div>
+                <form id="form2">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>名称:</label>
+                            <input type="text" class="form-control"  name="name">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>出库类型:</label>
+                            <input type="text" class="form-control" name="type">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>出库单号:</label>
+                            <input type="text" class="form-control" name="requestNo">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>创建日期:</label>
+                            <input type="text" class="form-control" name="createDate">
+                        </div>
+                    </div>
+                   
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>数量合计:</label>
+                            <input type="text" class="form-control" name="amount">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>出库申请人:</label>
+                            <input type="text" class="form-control" name="requestor">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>状态:</label>
+                            <input type="text" class="form-control" name="exeState">
+                        </div>
+                    </div>
+                </form>
+                    <div class="row row-centered has-success">
+                        <hr>
+                        
+                        <div class="form-group col-sm-4">
+                            <label>物料清单:</label>
+                        </div>
+                    </div>
+                    <div class="row row-centered has-success">
+                        <table id="OutStorageDetail" data-toggle="table" data-toolbar="#toolbar" data-height="250" data-click-to-select="true">
+                            <thead>
+                                <tr>
+                                    <th data-checkbox="true"></th>
+                                    <th data-field="programNumber">项目编号</th>
+                                    <th data-field="materialType">物料种类</th>
+                                    <th data-field="name">物料名称</th>
+                                    <th data-field="code">物料编码</th>
+                                    <th data-field="modelNumber">规格型号</th>
+                                    <th data-field="encapsulation">封装形式</th>
+                                    <th data-field="maxTemp">最高工作温度</th>
+                                    <th data-field="miniumTemp">最低工作温度</th>
+                                    <th data-field="amount">申请数量</th>
+                                    
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核:</label>
+                        </div>  
+                    </div>
+                    <form id="form3">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核状态:</label>
+                            <input type="text" class="form-control" name="exeState">
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label>建议:</label>
+                            <textarea name="auditComments" class="form-control" id="textarea"></textarea>
+                        </div>
+   
+                    </div> 
+                    </form>
+                
+      
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</body>
+<script>
+    $(function(){
+
+         //行单选
+         $('.singleSelectTable').on('click-row.bs.table', function (e, row, element) {
+            $('.singleSelectTable').bootstrapTable("uncheckAll");
+            $('.singleSelectTable').bootstrapTable("checkBy", row);
+        });
+
+        $('#query').click(function(){
+            var jsonobj=$('#form1').serializeJSON();//对象
+            var jsonString = JSON.stringify(jsonobj);//字符串
+        $.ajax({
+            url: '/api/findAllOutStorageByCondition',
+            type: "post",
+            dataType:'json',
+            contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+            //dataType:'jsonp',
+            data:jsonString,
+            success: function (data) {
+                //console.log(jsonString);
+                //var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                if(!data.hasOwnProperty("outStorageModels")){
+                    $("#table1").bootstrapTable("append",{ sellerName: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'sellerName', colspan: 9 });
+                    return;
+                }
+                var arr=data.outStorageModels;
+                for(var i=0;i<arr.length;i++){
+                    if(arr[i].type=='0'){
+                        arr[i].type='领用';
+                    }
+                    if(arr[i].type=='1'){
+                        arr[i].type='研发领用';
+                    }
+                    if(arr[i].type=='2'){
+                        arr[i].type='借用';
+                    }
+                    if(arr[i].exeState=='0'){
+                        arr[i].exeState='新建';
+                    }
+                    if(arr[i].exeState=='1'){
+                        arr[i].exeState='待审核';
+                    }
+                    if(arr[i].exeState=='2'){
+                        arr[i].exeState='待审批';
+                    }
+                    if(arr[i].exeState=='3'){
+                        arr[i].exeState='已批准';
+                    }
+                    if(arr[i].exeState=='4'){
+                        arr[i].exeState='已等待';
+                    }
+                    if(arr[i].exeState=='5'){
+                        arr[i].exeState='已出库';
+                    }
+                    if(arr[i].exeState=='6'){
+                        arr[i].exeState='已关闭';
+                    }
+                }
+                $('#table1').bootstrapTable('load',arr);
+            },
+            error:function(){
+                alert("失败");
+            }
+        });
+
+        });
+
+    //详情
+    $('#detail').click(function(){
+        var rowData=$('#table1').bootstrapTable('getAllSelections');
+        if(rowData.length!=1){
+            alert('请选择一条数据查看');
+            return;
+        }
+        $("#myModal1").modal("show");
+        var name=rowData[0].name;
+        var type=rowData[0].type;
+        var requestNo=rowData[0].requestNo;
+        var createDate=rowData[0].createDate;
+        var amount=rowData[0].totalNumber;
+        var requestor=rowData[0].requestor;
+        var exeState=rowData[0].exeState;
+        var auditComments=rowData[0].auditComments;
+        $('#form2 input[name=name]').val(name);
+        $('#form2 input[name=type]').val(type);
+        $('#form2 input[name=requestNo]').val(requestNo);
+        $('#form2 input[name=createDate]').val(createDate);
+        $('#form2 input[name=amount]').val(amount);
+        $('#form2 input[name=requestor]').val(requestor);
+        $('#form3 input[name=exeState]').val(exeState);
+        $('#form2 input[name=exeState]').val(exeState);
+        $('#form3 textarea[name=auditComments]').val(auditComments);
+        var MaterialArr=rowData[0].outMaterial;
+        $('#OutStorageDetail').bootstrapTable('removeAll');
+        $('#OutStorageDetail').bootstrapTable('append',MaterialArr);
+
+    });        
+
+
+    })
+</script>

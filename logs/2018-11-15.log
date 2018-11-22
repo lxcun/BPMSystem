@@ -1,0 +1,123 @@
+2018-11-15 09:57:08.961 [http-nio-8087-exec-10] ERROR c.a.b.S.i.MailServiceImpl -邮箱发送链接192.168.2.195:8088
+2018-11-15 11:14:00.551 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 4536 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-15 11:14:00.558 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 11:14:04.499 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 11:14:04.773 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 11:14:09.662 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 9.765 seconds (JVM running for 10.992)
+2018-11-15 11:15:02.339 [http-nio-8087-exec-10] INFO  c.a.b.S.i.OutStorageServiceImpl -提交出库单！
+2018-11-15 11:15:02.452 [http-nio-8087-exec-10] INFO  c.a.b.Common.RequestUtil -获取本地ipMS-20171116OFAF/192.168.2.195
+2018-11-15 11:15:02.452 [http-nio-8087-exec-10] ERROR c.a.b.S.i.MailServiceImpl -邮箱发送链接192.168.2.195:8088
+2018-11-15 11:28:15.592 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 10724 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-15 11:28:15.595 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 11:28:18.929 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 11:28:19.164 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 11:28:23.280 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.371 seconds (JVM running for 9.213)
+2018-11-15 11:28:45.624 [http-nio-8087-exec-10] INFO  c.a.b.S.i.OutStorageServiceImpl -开发人员提交出库单！
+2018-11-15 11:28:45.667 [http-nio-8087-exec-10] INFO  c.a.b.Common.RequestUtil -获取本地ipMS-20171116OFAF/192.168.2.195
+2018-11-15 11:28:45.667 [http-nio-8087-exec-10] ERROR c.a.b.S.i.MailServiceImpl -邮箱发送链接192.168.2.195:8088
+2018-11-15 11:32:38.140 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 1484 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-15 11:32:38.142 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 11:32:41.483 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 11:32:41.715 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 11:32:46.035 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.369 seconds (JVM running for 9.095)
+2018-11-15 11:33:02.673 [http-nio-8087-exec-1] INFO  c.a.b.S.i.OutStorageServiceImpl -开发人员提交了出库单！
+2018-11-15 11:33:02.713 [http-nio-8087-exec-1] INFO  c.a.b.Common.RequestUtil -获取本地ipMS-20171116OFAF/192.168.2.195
+2018-11-15 11:33:02.714 [http-nio-8087-exec-1] ERROR c.a.b.S.i.MailServiceImpl -邮箱发送链接192.168.2.195:8088
+2018-11-15 11:36:42.477 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 11556 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-15 11:36:42.570 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 11:36:45.935 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 11:36:46.158 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 11:36:50.323 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.434 seconds (JVM running for 9.181)
+2018-11-15 11:37:08.116 [http-nio-8087-exec-4] INFO  c.a.b.S.i.OutStorageServiceImpl -开发人员提交了出库单！
+2018-11-15 11:37:08.153 [http-nio-8087-exec-4] INFO  c.a.b.Common.RequestUtil -获取本地ipMS-20171116OFAF/192.168.2.195
+2018-11-15 11:37:08.153 [http-nio-8087-exec-4] ERROR c.a.b.S.i.MailServiceImpl -邮箱发送链接192.168.2.195:8088
+2018-11-15 13:40:24.542 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h17m37s936ms571µs565ns).
+2018-11-15 13:51:29.582 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 12284 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-15 13:51:29.583 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 13:51:32.620 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 13:51:32.862 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 13:51:36.683 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 7.824 seconds (JVM running for 8.523)
+2018-11-15 13:52:02.755 [http-nio-8087-exec-7] INFO  c.a.b.S.i.OutStorageServiceImpl -开发人员提交了出库单！
+2018-11-15 13:52:02.835 [http-nio-8087-exec-7] INFO  c.a.b.Common.RequestUtil -获取本地ipMS-20171116OFAF/192.168.2.195
+2018-11-15 13:52:02.835 [http-nio-8087-exec-7] ERROR c.a.b.S.i.MailServiceImpl -邮箱发送链接192.168.2.195:8088
+2018-11-15 13:52:47.139 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 10312 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-15 13:52:47.142 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 13:52:50.604 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 13:52:50.850 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 13:52:54.954 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.452 seconds (JVM running for 9.164)
+2018-11-15 13:53:10.042 [http-nio-8087-exec-3] INFO  c.a.b.S.i.OutStorageServiceImpl -开发人员提交了出库单！{"name":"etu","outMaterial":[{"amount":2,"code":"3","encapsulation":"","materialId":3,"modelNumber":"ICE-GM45A-R10(带CPU)","name":"COMe主板","programNumber":"djd"}],"programNumber":"djd","remark":"fgjh","totalNumber":2,"type":0,"typeNum":1}
+2018-11-15 13:53:10.127 [http-nio-8087-exec-3] INFO  c.a.b.Common.RequestUtil -获取本地ipMS-20171116OFAF/192.168.2.195
+2018-11-15 13:53:10.127 [http-nio-8087-exec-3] ERROR c.a.b.S.i.MailServiceImpl -邮箱发送链接192.168.2.195:8088
+2018-11-15 14:38:57.323 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 8220 (C:\Users\Administrator\AppData\Local\Temp\e4j3D73.tmp_dir1542263935\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\2\bpmsystem_exe)
+2018-11-15 14:38:57.336 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 14:39:03.869 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 14:39:04.158 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 14:39:29.659 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 8356 (C:\Users\Administrator\AppData\Local\Temp\e4jBC14.tmp_dir1542263967\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\2\bpmsystem_exe)
+2018-11-15 14:39:29.665 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 14:39:36.559 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 14:39:37.229 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 14:39:48.853 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 8096 (C:\Users\Administrator\AppData\Local\Temp\e4jBBF4.tmp_dir1542263967\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\2\bpmsystem_exe)
+2018-11-15 14:39:48.889 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 14:39:58.624 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 11620 (C:\Users\Administrator\AppData\Local\Temp\e4j2AEC.tmp_dir1542263995\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\2\bpmsystem_exe)
+2018-11-15 14:39:58.630 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 14:40:01.274 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 1248 (C:\Users\Administrator\AppData\Local\Temp\e4j2ACD.tmp_dir1542263995\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\2\bpmsystem_exe)
+2018-11-15 14:40:01.279 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 14:40:09.770 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 14:40:11.593 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 14:40:16.962 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 14:40:17.921 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 14:40:23.596 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 14:40:24.439 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 14:41:13.630 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 9768 (C:\Users\Administrator\AppData\Local\Temp\e4j7C56.tmp_dir1542264016\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\2\bpmsystem_exe)
+2018-11-15 14:41:13.635 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 14:41:22.935 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 14:41:23.278 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 14:41:51.529 [main] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 47.303 seconds (JVM running for 87.226)
+2018-11-15 14:42:43.450 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-11-15 14:42:43.502 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-11-15 14:42:47.332 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-11-15 14:42:47.506 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-11-15 14:42:47.524 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-11-15 14:42:47.708 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-11-15 14:42:49.728 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-11-15 14:42:49.768 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-11-15 14:42:50.759 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-11-15 14:42:50.905 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-11-15 14:43:03.503 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 13144 (C:\Users\Administrator\AppData\Local\Temp\e4jB022.tmp_dir1542264161\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\2\bpmsystem_exe)
+2018-11-15 14:43:03.536 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 14:43:10.706 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 14:43:13.202 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 14:43:25.268 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-11-15 14:43:25.275 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-11-15 14:43:59.786 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 8456 (C:\Users\Administrator\AppData\Local\Temp\e4jD81C.tmp_dir1542264236\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\2\bpmsystem_exe)
+2018-11-15 14:43:59.791 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 14:44:04.629 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 14:44:04.896 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 14:44:10.831 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-11-15 14:44:10.837 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-11-15 14:45:00.866 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 4064 (C:\Users\Administrator\AppData\Local\Temp\e4jCCD6.tmp_dir1542264299\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\2\bpmsystem_exe)
+2018-11-15 14:45:00.873 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 14:45:05.822 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 14:45:06.170 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 14:45:13.989 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-11-15 14:45:13.996 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-11-15 14:46:08.420 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 3992 (C:\Users\Administrator\AppData\Local\Temp\e4jD407.tmp_dir1542264366\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\2\bpmsystem_exe)
+2018-11-15 14:46:08.428 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 14:46:13.325 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 14:46:13.589 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 14:46:19.972 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-11-15 14:46:19.983 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-11-15 14:47:39.863 [main] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication v0.0.1-SNAPSHOT on MS-20171116OFAF with PID 12004 (C:\Users\Administrator\AppData\Local\Temp\e4j3A19.tmp_dir1542264458\bpmsystem-0.0.1-SNAPSHOT.jar started by Administrator in E:\2\bpmsystem_exe)
+2018-11-15 14:47:39.869 [main] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 14:47:44.228 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 14:47:44.491 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 14:47:51.232 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-11-15 14:47:51.243 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-11-15 15:02:43.573 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 11996 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-11-15 15:02:43.574 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-11-15 15:02:46.566 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-11-15 15:02:46.853 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-11-15 15:02:51.893 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 9.417 seconds (JVM running for 10.258)
+2018-11-15 15:31:41.475 [http-nio-8087-exec-1] INFO  c.a.b.S.i.OutStorageServiceImpl -开发人员提交了出库单！{"name":"tijiao","outMaterial":[{"amount":26,"code":"6","encapsulation":"","materialId":6,"modelNumber":"","name":"DC电源插座","programNumber":"dhh"}],"programNumber":"dhh","remark":"hxb","totalNumber":26,"type":0,"typeNum":1}
+2018-11-15 15:31:41.662 [http-nio-8087-exec-1] INFO  c.a.b.Common.RequestUtil -获取本地ipMS-20171116OFAF/192.168.2.195
+2018-11-15 15:31:41.662 [http-nio-8087-exec-1] ERROR c.a.b.S.i.MailServiceImpl -邮箱发送链接192.168.2.195:8088

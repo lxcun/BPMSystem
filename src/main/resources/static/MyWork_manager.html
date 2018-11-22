@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<body>
+    <style type="text/css">
+        body {
+            background-color: #EEEEEE;
+        }
+
+        #header {
+            font-size: 22px;
+            height: 80px;
+            margin-left: 700px;
+            margin-top: 30px;
+        }
+
+        th {
+            background: #eee;
+            color: #3366cc;
+        }
+
+        .container a {
+            width: 150px;
+            height: 30px;
+        }
+
+    </style>
+<div id="div2">
+    <div id="header">部门经理工作列表</div>
+    <div class="container">
+    <div class="row row-centered has-success">
+        <div class="form-group col-sm-4">
+            <label>我的待办工作列表:</label>     
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal3" id="detail">详情</button>
+            <button class="btn btn-success" data-toggle="modal" data-target="" id="test">验证</button>
+        </div>
+        <table id="managerTable">
+     
+        </table>
+
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>库存验证信息</label>    
+                <textarea id="info" class="form-control"></textarea> 
+            </div>
+        </div>
+
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>我的历史工作列表:</label>     
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal_history" id="detail_history">详情</button>
+        </div>
+        <table id="managerTable_history">
+
+        </table>
+    </div>
+</div>
+
+<!--第一个模态框   显示开发人员申请详情-->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                </h4>
+                
+            </div>
+            <div class="modal-body">
+                <div class="row row-centered has-success">
+                    <div class="form-group col-sm-4">
+                        <label>出库申请:</label>
+                    </div>
+                </div>
+                <form id="form7">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>名称:</label>
+                            <input type="text" class="form-control"  name="name">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>出库类型:</label>
+                            <input type="text" class="form-control" name="type">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>领用人:</label>
+                            <input type="text" class="form-control" name="requestor">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>项目编号:</label>
+                            <input type="text" class="form-control" name="programNumber">
+                        </div>
+                        
+                    </div>
+                   
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>创建日期:</label>
+                            <input type="text" class="form-control" name="createDate">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>物料种类数:</label>
+                            <input type="text" class="form-control" name="typeNum">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>物料数量:</label>
+                            <input type="text" class="form-control" name="totalNumber">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>描述:</label>
+                            <input type="text" class="form-control" name="remark">
+                        </div>
+                    </div>
+                </form>
+                    <div class="row row-centered has-success">
+                        <hr>
+                        
+                        <div class="form-group col-sm-4">
+                            <label>物料清单:</label>
+                        </div>
+                    </div>
+                    <div class="row row-centered has-success">
+                        <table id="table_manager_detail" data-toggle="table" data-toolbar="#toolbar" data-height="250" data-click-to-select="true">
+                            <thead>
+                                <tr>
+                                    <th data-checkbox="true"></th>
+                                    <th data-field="programNumber">项目编号</th>
+                                    <th data-field="materialType">物料种类</th>
+                                    <th data-field="name">物料名称</th>
+                                    <th data-field="code">物料编码</th>
+                                    <th data-field="modelNumber">规格型号</th>
+                                    <th data-field="encapsulation">封装形式</th>
+                                    <th data-field="maxTemp">最高工作温度</th>
+                                    <th data-field="miniumTemp">最低工作温度</th>
+                                    <th data-field="price">单价</th>
+                                    <th data-field="number">数量</th>
+                                    <th data-field="price">金额</th>
+                                    
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核:</label>
+                        </div>  
+                    </div>
+                    <form id="form3">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核结果:</label>
+                            <select name="exeState" class="form-control" id="audit">
+                                <option value="">请选择审核结果</option>
+                                <option value="3">通过</option>
+                                <option value="2">报请上级</option>
+                                <option value="6">拒绝</option>
+                                <option value="0">需修改</option>
+                                <option value="4">需等待</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label>上级领导:</label>
+                            <select name="approver" class="form-control" id="boss">
+                                <option value="总经理">总经理(张)</option>
+                                <option value="总工程师">总工程师(何)</option>
+                            </select>
+                        </div>    
+                    </div>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>建议:</label>
+                            <textarea name="auditComments" class="form-control" id="textarea"></textarea>
+                        </div>
+                        
+                    </div> 
+                    </form>
+                
+      
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="save_myApproval">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!--第二个模态框   显示经理历史审核详情-->
+<div class="modal fade" id="myModal_history" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                </h4>
+                
+            </div>
+            <div class="modal-body">
+                <div class="row row-centered has-success">
+                    <div class="form-group col-sm-4">
+                        <label>出库申请:</label>
+                    </div>
+                </div>
+                <form id="form8">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>名称:</label>
+                            <input type="text" class="form-control"  name="name">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>类型:</label>
+                            <input type="text" class="form-control" name="type">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>领用人:</label>
+                            <input type="text" class="form-control" name="requestor">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>创建日期:</label>
+                            <input type="text" class="form-control" name="createDate">
+                        </div>
+                    </div>
+                   
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>物料种数:</label>
+                            <input type="text" class="form-control" name="totalNumber">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>物料数量:</label>
+                            <input type="text" class="form-control" name="totalNumber">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>描述:</label>
+                            <input type="text" class="form-control" name="remark">
+                        </div>
+                    </div>
+                </form>
+                    <div class="row row-centered has-success">
+                        <hr>
+                        
+                        <div class="form-group col-sm-4">
+                            <label>物料清单:</label>
+                        </div>
+                    </div>
+                    <div class="row row-centered has-success">
+                        <table id="table_manager_detailHistory" data-toggle="table" data-toolbar="#toolbar" data-height="250" data-click-to-select="true">
+                            <thead>
+                                <tr>
+                                    <th data-checkbox="true"></th>
+                                    <th data-field="programNumber">项目编号</th>
+                                    <th data-field="type">物料种类</th>
+                                    <th data-field="name">物料名称</th>
+                                    <th data-field="code">物料编码</th>
+                                    <th data-field="modelNumber">规格型号</th>
+                                    <th data-field="encapsulation">封装形式</th>
+                                    <th data-field="maxTemp">最高工作温度</th>
+                                    <th data-field="miniumTemp">最低工作温度</th>
+                                    <th data-field="number">数量</th>
+                                    
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核:</label>
+                        </div>  
+                    </div>
+                    <form id="form9">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核结果:</label>
+                            <input type="text" name="result" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label>上级领导:</label>
+                            <input type="text" name="leader" class="form-control">
+                        </div>    
+                    </div>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>建议:</label>
+                            <textarea name="auditComments" class="form-control"></textarea>
+                        </div>
+                        
+                    </div> 
+                    </form>
+                
+      
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</body>
+<script>
+    $(function(){
+        var callbackColumns_manager=[  
+            {checkbox:true},
+            {
+                field: 'name',
+                title: '名称',
+            }, {
+                field: 'programNumber',
+                title: '项目编号'
+            },
+            {
+                field: 'requestNo',
+                title: '编号'
+            },{
+                field: 'requestor',
+                title: '申请人'
+            },{
+                field: 'totalNumber',
+                title: '物料数量'
+            },{
+                field: 'type',
+                title: '类型'
+            },{
+                field: 'examiner',
+                title: '审核人'
+            },{
+                field: 'approver',
+                title: '审批人'
+            }
+        ];
+        var callbackColumns_manager_history=[  
+            {checkbox:true},
+            {
+                field: 'name',
+                title: '名称',
+            }, {
+                field: 'programNumber',
+                title: '项目编号'
+            },
+            {
+                field: 'requestNo',
+                title: '编号'
+            },{
+                field: 'requestor',
+                title: '申请人'
+            },{
+                field: 'totalNumber',
+                title: '物料数量'
+            },{
+                field: 'type',
+                title: '出库类型'
+            },{
+                field: 'examiner',
+                title: '审核人'
+            },{
+                field: 'approver',
+                title: '审批人'
+            },{
+                field: 'exeState',
+                title: '状态'
+            }
+        ];
+        //部门经理需要加载的数据
+        $.ajax({
+            url: '/api/findMyApprovalOutStorage',
+            type: "get",
+            dataType:'text',
+            //dataType:'jsonp',
+            data:null,
+            success: function (data) {
+                var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                var arr=jsonobj.MyApprovalOutStorage;
+                $('#managerTable').bootstrapTable({
+                    data:arr,
+                    showColumns:true,
+                    cache: false,                       //是否使用缓存，默认为true，
+                    pagination: true,                   //是否显示分页（*）
+                    search: true,                       //是否显示表格搜索
+                    height:"300",
+                    width: "100%",
+                    columns:callbackColumns_manager,
+                    clickToSelect:true,     //点击行选中复选框
+                    onCheck:function(row,$element){
+                        index = $element.data('index');
+                    },
+                    onDblClickRow:function(row,$element){
+                    }
+                });
+            },
+            error:function(){
+                alert("失败");
+            }
+        });
+
+        //部门经理历史记录
+        $.ajax({
+            url: '/api/findMyApprovalOutStorage',
+            type: "get",
+            dataType:'text',
+            //dataType:'jsonp',
+            data:null,
+            success: function (data) {
+                var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                var arr=jsonobj.MyHistoryApprovalOutStorage;
+                for(var i=0;i<arr.length;i++){
+                    if(arr[i].type==0){
+                        arr[i].type='领用';
+                    }
+                    if(arr[i].type==1){
+                        arr[i].type='借用';
+                    }
+                    
+                    if(arr[i].exeState==0){
+                        arr[i].exeState='新建';
+                    }
+                    if(arr[i].exeState==1){
+                        arr[i].exeState='待审核';
+                    }
+                    if(arr[i].exeState==2){
+                        arr[i].exeState='待审核';
+                    }
+                    if(arr[i].exeState==3){
+                        arr[i].exeState='已批准';
+                    }
+                    if(arr[i].exeState==4){
+                        arr[i].exeState='已等待';
+                    }
+                    if(arr[i].exeState==5){
+                        arr[i].exeState='已出库';
+                    }
+                    if(arr[i].exeState==6){
+                        arr[i].exeState='已关闭';
+                    }
+
+                }
+                $('#managerTable_history').bootstrapTable({
+                    data:arr,
+                    showColumns:true,
+                    cache: false,                       //是否使用缓存，默认为true，
+                    pagination: true,                   //是否显示分页（*）
+                    search: true,                       //是否显示表格搜索
+                    height:"300",
+                    width: "100%",
+                    columns:callbackColumns_manager_history,
+                    clickToSelect:true,     //点击行选中复选框
+                    onCheck:function(row,$element){
+                        index = $element.data('index');
+                    },
+                });
+            },
+            error:function(){
+                alert("失败");
+            }
+        });
+
+    var outStorageId=0;
+
+$('#detail').click(function(){
+
+    var rowData=$('#managerTable').bootstrapTable('getAllSelections');
+    console.log(rowData);
+    ///////开发人员申请详细清单
+    outStorageId=rowData[0].outStorageId;
+//表格数据
+    var detailOutStorages = rowData[0].outMaterial;
+   
+    $('#table_manager_detail').bootstrapTable('removeAll');
+    $('#table_manager_detail').bootstrapTable('append', detailOutStorages);
+//表单数据
+    var name = rowData[0].name;
+    var type = rowData[0].type;
+    var requestor = rowData[0].requestor;
+    var programNumber = rowData[0].programNumber;
+    var createDate = rowData[0].createDate;
+    var typeNum = rowData[0].typeNum;
+    var totalNumber = rowData[0].totalNumber;
+    var remark = rowData[0].remark;
+
+    $('#form7 input[name=name]').val(name);
+    $('#form7 input[name=type]').val(type);
+    $('#form7 input[name=requestor]').val(requestor);
+    $('#form7 input[name=programNumber]').val(programNumber);
+    $('#form7 input[name=typeNum]').val(typeNum);
+    $('#form7 input[name=totalNumber]').val(totalNumber);
+    $('#form7 input[name=createDate]').val(createDate);
+    $('#form7 input[name=remark]').val(remark);
+    $('#form7 input[name=name]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=type]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=requestor]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=createDate]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=typeNum]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=programNumber]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=totalNumber]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=remark]').attr("readonly", "readonly");//设置成只读
+        
+
+})
+
+
+//经理审批历史记录详情
+$('#detail_history').click(function(){
+    var rowData=$('#managerTable_history').bootstrapTable('getAllSelections');
+    console.log(rowData);
+    var detailOutStorages = rowData[0].outMaterial;
+    $('#table_manager_detailHistory').bootstrapTable('removeAll');
+    $('#table_manager_detailHistory').bootstrapTable('append', detailOutStorages);
+    var name = rowData[0].name;
+    var type = rowData[0].type;
+    var typeNum = rowData[0].typeNum;
+    var requestor = rowData[0].requestor;
+    var createDate = rowData[0].createDate;
+    var totalNumber = rowData[0].totalNumber;
+    var remark = rowData[0].remark;
+    var amount = rowData[0].amount;
+    var result = rowData[0].exeState;
+    var auditComments = rowData[0].auditComments;
+
+    $('#form8 input[name=name]').val(name);
+    $('#form8 input[name=type]').val(type);
+    $('#form8 input[name=requestor]').val(requestor);
+    $('#form8 input[name=createDate]').val(createDate);
+    $('#form8 input[name=typeNum]').val(typeNum);
+    $('#form8 input[name=totalNumber]').val(totalNumber);
+    $('#form8 input[name=remark]').val(remark);
+    $('#form9 textarea[name=auditComments]').val(auditComments);
+    $('#form9 input[name=result]').val(result);
+    $('#form8 input[name=amount]').val(amount);
+    $('#form8 input[name=name]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=type]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=requestor]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=createDate]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=totalPrice]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=totalNumber]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=typeNum]').attr("readonly", "readonly");
+    $('#form8 input[name=remark]').attr("readonly", "readonly");//设置成只读
+
+})
+
+//验证库存数量
+$('#test').click(function(){
+    $('#info').val('');
+    var rowData=$('#managerTable').bootstrapTable('getAllSelections');
+    var arr_outMaterial=rowData[0].outMaterial;
+    var str_info='';
+    for(var i=0;i<arr_outMaterial.length;i++){
+        var material_name=arr_outMaterial[i].name;
+        var material_amount=arr_outMaterial[i].amount;
+        var material_needNumber=arr_outMaterial[i].number;
+        str_info=str_info+material_name+'库存数：'+material_amount+'    '+'申请数量：'+material_needNumber+'\n';
+    }
+    $('#info').val(str_info);
+})
+    //提交审核结果   
+$('#save_myApproval').click(function(){
+
+    var jsonobj=$('#form3').serializeJSON();//对象
+    var audit=$('#audit').val();
+    jsonobj.histories=audit;
+    jsonobj.outStorageId=outStorageId;
+    var jsonString = JSON.stringify(jsonobj);//字符串
+    $.ajax({
+        url: '/api/divisionManagerApproval',
+        type: "post",
+        dataType: 'text',    //接收到服务器的数据格式
+        contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+        data: jsonString,
+        success: function (data) {
+            console.log(jsonString);
+        },
+        error: function () {
+            alert("失败");
+            console.log(jsonString);
+        }
+    });
+})
+
+
+    $('#audit').change(function(){
+        $('#boss').attr("disabled","disabled");
+        var audit=$('#audit').val();//审核状态
+        if(audit=='报请上级'){
+            $('#boss').removeAttr("disabled");
+
+        }
+    })
+    })
+</script>

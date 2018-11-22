@@ -1,0 +1,46 @@
+2018-10-22 09:22:42.136 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 8948 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-22 09:22:42.137 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-22 09:22:45.266 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-22 09:22:45.591 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-22 09:22:50.034 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.725 seconds (JVM running for 10.08)
+2018-10-22 09:25:47.574 [main] INFO  c.a.b.S.i.MailServiceImplTest -Starting MailServiceImplTest on MS-20171116OFAF with PID 10260 (started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-22 09:25:47.576 [main] INFO  c.a.b.S.i.MailServiceImplTest -No active profile set, falling back to default profiles: default
+2018-10-22 09:25:50.050 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-22 09:25:50.403 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-22 09:25:57.451 [main] INFO  c.a.b.S.i.MailServiceImplTest -Started MailServiceImplTest in 10.462 seconds (JVM running for 12.356)
+2018-10-22 09:26:00.646 [Thread-10] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-10-22 09:26:00.653 [Thread-10] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-10-22 09:26:48.471 [main] INFO  c.a.b.S.i.MailServiceImplTest -Starting MailServiceImplTest on MS-20171116OFAF with PID 1260 (started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-22 09:26:48.473 [main] INFO  c.a.b.S.i.MailServiceImplTest -No active profile set, falling back to default profiles: default
+2018-10-22 09:26:51.422 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-22 09:26:51.805 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-22 09:26:59.351 [main] INFO  c.a.b.S.i.MailServiceImplTest -Started MailServiceImplTest in 11.322 seconds (JVM running for 13.745)
+2018-10-22 09:27:20.296 [Thread-10] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-10-22 09:27:20.301 [Thread-10] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-10-22 09:28:48.661 [Thread-29] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-10-22 09:28:48.703 [Thread-29] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-10-22 09:28:50.058 [main] INFO  c.a.b.S.i.MailServiceImplTest -Starting MailServiceImplTest on MS-20171116OFAF with PID 6904 (started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-22 09:28:50.086 [main] INFO  c.a.b.S.i.MailServiceImplTest -No active profile set, falling back to default profiles: default
+2018-10-22 09:28:50.386 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 8948 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-22 09:28:50.386 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-22 09:28:51.965 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-2 - Starting...
+2018-10-22 09:28:51.984 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-2 - Start completed.
+2018-10-22 09:28:53.368 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-22 09:28:53.664 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-22 09:28:55.664 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 5.317 seconds (JVM running for 375.695)
+2018-10-22 09:29:01.028 [main] INFO  c.a.b.S.i.MailServiceImplTest -Started MailServiceImplTest in 11.644 seconds (JVM running for 13.446)
+2018-10-22 09:29:03.060 [Thread-10] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-10-22 09:29:03.067 [Thread-10] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-10-22 09:29:22.634 [restartedMain] INFO  c.a.b.BpmsystemApplication -Starting BpmsystemApplication on MS-20171116OFAF with PID 6180 (E:\OASystem\Source\BPMSystem\target\classes started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-22 09:29:22.635 [restartedMain] INFO  c.a.b.BpmsystemApplication -No active profile set, falling back to default profiles: default
+2018-10-22 09:29:25.682 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-22 09:29:25.933 [restartedMain] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-22 09:29:30.048 [restartedMain] INFO  c.a.b.BpmsystemApplication -Started BpmsystemApplication in 8.357 seconds (JVM running for 9.134)
+2018-10-22 09:29:54.191 [main] INFO  c.a.b.S.i.MailServiceImplTest -Starting MailServiceImplTest on MS-20171116OFAF with PID 8684 (started by Administrator in E:\OASystem\Source\BPMSystem)
+2018-10-22 09:29:54.199 [main] INFO  c.a.b.S.i.MailServiceImplTest -No active profile set, falling back to default profiles: default
+2018-10-22 09:29:56.655 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Starting...
+2018-10-22 09:29:56.936 [main] INFO  c.z.h.HikariDataSource -HikariPool-1 - Start completed.
+2018-10-22 09:30:03.448 [main] INFO  c.a.b.S.i.MailServiceImplTest -Started MailServiceImplTest in 9.945 seconds (JVM running for 11.429)
+2018-10-22 09:30:05.918 [Thread-10] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown initiated...
+2018-10-22 09:30:05.927 [Thread-10] INFO  c.z.h.HikariDataSource -HikariPool-1 - Shutdown completed.
+2018-10-22 13:45:49.626 [HikariPool-1 housekeeper] WARN  c.z.h.pool.HikariPool -HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h4m52s506ms996µs892ns).

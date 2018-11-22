@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>basic-columns</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="./style/uniformStyle.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+
+</head>
+<body>
+<div class="maindiv">
+    <div id="header">库存查询</div>
+    <div class="container">
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>查询条件:</label>
+            </div>
+        </div>
+        <button class="btn btn-success" id="query" style="margin-bottom: 15px">查询</button>
+        <form id="form1">
+            <div class="row row-centered has-success">
+                <div class="form-group col-sm-3">
+                    <label>物料种类:</label>
+                    <select id="types" name="type"  class="form-control">
+                        <option value=""></option>
+                    </select>
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <label>物料编码:</label>
+                    <select id="codes" name="code" class="form-control">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label>型号:</label>
+                    <select id="modelNumbers" name="modelNumber" class="form-control">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label>封装:</label>
+                    <select id="encapsulations" name="encapsulation" class="form-control">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row row-centered has-success">
+                <div class="form-group col-sm-3">
+                    <label>项目编号:</label>
+                    <select id="programNumbers" name="programNumber" class="form-control">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+        </form>
+        <table id="storage_table" data-toggle="table" data-toolbar="#toolbar" data-click-to-select="true" data-search="true" class="singleSelectTable">
+            <thead>
+                <tr>
+                    <th data-checkbox="true"></th>
+                    <th data-field="programNumber">项目编号</th>
+                    <th data-field="typeName">物料种类</th>
+                    <th data-field="name">物料名称</th>
+                    <th data-field="code">物料编码</th>
+                    <th data-field="modelNumber">规格型号</th>
+                    <th data-field="encapsulation">封装形式</th>
+                    <th data-field="maxTemp">最高工作温度</th>
+                    <th data-field="miniumTemp">最低工作温度</th>
+                    <th data-field="amount">数量</th>                    
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+<script>
+    $(function () {
+        $.ajax({
+            url: '/api/listType',
+            type: "get",
+            dataType: 'text',    //接收到服务器的数据格式
+            contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+            data: null,
+            success: function (data) {
+                var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                var arr = jsonobj.listType;
+                for (var i = 0; i < arr.length; i++) {
+                    var value = arr[i].typeName;
+                    $("#types").append("<option value='" + value + "'>" + value + "</option>");
+                }
+            },
+            error: function () {
+                alert("失败");
+            }
+        })
+
+
+        $.ajax({
+            url: '/api/findAllMaterialCode',
+            type: "get",
+            dataType: 'text',    //接收到服务器的数据格式
+            contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+            data: null,
+            success: function (data) {
+                var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                var arr = jsonobj.codes;
+                for (var i = 0; i < arr.length; i++) {
+                    var value = arr[i];
+                    $("#codes").append("<option value='"+value+"'>" + value + "</option>");
+                }
+            },
+            error: function () {
+                alert("失败");
+            }
+        })
+
+
+        $.ajax({
+            url: '/api/findAllProgramNumber',
+            type: "get",
+            dataType: 'text',    //接收到服务器的数据格式
+            contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+            data: null,
+            success: function (data) {
+                var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                var arr = jsonobj.programNumbers;
+                for (var i = 0; i < arr.length; i++) {
+                    var value = arr[i];
+                    $("#programNumbers").append("<option value='" + value + "'>" + value + "</option>");
+                }
+            },
+            error: function () {
+                alert("失败");
+            }
+        })
+
+
+        $.ajax({
+            url: '/api/findAllMaterialEncapsulation',
+            type: "get",
+            dataType: 'text',    //接收到服务器的数据格式
+            contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+            data: null,
+            success: function (data) {
+                var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                var arr = jsonobj.encapsulations;
+                for (var i = 0; i < arr.length; i++) {
+                    var value = arr[i];
+                    $("#encapsulations").append("<option value='" + value + "'>" + value + "</option>");
+                }
+            },
+            error: function () {
+                alert("失败");
+            }
+        })
+
+
+        $.ajax({
+            url: '/api/findAllMaterialModelNumber',
+            type: "get",
+            dataType: 'text',    //接收到服务器的数据格式
+            contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+            data: null,
+            success: function (data) {
+                var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                var arr = jsonobj.modelNumbers;
+                for (var i = 0; i < arr.length; i++) {
+                    var value = arr[i];
+                    $("#modelNumbers").append("<option value='" + value + "'>" + value + "</option>");
+                }
+            },
+            error: function () {
+                alert("失败");
+            }
+        })
+
+
+     //行单选
+     $('.singleSelectTable').on('click-row.bs.table', function (e, row, element) {
+        $('.singleSelectTable').bootstrapTable("uncheckAll");
+        $('.singleSelectTable').bootstrapTable("checkBy", row);
+    });
+    var index=0;
+    //查询
+    $('#query').click(function () {
+        var jsonobj=$('#form1').serializeJSON();//对象
+        var jsonString = JSON.stringify(jsonobj);//转成字符串
+            $.ajax({
+                url: '/api/findAllStorageByCondition',
+                type: "post",
+                dataType: 'json',    //接收到服务器的数据格式
+                contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+                data: jsonString,
+                success: function (data) {
+                    if(!data.hasOwnProperty("listStorage")){
+                        $('#storage_table').bootstrapTable("removeAll");
+                        $("#storage_table").bootstrapTable("append",{ programNumber: '<div style="text-align:center;color:red">没有相关记录！</div>' }).bootstrapTable('mergeCells', { index: 0, field: 'programNumber', colspan: 9 });
+                        return;
+                    }
+                    var storage_arr = data.listStorage;
+                    /*
+                    for(var i=0;i<arr.length;i++){
+                        var obj=arr[i].materialId;
+                        //delete obj.id;        //删除id属性
+                        var obj2=arr[i];
+                        delete obj2.materialId;
+                        $.extend(obj,obj2);//将两个对象合并
+                        arrdata.push(obj);//将新对象加入数组中 
+                    }
+                    */
+                    //var temp={field:'customDefine2',title:arr[0].customDefine1};//将自定义的列加入
+                    //callbackColumns.push(temp);
+                    /*
+                    var material_type = $('#material_type').val();
+                    var material_code = $('#material_code').val();
+                    var material_number = $('#material_number').val();
+                    var material_encapsulation = $('#material_encapsulation').val();
+                    var material_arr_copy=material_arr;
+                    for (var j = 0; j < material_arr_copy.length; j++) {
+                        if (material_arr_copy[j].typeName == material_type && material_arr_copy[j].code == material_code&&material_arr_copy[j].modelNumber==material_number&&material_arr_copy[j].encapsulation==material_encapsulation) {
+                            
+                            var material_obj=material_arr_copy[j];
+                            material_arr=[];
+                            material_arr.push(material_obj);
+                            console.log(material_arr);
+                        }
+                    }
+                    */
+                    var arr=[];
+                    for(var i=0;i<storage_arr.length;i++){
+                        var materialObj=storage_arr[i].material;
+                       if(materialObj.type==null){
+                           materialObj.typeName=null;
+                    }else{
+                           materialObj.typeName=materialObj.type.typeName;
+                    }
+                        materialObj.amount=storage_arr[i].amount;
+                        var programNumber=storage_arr[i].programNumber;
+                        materialObj.programNumber=programNumber;                       
+                        arr.push(materialObj);
+                    }
+                    $('#storage_table').bootstrapTable("load",arr);
+
+                },
+                error: function () {
+                    alert("失败");
+                }
+            });
+        })
+
+///////////////////////////////////////////////////////////////////////////////
+
+//下面是获取当前日期的操作
+     var now = new Date(); 
+     var h = now.getFullYear(); 
+     var m = (now.getMonth() + 1>9) ? now.getMonth() + 1 : "0"+(now.getMonth() + 1); 
+     var s = (now.getDate()>9)  ? now.getDate()  : "0"+now.getDate(); 
+     $('.NowDate').val(h+"/"+m+"/"+s);
+
+
+    
+})
+</script>

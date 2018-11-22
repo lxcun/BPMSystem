@@ -1,0 +1,187 @@
+h4, h5, h6,
+h1, h2, h3 {margin: 0;}
+ul, ol {margin: 0;}
+p {margin: 0;}
+
+html, body{
+	font-family: 'Roboto', sans-serif;
+    font-size: 100%;
+    width: auto;
+    height: auto;
+    overflow-x: hidden; /*对超出框左右内容进行隐藏*/
+    /*background: url(../style/images/bg.jpg) no-repeat 0px 0px;*/
+    /*background-size: 100% 100%;*/
+	background-size:cover;
+}
+body a{
+	transition: 0.5s all ease;
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
+	-ms-transition: 0.5s all ease;
+	text-decoration:none;
+}
+h1,h2,h3,h4,h5,h6{
+	margin:0;			   
+}
+p{
+	margin:0;
+}
+ul,label{
+	margin:0;
+	padding:0;
+}
+body a:hover{
+	text-decoration:none;
+}
+	/*sidebar navigation*/
+#sidebar {
+    width:240px;
+    height:100%;
+    position:fixed;    /* 相对于浏览器窗口进行定位*/
+    /*background:rgba(52, 48, 48, 0.78);*/
+    background-color: #EEEEEE;
+    -webkit-transition:all .3s ease-in-out;
+    -moz-transition:all .3s ease-in-out;
+    -o-transition:all .3s ease-in-out;
+    transition:all .3s ease-in-out;
+    left: 0px;
+    top:0px;
+}
+#sidebar ul li {
+    position: relative;
+    border-bottom: 2px solid white;
+}
+.list,.right-stat-bar{
+    height: 100%;
+}
+
+/*LEFT NAVIGATION ICON*/
+.dcjq-icon {
+    height:17px;
+    width:17px;
+    display:inline-block;
+    background:url(../style/images/1.png) no-repeat top;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    position:absolute;
+    right:10px;
+}
+.active .dcjq-icon {
+    background:url(../style/images/2.png) no-repeat bottom;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+}
+.right-side-accordion .dcjq-icon {
+    height:17px;
+    width:17px;
+    display:inline-block;
+    background:url(../style/images/acc-expand.png) no-repeat top;
+    border-radius:3px;  /*添加圆角*/
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    position:absolute;
+    right:10px;
+}
+
+
+ul.menu,ul.menu li ul.menu2 {
+   /* margin:-2px 0 0;*/
+    margin: 0px;
+    padding:0;
+}
+ul.menu {
+    padding-top:0px;
+
+}
+#sidebar>ul>li>ul.menu2 {
+    display:none;
+}
+#sidebar .menu1>.menu2 li a {
+    padding-left:46px;
+}
+#sidebar>ul>li.active>ul.menu2,#sidebar>ul>li>ul.menu2>li>a {
+    display:block;
+}
+ul.menu li ul.menu2 li {
+    background:rgba(52, 48, 48, 0);
+    margin-bottom:0;
+    margin-left:0;
+    margin-right:0;
+}
+ul.menu li ul.menu2 li a {
+    font-size:12px;
+    padding-top:-10px;
+    padding-bottom:13px;
+    -webkit-transition:all 0.3s ease;
+    -moz-transition:all 0.3s ease;
+    -o-transition:all 0.3s ease;
+    -ms-transition:all 0.3s ease;
+    transition:all 0.3s ease;
+   /* color:#fff;*/
+   color: black;
+}
+ul.menu li ul.menu2 li a:hover,ul.menu li ul.menu2 li.active a {
+    /*color:#fff;*/
+    color: black;
+    -webkit-transition:all 0.3s ease;
+    -moz-transition:all 0.3s ease;
+    -o-transition:all 0.3s ease;
+    -ms-transition:all 0.3s ease;
+    transition:all 0.3s ease;
+    display:block;
+    background:rgba(40, 40, 46, 0.28);
+}
+ul.menu li {
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+ul.menu li.menu1 {
+    line-height:0px;
+}
+ul.menu ul.menu2 li {
+    border-bottom:none;
+}
+ul.menu li a span {
+    display:inline-block;
+}
+ul.menu li a {
+    /*color:#fff;*/
+    color: black;
+    text-decoration:none;
+    display:block;
+    padding:18px 0 18px 25px;
+    font-size:12px;
+    outline:none;
+    -webkit-transition:all 0.3s ease;
+    -moz-transition:all 0.3s ease;
+    -o-transition:all 0.3s ease;
+    -ms-transition:all 0.3s ease;
+    transition:all 0.3s ease;
+}
+ul.menu li a.active, ul.menu li a:hover, ul.menu li a:focus {
+    background: rgba(40, 40, 46, 0.28);
+    color: #fff;
+    display: block;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+ul.menu li a i {
+    font-size:15px;
+    padding-right:6px;
+}
+ul.menu li a:hover i,ul.menu li a:focus i {
+    color:#fff;
+}
+ul.menu li a.active i {
+    color:#fff;
+}
+.mail-info,.mail-info:hover {
+    margin:-3px 6px 0 0;
+    font-size: 11px;
+}
+/*main content*/

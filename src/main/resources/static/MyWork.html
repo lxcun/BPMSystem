@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-table/src/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap-editable.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/bootstrap-table/src/bootstrap-table.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-editable.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-editable.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<body>
+    <style type="text/css">
+        body {
+            background-color: #EEEEEE;
+        }
+
+        #header {
+            font-size: 22px;
+            height: 80px;
+            margin-left: 700px;
+            margin-top: 30px;
+        }
+
+        th {
+            background: #eee;
+            color: #3366cc;
+        }
+
+        .container a {
+            width: 150px;
+            height: 30px;
+        }
+
+    </style>
+    <div>
+    <div id="header">出库申请列表</div>
+    <div class="container">
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal1" id="newApplication">新建</button>
+            <button class="btn btn-success" data-toggle="modal" data-target="" id="applyInfoBtn">详情</button>
+        </div>
+        <table id="table1">
+        </table>
+    </div>
+    <!--第一个模态框  详情的模态框、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        出库申请详情
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" id="newMaterialForm">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>名称:</label>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label >类型:</label>
+                                <select name="type" class="form-control">
+                                    <option value="0">领用</option>
+                                    <option value="1">外借</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row row-centered has-success" style="margin-top: 15px;">
+                            <div class="form-group col-sm-12">
+                                <label>描述:</label>
+                                <textarea style="width: 95%;" rows="1" class="form-control" name="remark"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <div style="margin-top: 15px;">
+                        <label>已有物料:</label>
+                    </div>
+                    <table id="inventoryMaterialTable"></table>
+                    <div class="btn-group" style="margin-bottom: 10px;">
+                        <button class="btn btn-success" id="addSelected">加入申请单</button>
+                        <button class="btn btn-success" id="deleteRows">取消已选物料</button>
+                        <button class="btn btn-success" id="addNewMaterialType" data-toggle="modal" data-target="#myModal2" >新增物料种类</button>
+                    </div>
+                    <div>
+                        <label>申请物料清单:</label>
+                    </div>
+                    <table id="applyMaterialsTable"
+                           data-toggle="table"
+                           data-height="180"
+                           data-click-to-select="true">
+                        <thead>
+                        <tr>
+                            <th data-checkbox="true"></th>
+                            <th data-field="programNumber">项目编号</th>
+                            <th data-field="materialType">物料种类</th>
+                            <th data-field="name">物料名称</th>
+                            <th data-field="code">物料编码</th>
+                            <th data-field="modelNumber">规格型号</th>
+                            <th data-field="encapsulation">封装形式</th>
+                            <th data-field="miniumTemp">最低工作温度</th>
+                            <th data-field="maxTemp">最高工作温度</th>
+                            <th data-field="batchNumber">批次号</th>
+                            <th data-field="amount" data-editable="true">数量</th>
+                            <th data-field="price" data-editable="true">单价</th>
+                            <th data-field="total">金额</th>
+                            <th data-field="remark" data-editable="true">备注</th>
+                            <th data-field="storageId" data-visible="false">编号</th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <form class="form-inline" id="form2" style="margin-top: 10px;">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>种类:</label>
+                                <input type="text" class="form-control" id="typeNum" name="typeNum" readonly>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label >数量:</label>
+                                <input type="text" class="form-control" id="totalNumber" name="totalNumber" readonly>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>总价:</label>
+                                <input type="text" class="form-control" id="totalPrice" name="totalPrice" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveApplyInfo">保存</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitApplyInfo">提交</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    <!--第二个模态框  添加新物料申请、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        新物料添加
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form id="newForm" class="form-inline">
+                        <div class="row row-centered has-success" style="margin-bottom: 10px;">
+                            <div class="form-group col-sm-4">
+                                <label>物料名称:</label>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>物料类型:</label>
+                                <input type="text" class="form-control" name="materialType">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>是否符合Rohs标准:</label>
+                                <select name="roHS" id="" class="form-control">
+                                    <option value="true">true</option>
+                                    <option value="false">false</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row row-centered has-success" style="margin-bottom: 10px;">
+                            <div class="form-group col-sm-4">
+                                <label>物料编码前缀:</label>
+                                <input type="text" class="form-control" name="preCode" style="width: 62%">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>物料编码:</label>
+                                <input type="text" class="form-control" name="code">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>金额:</label>
+                                <input type="text" class="form-control" name="price" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字">
+                            </div>
+                        </div>
+                        <div class="row row-centered has-success" style="margin-bottom: 10px;">
+                            <div class="form-group col-sm-4">
+                                <label>规格型号:</label>
+                                <input type="text" class="form-control" name="modelNumber">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>总库存数:</label>
+                                <input type="text" class="form-control" name="amount" value="0" readonly="readonly">
+                            </div>
+                            <div class="form-group col-sm-4 has-success">
+                                <label>有效期:</label>
+                                <input type="date" class="form-control" name="endDate">
+                            </div>
+                        </div>
+                        <div class="row row-centered has-success" style="margin-bottom: 10px;">
+                            <div class="form-group col-sm-4">
+                                <label>最低工作温度:</label>
+                                <input type="text" class="form-control" name="miniumTemp" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字" style="width: 62%">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label>最高工作温度:</label>
+                                <input type="text" class="form-control" name="maxTemp" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字" style="width: 62%">
+                            </div>
+                            <div class="form-group col-sm-4 has-success">
+                                <label>生产厂家:</label>
+                                <input type="text" class="form-control" name="produceFactoryName" style="width: 65%">
+                            </div>
+                        </div>
+                        <div class="row row-centered has-success" style="margin-bottom: 10px;">
+                            <div class="form-group col-sm-4">
+                                <label>物料状态:</label>
+                                <select name="active" class="form-control">
+                                    <option value="true">true</option>
+                                    <option value="false">false</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-8">
+                                <label>物料描述:</label>
+                                <textarea name="description" class="form-control" rows="1" style="width:85% "></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="addNewMaterialInfo">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</div>
+
+    <!--第一个模态框  详情的模态框、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、-->
+    <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        出库申请详情
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" id="applyInfoForm">
+                        <div class="row row-centered has-success">
+                            <div class="form-group col-sm-4">
+                                <label>名称:</label>
+                                <input type="text" class="form-control" name="name" readonly>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <label >类型:</label>
+                                <select name="type" class="form-control" readonly="">
+                                    <option value="0">领用</option>
+                                    <option value="1">外借</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row row-centered has-success" style="margin-top: 15px;">
+                            <div class="form-group col-sm-12">
+                                <label>描述:</label>
+                                <textarea style="width: 95%;" rows="1" class="form-control" name="remark" readonly></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <div>
+                        <label>申请物料清单:</label>
+                    </div>
+                    <table id="applyMaterials"
+                           data-toggle="table"
+                           data-height="380"
+                           data-click-to-select="true">
+                        <thead>
+                        <tr>
+                            <th data-checkbox="true"></th>
+                            <th data-field="programNumber">项目编号</th>
+                            <th data-field="materialType">物料种类</th>
+                            <th data-field="name">物料名称</th>
+                            <th data-field="code">物料编码</th>
+                            <th data-field="modelNumber">规格型号</th>
+                            <th data-field="encapsulation">封装形式</th>
+                            <th data-field="miniumTemp">最低工作温度</th>
+                            <th data-field="maxTemp">最高工作温度</th>
+                            <th data-field="batchNumber">批次号</th>
+                            <th data-field="amount">数量</th>
+                            <th data-field="price">单价</th>
+                            <th data-field="total">金额</th>
+                            <th data-field="remark" data-editable="true">备注</th>
+                            <th data-field="storageId" data-visible="false">编号</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<div id="div2">
+    <div id="header">部门经理工作列表</div>
+    <div class="container">
+    <div class="row row-centered has-success">
+        <div class="form-group col-sm-4">
+            <label>我的待办工作列表:</label>     
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal3" id="detail">详情</button>
+            <button class="btn btn-success" data-toggle="modal" data-target="" id="test">验证</button>
+        </div>
+        <table id="managerTable">
+     
+        </table>
+
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>库存验证信息</label>    
+                <textarea id="info" class="form-control"></textarea> 
+            </div>
+        </div>
+
+        <div class="row row-centered has-success">
+            <div class="form-group col-sm-4">
+                <label>我的历史工作列表:</label>     
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-success" data-toggle="modal" data-target="#myModal_history" id="detail_history">详情</button>
+        </div>
+        <table id="managerTable_history">
+
+        </table>
+    </div>
+</div>
+
+<!--第三个模态框   显示开发人员申请详情-->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                </h4>
+                
+            </div>
+            <div class="modal-body">
+                <div class="row row-centered has-success">
+                    <div class="form-group col-sm-4">
+                        <label>出库申请:</label>
+                    </div>
+                </div>
+                <form id="form7">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>名称:</label>
+                            <input type="text" class="form-control"  name="name">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>类型:</label>
+                            <input type="text" class="form-control" name="materialType">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>领用人:</label>
+                            <input type="text" class="form-control" name="requestor">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>创建日期:</label>
+                            <input type="text" class="form-control" name="createDate">
+                        </div>
+                    </div>
+                   
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>物料种类:</label>
+                            <input type="text" class="form-control" name="type">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>物料数量:</label>
+                            <input type="text" class="form-control" name="amount">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>合计金额:</label>
+                            <input type="text" class="form-control" name="totalPrice">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>描述:</label>
+                            <input type="text" class="form-control" name="remark">
+                        </div>
+                    </div>
+                </form>
+                    <div class="row row-centered has-success">
+                        <hr>
+                        
+                        <div class="form-group col-sm-4">
+                            <label>物料清单:</label>
+                        </div>
+                    </div>
+                    <div class="row row-centered has-success">
+                        <table id="table_manager_detail" data-toggle="table" data-toolbar="#toolbar" data-height="250" data-click-to-select="true">
+                            <thead>
+                                <tr>
+                                    <th data-checkbox="true"></th>
+                                    <th data-field="programNumber">项目编号</th>
+                                    <th data-field="type">物料种类</th>
+                                    <th data-field="name">物料名称</th>
+                                    <th data-field="code">物料编码</th>
+                                    <th data-field="modelNumber">规格型号</th>
+                                    <th data-field="encapsulation">封装形式</th>
+                                    <th data-field="maxTemp">最高工作温度</th>
+                                    <th data-field="miniumTemp">最低工作温度</th>
+                                    <th data-field="price">单价</th>
+                                    <th data-field="number">数量</th>
+                                    <th data-field="price">金额</th>
+                                    
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核:</label>
+                        </div>  
+                    </div>
+                    <form id="form3">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核结果:</label>
+                            <select name="exeState" class="form-control" id="audit">
+                                <option value="">请选择审核结果</option>
+                                <option value="3">通过</option>
+                                <option value="2">报请上级</option>
+                                <option value="6">拒绝</option>
+                                <option value="0">需修改</option>
+                                <option value="4">需等待</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label>上级领导:</label>
+                            <select name="approver" class="form-control" id="boss">
+                                <option value="总经理">总经理(张)</option>
+                                <option value="总工程师">总工程师(何)</option>
+                            </select>
+                        </div>    
+                    </div>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>建议:</label>
+                            <textarea name="auditComments" class="form-control" id="textarea"></textarea>
+                        </div>
+                        
+                    </div> 
+                    </form>
+                
+      
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="save_myApproval">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!--第四个模态框   显示经理历史审核详情-->
+<div class="modal fade" id="myModal_history" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                </h4>
+                
+            </div>
+            <div class="modal-body">
+                <div class="row row-centered has-success">
+                    <div class="form-group col-sm-4">
+                        <label>出库申请:</label>
+                    </div>
+                </div>
+                <form id="form8">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>名称:</label>
+                            <input type="text" class="form-control"  name="name">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>类型:</label>
+                            <input type="text" class="form-control" name="type">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>领用人:</label>
+                            <input type="text" class="form-control" name="requestor">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>创建日期:</label>
+                            <input type="text" class="form-control" name="createDate">
+                        </div>
+                    </div>
+                   
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-3">
+                            <label>物料种数:</label>
+                            <input type="text" class="form-control" name="totalNumber">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>物料数量:</label>
+                            <input type="text" class="form-control" name="amount">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>合计金额:</label>
+                            <input type="text" class="form-control" name="totalPrice">
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>描述:</label>
+                            <input type="text" class="form-control" name="remark">
+                        </div>
+                    </div>
+                </form>
+                    <div class="row row-centered has-success">
+                        <hr>
+                        
+                        <div class="form-group col-sm-4">
+                            <label>物料清单:</label>
+                        </div>
+                    </div>
+                    <div class="row row-centered has-success">
+                        <table id="table_manager_detailHistory" data-toggle="table" data-toolbar="#toolbar" data-height="250" data-click-to-select="true">
+                            <thead>
+                                <tr>
+                                    <th data-checkbox="true"></th>
+                                    <th data-field="programNumber">项目编号</th>
+                                    <th data-field="type">物料种类</th>
+                                    <th data-field="name">物料名称</th>
+                                    <th data-field="code">物料编码</th>
+                                    <th data-field="modelNumber">规格型号</th>
+                                    <th data-field="encapsulation">封装形式</th>
+                                    <th data-field="maxTemp">最高工作温度</th>
+                                    <th data-field="miniumTemp">最低工作温度</th>
+                                    <th data-field="price">单价</th>
+                                    <th data-field="number">数量</th>
+                                    <th data-field="price">金额</th>
+                                    
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核:</label>
+                        </div>  
+                    </div>
+                    <form id="form9">
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>审核结果:</label>
+                            <input type="text" name="result" class="form-control">
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label>上级领导:</label>
+                            <input type="text" name="leader" class="form-control">
+                        </div>    
+                    </div>
+                    <div class="row row-centered has-success">
+                        <div class="form-group col-sm-4">
+                            <label>建议:</label>
+                            <textarea name="auditComments" class="form-control"></textarea>
+                        </div>
+                        
+                    </div> 
+                    </form>
+                
+      
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="save_myApproval">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+</body>
+</html>
+<script>
+    $(function(){
+        var ip='/api/';
+        var callbackColumns=[
+            {checkbox:true},
+            {
+                field: 'name',
+                title: '名称',
+
+            }, {
+                field: 'requestNo',
+                title: '出库编号'
+            },{
+                field: 'exeStat',
+                title: '状态'
+            },{
+                field: 'createDate',
+                title: '创建日期'
+            },{
+                field: 'amount',
+                title: '物料数量'
+            },{
+                field: 'totalPrice',
+                title: '总金额'
+            },{
+                field: 'type',
+                title: '出库类型'
+            },{
+                field: 'outStorageId',
+                title: '出库申请ID',
+                visible: false
+            }
+        ];
+        $.ajax({
+            url: '/api/myWork',
+            type: "get",
+            dataType:'json',
+            data:null,
+            success: function (data) {
+                var arr=data.myApplyOutStorages;
+                for(var i in arr){
+                    if(arr[i].exeStat == 0){
+                        arr[i].exeStat = "新建";
+                    }else if(arr[i].exeStat == 1){
+                        arr[i].exeStat = "待审批";
+                    }else if(arr[i].exeStat == 2){
+                        arr[i].exeStat = "已批准";
+                    }else if(arr[i].exeStat == 3){
+                        arr[i].exeStat = "已等待";
+                    }else if(arr[i].exeStat == 4){
+                        arr[i].exeStat = "已出库";
+                    }else if(arr[i].exeStat == 5){
+                        arr[i].exeStat = "已关闭";
+                    }
+                    if(arr[i].type == 0){
+                        arr[i].type = "领用";
+                    }else if(arr[i].type == 1){
+                        arr[i].type = "外借";
+                    }
+                }
+                $('#table1').bootstrapTable({
+                    data:arr,
+                    showColumns:true,
+                    cache: false,                       //是否使用缓存，默认为true，
+                    pagination: true,                   //是否显示分页（*）
+                    search: true,                       //是否显示表格搜索
+                    height:"600",
+                    width: "100%",
+                    columns:callbackColumns,
+                    clickToSelect:true,     //点击行选中复选框
+                    onClickRow: function (row) {
+
+                        },
+                    onCheck:function(row,$element){
+                        //index = $element.data('index');
+                    },
+                    onDblClickRow:function(row,$element){
+
+                    }
+                });
+            },
+            error:function(){
+                alert("失败");
+            }
+        });
+
+        callbackColumns2=[
+            {checkbox:true},
+            {
+                field: 'materialType',
+                title: '物料种类',
+            },{
+                field: 'name',
+                title: '物料名称',
+
+            },{
+                field: 'code',
+                title: '物料编码'
+            },{
+                field: 'modelNumber',
+                title: '规格型号'
+            },{
+                field: 'encapsulation',
+                title: '封装形式'
+            }, {
+                field: 'miniumTemp',
+                title: '最低工作温度'
+            },{
+                field: 'maxTemp',
+                title: '最高工作温度'
+            },{
+                field: 'price',
+                title: '单价'
+            },{
+                field: 'batchNumber',
+                title: '批次号'
+            },{
+                field: 'amount',
+                title: '库存数量'
+            },{
+                field: 'storageId',
+                title: '库存物料ID',
+                visible: false
+            }
+        ];
+        function initInventoryMaterialTable() {
+            $.ajax({
+                url: '/api/findAllDetailStorage',
+                type: "get",
+                dataType:'json',
+                data:null,
+                success: function (data) {
+                    if(data.success){
+                        //var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                        var arr=data.detailStorages;
+                        var storages = [];
+                        for(var i in arr){
+                            storages[i] = arr[i].storage;
+                            storages[i].batchNumber = arr[i].batchNumber;
+                        }
+                        $('#inventoryMaterialTable').bootstrapTable({
+                            data:storages,
+                            showColumns:true,
+                            cache: false,                       //是否使用缓存，默认为true，
+                            pagination: true,                   //是否显示分页（*）
+                            search: true,                       //是否显示表格搜索
+                            height:"180",
+                            clickToSelect:true,
+                            columns:callbackColumns2,
+                        });
+                    }else{
+                        alert(data.Msg);
+                    }
+                },
+                error:function(){
+                    alert("失败");
+                }
+            });
+        }
+        var saveUrl;
+        var submitUrl = '/api/saveOutStorage';
+        var outID;
+        //新建出库申请
+        $('#newApplication').click(function(){//..........................................................................
+            initInventoryMaterialTable();
+            saveUrl = '/api/addOutStorage';
+            //submitUrl =
+            outID = '';
+        });
+        //点击查看出库单详情
+        $('#applyInfoBtn').click(function(){
+            var row = $('#table1').bootstrapTable('getAllSelections');
+            if(row.length != 1){
+                alert("请选择一条数据查看详情!");
+                return;
+            }
+            var rowData = row[0];
+            if(rowData.type == "领用"){
+                rowData.type =  0;
+            }else if(rowData.type == "外借"){
+                rowData.type =  1;
+            }
+            if(rowData.exeStat == "新建"){
+                $('#myModal1').modal('show');
+                $("#newMaterialForm input[name=name]").val(rowData.name);
+                $("#newMaterialForm select[name=type]").val(rowData.type);
+                $("#newMaterialForm textarea[name=remark]").val(rowData.remark);
+                $("#inventoryMaterialTable").bootstrapTable('destroy');
+                initInventoryMaterialTable();
+                var applyRows = rowData.detailOutStorages;
+                for(var i in applyRows){
+                    var rows = applyRows[i].storage;
+                    rows.programNumber = applyRows[i].programNumber;
+                    rows.batchNumber = applyRows[i].batchNumber;
+                    $('#applyMaterialsTable').bootstrapTable('append', rows);
+                    getRowTotal();
+                }
+                saveUrl = "/api/modefyOutStorage";
+                outID = rowData.outStorageId;
+            }else{
+                $('#myModal3').modal('show');
+                $("#applyInfoForm input[name=name]").val(rowData.name);
+                $("#applyInfoForm select[name=type]").val(rowData.type);
+                $("#applyInfoForm textarea[name=remark]").val(rowData.remark);
+                var applyRows = rowData.detailOutStorages;
+                for(var i in applyRows){
+                    var rows = applyRows[i].storage;
+                    rows.programNumber = applyRows[i].programNumber;
+                    rows.batchNumber = applyRows[i].batchNumber;
+                    $('#applyMaterialsTable').bootstrapTable('append', rows);
+                    getRowTotal();
+                }
+            }
+        });
+        function getRowTotal(){
+            var tr = $("#applyMaterialsTable tr");
+            var totalPrice=0;
+            var totalAmount=0;
+            for(var i=1;i<tr.length;i++){
+                var tds = $(tr[i]).find("td");
+                var amount=$(tds[10]).text();
+                var price=$(tds[11]).text();
+                var total=amount*price;
+                $(tds[12]).text(total);
+                totalPrice=totalPrice+price*amount;
+                totalAmount += Number(amount);
+            }
+            var totalType = tr.length-1;
+            $('#typeNum').val(totalType);
+            $('#totalNumber').val(totalAmount);
+            $('#totalPrice').val(totalPrice);
+        }
+        //加入申请单
+        $('#addSelected').click(function() {
+            var rowData = $('#inventoryMaterialTable').bootstrapTable('getAllSelections');//数组
+            $('#applyMaterialsTable').bootstrapTable('append', rowData);
+            setInterval(getRowTotal, 1000);
+        });
+        //取消已选物料
+        $('#deleteRows').click(function(){
+            var ids = $.map($('#applyMaterialsTable').bootstrapTable('getSelections'), function (row) {
+                return row.storageId;
+            });
+            $('#applyMaterialsTable').bootstrapTable('remove', {
+                field: 'storageId',
+                values: ids
+            });
+        });
+        //添加新物料种类
+        $('#addNewMaterialInfo').click(function () {
+            var newMaterialJsonobj=$('#newMaterialForm').serializeJSON();//对象
+            var jsonString = JSON.stringify(newMaterialJsonobj);//转成字符串
+            var rows=[];
+            rows.push(newMaterialJsonobj);
+            $.ajax({
+                url: ip+'addStorage',
+                type: "post",
+                dataType:'text',    //接收到服务器的数据格式
+                contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+                data:jsonString,
+                success: function (data) {
+                    location.reload(true);
+                    $('#newMaterialForm input').val("");
+                    $('#newMaterialForm textarea').val("");
+                    $("#inventoryMaterialTable").bootstrapTable('destroy');
+                    $("#inventoryMaterialTable").bootstrapTable('refresh',option);
+                    alert("提交成功啦");
+                },
+                error:function(){
+                    alert("失败");
+                }
+            });
+        });
+        //保存出库申请单
+        $('#saveApplyInfo').click(function(){
+            var jsonobj=$('#newMaterialForm').serializeJSON();
+            var jsonobj2=$('#form2').serializeJSON();
+            $('#applyMaterialsTable').bootstrapTable('checkAll');
+            var rowData=$('#applyMaterialsTable').bootstrapTable('getAllSelections');
+            arr=[];
+            for(var j=0;j<rowData.length;j++){
+                var dataobj={};
+                var materialType= rowData[j].materialType;
+                var name= rowData[j].name;
+                var modelNumber= rowData[j].modelNumber;    //型号
+                var code= rowData[j].code;  //编码
+                var encapsulation= rowData[j].encapsulation;    //封装
+                var maxTemp= rowData[j].maxTemp;
+                var miniumTemp= rowData[j].miniumTemp;
+                var price= rowData[j].price;  //价格
+                var amount= rowData[j].amount; //数量
+                var total= rowData[j].total;  //金额
+                var remark= rowData[j].remark;
+                var storageId= rowData[j].storageId;
+                dataobj.name=name;
+                dataobj.modelNumber=modelNumber;
+                dataobj.code=code;
+                dataobj.encapsulation=encapsulation;
+                dataobj.price=price;
+                dataobj.amount=amount;
+                dataobj.total=total;
+                dataobj.remark=remark;
+                dataobj.storageId=storageId;
+                arr.push(dataobj);
+
+            }
+            jsonobj.outMaterial=arr;
+            jsonobj.totalPrice=jsonobj2.totalPrice;
+            jsonobj.typeNum=jsonobj2.typeNum;
+            jsonobj.totalNumber=jsonobj2.totalNumber;
+            jsonobj.outStorageId = outID;
+
+            var jsonString = JSON.stringify(jsonobj);
+            outStorage(saveUrl,jsonString);
+        });
+        function outStorage(url,data) {
+            $.ajax({
+                url: url,
+                type: "post",
+                dataType:'text',    //接收到服务器的数据格式
+                contentType:"application/json; charset=utf-8",//设置你发送给服务器的格式
+                data:data,
+                success: function (data) {
+                    location.reload(true);
+                    alert("提交成功啦");
+                },
+                error:function(){
+                    alert("失败");
+                }
+            });
+        }
+        //提交出库申请单
+        $('#submitApplyInfo').click(function(){
+            var jsonobj=$('#newMaterialForm').serializeJSON();
+            var jsonobj2=$('#form2').serializeJSON();
+            $('#applyMaterialsTable').bootstrapTable('checkAll');
+            var rowData=$('#applyMaterialsTable').bootstrapTable('getAllSelections');
+            arr=[];
+            for(var j=0;j<rowData.length;j++){
+                var dataobj={};
+                var materialType= rowData[j].materialType;
+                var name= rowData[j].name;
+                var modelNumber= rowData[j].modelNumber;    //型号
+                var code= rowData[j].code;  //编码
+                var encapsulation= rowData[j].encapsulation;    //封装
+                var maxTemp= rowData[j].maxTemp;
+                var miniumTemp= rowData[j].miniumTemp;
+                var price= rowData[j].price;  //价格
+                var amount= rowData[j].amount; //数量
+                var total= rowData[j].total;  //金额
+                var remark= rowData[j].remark;
+                var storageId= rowData[j].storageId;
+                dataobj.name=name;
+                dataobj.modelNumber=modelNumber;
+                dataobj.code=code;
+                dataobj.encapsulation=encapsulation;
+                dataobj.price=price;
+                dataobj.amount=amount;
+                dataobj.total=total;
+                dataobj.remark=remark;
+                dataobj.storageId=storageId;
+                arr.push(dataobj);
+
+            }
+            jsonobj.outMaterial=arr;
+            jsonobj.totalPrice=jsonobj2.totalPrice;
+            jsonobj.typeNum=jsonobj2.typeNum;
+            jsonobj.totalNumber=jsonobj2.totalNumber;
+            jsonobj.outStorageId = outID;
+
+            var jsonString = JSON.stringify(jsonobj);
+            outStorage(submitUrl,jsonString);
+        });
+
+
+////////////////////////////////////////////////////////////////////////
+
+        var callbackColumns_manager=[  
+            {checkbox:true},
+            {
+                field: 'name',
+                title: '名称',
+            }, {
+                field: 'requestNo',
+                title: '编号'
+            },{
+                field: 'requestor',
+                title: '申请人'
+            },{
+                field: 'amount',
+                title: '物料数量'
+            },{
+                field: 'totalPrice',
+                title: '总金额'
+            },{
+                field: 'type',
+                title: '类型'
+            },{
+                field: 'detailPos',
+                title: '审核人'
+            },{
+                field: 'needMan',
+                title: '审批人'
+            }
+        ];
+        var callbackColumns_manager_history=[  
+            {checkbox:true},
+            {
+                field: 'name',
+                title: '名称',
+            }, {
+                field: 'requestNo',
+                title: '编号'
+            },{
+                field: 'requestor',
+                title: '申请人'
+            },{
+                field: 'amount',
+                title: '物料数量'
+            },{
+                field: 'totalPrice',
+                title: '总金额'
+            },{
+                field: 'type',
+                title: '类型'
+            },{
+                field: 'detailPos',
+                title: '审核人'
+            },{
+                field: 'needMan',
+                title: '审批人'
+            },{
+                field: 'exeState',
+                title: '状态'
+            }
+        ];
+        //部门经理需要加载的数据
+        $.ajax({
+            url: '/api/myWork',
+            type: "get",
+            dataType:'text',
+            //dataType:'jsonp',
+            data:null,
+            success: function (data) {
+                var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                var arr=jsonobj.myApprovalOutStorages;
+                $('#managerTable').bootstrapTable({
+                    data:arr,
+                    showColumns:true,
+                    cache: false,                       //是否使用缓存，默认为true，
+                    pagination: true,                   //是否显示分页（*）
+                    search: true,                       //是否显示表格搜索
+                    height:"300",
+                    width: "100%",
+                    columns:callbackColumns_manager,
+                    clickToSelect:true,     //点击行选中复选框
+                    onCheck:function(row,$element){
+                        index = $element.data('index');
+                    },
+                    onDblClickRow:function(row,$element){
+                    }
+                });
+            },
+            error:function(){
+                alert("失败");
+            }
+        });
+
+        //部门经理历史记录
+        $.ajax({
+            url: '/api/myWork',
+            type: "get",
+            dataType:'text',
+            //dataType:'jsonp',
+            data:null,
+            success: function (data) {
+                var jsonobj = JSON.parse(data);//将接收到数据转成对象
+                var arr=jsonobj.myHistoryApprovalOutStorages;
+                $('#managerTable_history').bootstrapTable({
+                    data:arr,
+                    showColumns:true,
+                    cache: false,                       //是否使用缓存，默认为true，
+                    pagination: true,                   //是否显示分页（*）
+                    search: true,                       //是否显示表格搜索
+                    height:"300",
+                    width: "100%",
+                    columns:callbackColumns_manager_history,
+                    clickToSelect:true,     //点击行选中复选框
+                    onCheck:function(row,$element){
+                        index = $element.data('index');
+                    },
+                });
+            },
+            error:function(){
+                alert("失败");
+            }
+        });
+
+    var outStorageId=0;
+$('#detail').click(function(){
+
+    var rowData=$('#managerTable').bootstrapTable('getAllSelections');
+    console.log(rowData);
+    ///////开发人员申请详细清单
+    outStorageId=rowData[0].outStorageId;
+//表格数据
+    var detailOutStorages = rowData[0].outMaterial;
+   
+    $('#table_manager_detail').bootstrapTable('removeAll');
+    $('#table_manager_detail').bootstrapTable('append', detailOutStorages);
+//表单数据
+    var name = rowData[0].name;
+    var type = rowData[0].type;
+    var requestor = rowData[0].requestor;
+    var createDate = rowData[0].createDate;
+    var totalPrice = rowData[0].totalPrice;
+    var remark = rowData[0].remark;
+
+    $('#form7 input[name=name]').val(name);
+    $('#form7 input[name=type]').val(type);
+    $('#form7 input[name=requestor]').val(requestor);
+    $('#form7 input[name=createDate]').val(createDate);
+    $('#form7 input[name=totalPrice]').val(totalPrice);
+    $('#form7 input[name=remark]').val(remark);
+    $('#form7 input[name=name]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=type]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=requestor]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=createDate]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=totalPrice]').attr("readonly", "readonly");//设置成只读
+    $('#form7 input[name=remark]').attr("readonly", "readonly");//设置成只读
+        
+
+})
+
+
+//经理审批历史记录详情
+$('#detail_history').click(function(){
+    var rowData=$('#managerTable_history').bootstrapTable('getAllSelections');
+    console.log(rowData);
+    var detailOutStorages = rowData[0].outMaterial;
+    $('#table_manager_detailHistory').bootstrapTable('removeAll');
+    $('#table_manager_detailHistory').bootstrapTable('append', detailOutStorages);
+    var name = rowData[0].name;
+    var type = rowData[0].type;
+    var totalNumber = rowData[0].totalNumber;
+    var requestor = rowData[0].requestor;
+    var createDate = rowData[0].createDate;
+    var totalPrice = rowData[0].totalPrice;
+    var remark = rowData[0].remark;
+    var amount = rowData[0].amount;
+    var result = rowData[0].exeState;
+    var auditComments = rowData[0].auditComments;
+
+    $('#form8 input[name=name]').val(name);
+    $('#form8 input[name=type]').val(type);
+    $('#form8 input[name=requestor]').val(requestor);
+    $('#form8 input[name=createDate]').val(createDate);
+    $('#form8 input[name=totalPrice]').val(totalPrice);
+    $('#form8 input[name=totalNumber]').val(totalNumber);
+    $('#form8 input[name=remark]').val(remark);
+    $('#form9 textarea[name=auditComments]').val(auditComments);
+    $('#form9 input[name=result]').val(result);
+    $('#form8 input[name=amount]').val(amount);
+    $('#form8 input[name=name]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=type]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=requestor]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=createDate]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=totalPrice]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=totalNumber]').attr("readonly", "readonly");//设置成只读
+    $('#form8 input[name=remark]').attr("readonly", "readonly");//设置成只读
+
+})
+
+//验证库存数量
+$('#test').click(function(){
+    $('#info').val('');
+    var rowData=$('#managerTable').bootstrapTable('getAllSelections');
+    var arr_outMaterial=rowData[0].outMaterial;
+    var str_info='';
+    for(var i=0;i<arr_outMaterial.length;i++){
+        var material_name=arr_outMaterial[i].name;
+        var material_amount=arr_outMaterial[i].amount;
+        var material_needNumber=arr_outMaterial[i].number;
+        str_info=str_info+material_name+'库存数：'+material_amount+'    '+'申请数量：'+material_needNumber+'\n';
+    }
+    $('#info').val(str_info);
+})
+    //提交审核结果   
+$('#save_myApproval').click(function(){
+
+    var jsonobj=$('#form3').serializeJSON();//对象
+    var audit=$('#audit').val();
+    jsonobj.histories=audit;
+    jsonobj.outStorageId=outStorageId;
+    var jsonString = JSON.stringify(jsonobj);//字符串
+    $.ajax({
+        url: '/api/divisionManagerApproval',
+        type: "post",
+        dataType: 'text',    //接收到服务器的数据格式
+        contentType: "application/json; charset=utf-8",//设置你发送给服务器的格式
+        data: jsonString,
+        success: function (data) {
+            console.log(jsonString);
+        },
+        error: function () {
+            alert("失败");
+            console.log(jsonString);
+        }
+    });
+})
+
+
+    $('#audit').change(function(){
+        $('#boss').attr("disabled","disabled");
+        var audit=$('#audit').val();//审核状态
+        if(audit=='报请上级'){
+            $('#boss').removeAttr("disabled");
+
+        }
+    })
+        
+
+    })
+</script>

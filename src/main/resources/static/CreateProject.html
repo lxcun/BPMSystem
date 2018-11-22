@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style/default.css" />
+    <script charset="utf-8" src="./script/kindeditor-min.js"></script>
+    <script charset="utf-8" src="./script/zh_CN.js"></script>
+    <script src="./assets/jquery.min.js"></script>
+    <script src="script/jquery.serializejson.js"></script>
+</head>
+<style>
+    h2 {
+        font-size: 30px;
+        height: 80px;
+        color: rgb(39, 136, 192);
+        margin-left: 100px;
+        position: relative;
+    }
+    #div1 {
+        font-size: 22px;
+        height: 80px;
+        margin-left: 100px;
+        position: relative;
+    }
+    #load {
+        background-color: white; 
+        border: 1px solid #4297D4;
+        color: #4297D4;
+        padding: 5px 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10px;
+        margin: 2px 1px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    body{
+        background-color: #EEEEEE;
+    }
+    #project{
+        height: 40px;
+    }
+
+</style>
+<body>
+    <h2>创建项目</h2>
+    <div id="div1">
+    <p>请选择需要创建的项目</p>
+    <form id="form1">
+    <div>
+    <select name="project" id="project">
+        <option value="选择项目">选择项目</option>
+        <option value="生产项目">生产项目</option>
+        <option value="研发项目">研发项目</option>
+        <option value="配套项目">配套项目</option>
+        <option value="物料采购项目">物料采购项目</option>
+        <option value="销售项目">销售项目</option>
+    </select> 
+    </div>  
+    <table id="table" style="border: slateblue 1px solider">
+    </table>
+    <div id="div2">
+        <p>项目描述:</p>
+        <textarea name="content"  class="text" style="width:800px;height:400px;visibility:hidden;"></textarea>
+
+    </div>
+    </form>
+    <input type="button" id="load" value="保存">
+    </div>
+</body>
+</html>
+<script>
+    $(function(){
+        $('#div2').hide();
+
+        //select选项改变事件
+        $('#project').change(function(){
+            $('#div2').show();
+            var value1=$("#project").find("option:selected").text();
+            if(value1=='生产项目'){
+                $('#th1').remove();
+                $('#tr1').remove();
+                var html="<thead id='th1'><tr><th>项目名称(生产项目)</th><th>客户名称</th><th>客户联系方式</th><th>设备型号与生产批次</th></tr></thead><tr id='tr1'><td><input type='text' id='input1' class='inputClass' name='name1'></td><td><input type='text' id='input2' class='inputClass' name='name2'></td><td><input type='text' id='input3' class='inputClass' name='name3'></td><td><input type='text' id='input4' class='inputClass' name='name4'></td></tr>";
+                $('#table').append(html);              
+            }
+            if(value1=='研发项目'){
+                $('#th1').remove();
+                $('#tr1').remove();
+                var html="<thead id='th1'><tr><th>项目名称(研发项目)</th><th>项目名称</th><th>人员联系方式</th><th>需求1</th><th>需求2</th></tr></thead><tr id='tr1'><td><input type='text' id='input1' class='inputClass' name='name1'></td><td><input type='text' id='input2' class='inputClass' name='name2'></td><td><input type='text' id='input3' class='inputClass' name='name3'></td><td><input type='text' id='input4' class='inputClass' name='name4'></td><td><input type='text' id='input5' class='inputClass' name='name5'></td></tr>";
+                $('#table').append(html);
+            }
+            if(value1=='配套项目'){
+                $('#th1').remove();
+                $('#tr1').remove();
+                var html="<thead id='th1'><tr><th>项目名称(配套项目)</th><th>配套名称</th><th>客户联系方式</th><th>设备型号与生产批次</th></tr></thead><tr id='tr1'><td><input type='text' id='input1' class='inputClass' name='name1'></td><td><input type='text' id='input2' class='inputClass' name='name2'></td><td><input type='text' id='input3' class='inputClass' name='name3'></td><td><input type='text' id='input4' class='inputClass' name='name4'></td></tr>";
+                $('#table').append(html);
+            }
+            if(value1=='物料采购项目'){
+                $('#th1').remove();
+                $('#tr1').remove();
+                var html="<thead id='th1'><tr><th>项目名称(物料采购项目)</th><th>物料采购名称</th><th>客户联系方式</th><th>设备型号与生产批次</th></tr></thead><tr id='tr1'><td><input type='text' id='input1' class='inputClass' name='name1'></td><td><input type='text' id='input2' class='inputClass' name='name2'></td><td><input type='text' id='input3' class='inputClass' name='name3'></td><td><input type='text' id='input4' class='inputClass' name='name4'></td></tr>";
+                $('#table').append(html);
+            }
+            if(value1=='销售项目'){
+                $('#th1').remove();
+                $('#tr1').remove();
+                var html="<thead id='th1'><tr><th>项目名称(销售项目)</th><th>销售项目名称</th><th>客户联系方式</th><th>设备型号与生产批次</th></tr></thead><tr id='tr1'><td><input type='text' id='input1' class='inputClass' name='name1'></td><td><input type='text' id='input2' class='inputClass' name='name2'></td><td><input type='text' id='input3' class='inputClass' name='name3'></td><td><input type='text' id='input4' class='inputClass' name='name4'></td></tr>";
+                $('#table').append(html);
+            }
+            
+        })
+        //设置输入的值
+        $("#table").on("blur",".inputClass",function(){
+            $(this).attr("value",$(this).val());
+        });
+            
+
+        //点击提交
+        $('#load').click(function(){
+            var jsonobj4=$('#form1').serializeJSON();
+            delete jsonobj4.content;//移除content属性
+            html = editor.html();//再添加属性 值为textarea中的值
+            jsonobj4.content=html;        
+            var jsonString = JSON.stringify(jsonobj4);//转成字符串
+            
+            $.ajax({
+                url: 'welcome.php',
+                type: "post",
+                dataType:'text',    //接收到服务器的数据格式
+                contentType:"application/json;; charset=utf-8",//设置你发送给服务器的格式
+                data:jsonString,
+                success: function (data) {
+                    //console.log(data);
+                    console.log(jsonString);
+                    alert("提交成功啦");
+                },
+                error:function(){
+                    alert("失败");
+                }                                       
+            });
+        
+        });
+
+
+        var editor;
+		KindEditor.ready(function(K) {
+			editor = K.create('textarea[name="content"]', {
+			allowFileManager : true
+			});
+		});
+
+    })
+</script>

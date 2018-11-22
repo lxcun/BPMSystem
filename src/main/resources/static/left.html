@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<head>
+<title>仓库管理</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+
+<link href="style/style.css" rel='stylesheet' type='text/css' />
+
+<script src="script/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+<div id="container">
+    <aside>
+        <div id="sidebar" class="nav-collapse">
+        <div class="list">
+            <ul class="menu" id="menuid"> 
+
+                <div id="list" style="display: none;">    <!--高管-->       
+                    <li class="menu1">
+                    <li style="display: none;" id="outApply"><!--开发人员-->
+                        <a target="view_frame" href="OutStorageRequest.html">出库申请</a>
+                    </li>
+                    <li style="display: none;" id="application_Buy"><!--采购员-->
+                        <a target="view_frame" href="application_buy.html">采购申请</a>
+                    </li>
+                    <li style="display: none;" id="approval_out">
+                            <a target="view_frame" href="OutStorageApproval.html">出库审批</a>
+                        </li>
+                        
+                        <li style="display: none;" id="approval_buy">
+                            <a target="view_frame" href="purchaseApproval.html">采购审批</a>
+                        </li> 
+                        <li style="display: none;" id="queryBuy">
+                            <a target="view_frame" href="queryPurchaseRequest.html">采购查询</a>
+                        </li>
+                        <li style="display: none;" id="out_approval"><!--部门经理-->
+                            <a target="view_frame" href="OutStorageAudit.html">出库审核</a>
+                        </li>
+                        <li style="display: none;" id="manageProject">
+                            <a target="view_frame" href="ManageProject.html">项目管理</a>
+                        </li>
+                        <li style="display: none;" id="buy_approval">
+                            <a target="view_frame" href="purchaseAudit.html">采购审核</a>
+                        </li>
+                        <li style="display: none;" id="InStorage_Buy">
+                            <a target="view_frame" href="achievePurchase.html">完成采购</a>
+                        </li>
+                        <li style="display: none;" id="qualityInspectionNotice">
+                            <a target="view_frame" href="qualityInspectionNotice.html">通知质检</a>
+                        </li>
+                        <li style="display: none;" id="checkMaterial"><!--质检员-->
+                            <a target="view_frame" href="materialInspection.html">物料质检</a>
+                        </li>
+                        <li style="display: none;" id="InStorage">  <!--库管菜单-->
+                            <a target="view_frame" href="InWareHouse.html">物料入库</a>
+                        </li>
+                        <li style="display: none;" id="outStorage">
+                            <a target="view_frame" href="OutWarehouse.html">物料出库</a>
+                        </li>
+                        <li style="display: none;" id="materialTypeSet">
+                            <a target="view_frame" href="addMaterial.html">物料种类添加</a>
+                        </li>
+                        <li style="display: none;" id="productFactoryManage">
+                            <a target="view_frame" href="productFactoryManage.html">供应商管理</a>
+                        </li>
+                        <li style="display: none;" id="queryStorage">
+                            <a target="view_frame" href="StorageManage.html">库存查询</a>
+                        </li> 
+                        <li style="display: none;" id="queryOutApply">
+                            <a target="view_frame" href="queryOutApply.html">出库申请查询</a>
+                        </li>  
+                        <li style="display: none;" id="queryOut">
+                            <a target="view_frame" href="queryOutStorageList.html">出库查询</a>
+                        </li>
+                        <li style="display: none;" id="queryIn">
+                            <a target="view_frame" href="notSupport.html">入库查询</a>
+                        </li>
+                        <li style="display: none;" id="queryCheck">
+                            <a target="view_frame" href="notSupport.html">质检查询</a>
+                        </li>
+                        <li style="display: none;" id="queryProject">
+                            <a target="view_frame" href="notSupport.html">项目查询</a>
+                        </li> 
+                        <li style="display: none;" id="analyzeBuy">
+                            <a target="view_frame" href="notSupport.html">采购分析</a>
+                        </li>
+                        
+                        <li style="display: none;" id="analyzeProject">
+                            <a target="view_frame" href="notSupport.html">项目分析</a>
+                        </li>  
+                        <li style="display: none;" id="analyzeQuality">
+                            <a target="view_frame" href="notSupport.html">质量分析</a>
+                        </li> 
+                        <li style="display: none;" id="analyzeStorage">
+                            <a target="view_frame" href="notSupport.html">库存分析</a>
+                        </li>
+                        <!--<li style="display: none;" id="myProject">-->
+                            <!--<a target="view_frame" href="notSupport.html">我的项目</a>-->
+                        <!--</li>-->
+                    </li>
+                </div>
+
+                <div id="UserManage" style="display: none;">           
+                        <li class="menu1">
+                                <li><a target="view_frame" href="UserManageList.html">用户管理</a></li>
+                                <li><a target="view_frame" href="notSupport.html">系统设置</a></li>
+                        </li>
+                </div>
+<!--hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh-->
+
+                
+            </ul>  
+                  
+        </div>
+        </div>
+    </aside>
+</div>
+<script type="text/javascript" src="./script/jquery.cookie.js"></script>
+<script src="script/bootstrap.js"></script>
+<script src="script/jquery.dcjqaccordion.2.7.js"></script>
+<script src="script/scripts.js"></script>
+</body>
+</html>
+<script>
+    $(function(){
+        $.ajax({
+			url: '/api/username',
+            type: "get",
+            dataType:'json',    //接收到服务器的数据格式
+            data:null,
+            success: function (data) {
+                var arr=data.user.roles;
+                var depart = data.user.operation;
+                for(var i=0;i<arr.length;i++){
+                    if(arr[i].role=='ROLE_DEVELOPER'){//开发人员
+                        $('#list').show();
+                        $('#myProject').show();
+                        $('#queryStorage').show();
+                        $('#outApply').show();
+                        $('#materialTypeSet').show();
+
+                    }
+                    if(arr[i].role=='ROLE_DIVISIONMANAGER'){//部门经理
+                        if(depart == "财务部"){
+                            $('#list').show();
+                            $('#buy_approval').show();          //采购申请
+                            $('#myProject').show();
+                            $('#queryStorage').show();
+                            $('#queryProject').show();
+                            $('#analyzeProject').show();
+                            $('#analyzeQuality').show();
+                            
+                        }
+                        else {
+                            $('#list').show();
+                            $('#out_approval').show();          //出库申请
+                            $('#myProject').show();             //我的项目
+                            $('#queryStorage').show();          //库存查询
+                            $('#queryOutApply').show();         //出库申请查询
+                            $('#queryProject').show();          //项目查询
+                            $('#analyzeProject').show();        //项目分析
+                            $('#manageProject').show();
+                        }
+                    }
+                    if(arr[i].role=='ROLE_SENIOREXECUTIVE'){//高管
+                        $('#list').show();
+                        $('#approval_out').show();
+                        $('#approval_buy').show();
+                        $('#myProject').show();
+                        $('#queryBuy').show();
+                        $('#queryStorage').show();
+                        $('#queryOutApply').show();
+                        $('#queryOut').show();
+                        $('#queryIn').show();
+                        $('#queryCheck').show();
+                        $('#queryProject').show();
+                        $('#analyzeBuy').show();
+                        $('#analyzeProject').show();
+                        $('#analyzeQuality').show();
+                        $('#analyzeStorage').show();
+
+                    }
+                    if(arr[i].role=='ROLE_BUYER'){//采购员
+                        $('#list').show();
+                        $('#application_Buy').show();
+                        $('#InStorage_Buy').show();
+                        $('#materialTypeSet').show();
+                        $('#productFactoryManage').show();
+                        $('#queryBuy').show();
+                        $('#queryStorage').show();
+                        $('#analyzeBuy').show();
+                        $('#qualityInspectionNotice').show();
+
+                    }
+                    if(arr[i].role=='ROLE_INSPECTOR'){//质检员
+                             
+                        $('#list').show();
+                        $('#checkMaterial').show();
+                        $('#queryBuy').show();
+                        $('#queryProject').show();
+                        $('#queryCheck').show();
+                        $('#analyzeProject').show();
+                        $('#analyzeQuality').show();
+
+                    }
+                    if(arr[i].role=='ROLE_STOREHOUSE'){//库管
+                           
+                        $('#list').show();
+                        $('#InStorage').show();
+                        $('#outStorage').show();
+                        $('#materialTypeSet').show();
+                        $('#materialStorageSet').show();
+                        $('#queryBuy').show();
+                        $('#queryStorage').show();
+                        $('#queryOut').show();
+                        $('#queryIn').show();
+                        $('#analyzeStorage').show();
+
+                    }
+                    if(arr[i].role=='ROLE_ADMIN'){//系统管理员
+                        $('#UserManage').show();
+                        
+
+                    }
+
+                }
+                
+				console.log(data);
+            },
+            error:function(){
+            }                                       
+        });
+        
+      
+    })
+</script>
